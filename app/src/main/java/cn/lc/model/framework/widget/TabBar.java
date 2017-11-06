@@ -35,18 +35,14 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
     ImageView ivTab3;
     @BindView(R.id.tv_tab3)
     TextView tvTab3;
-    @BindView(R.id.iv_tab4)
-    ImageView ivTab4;
-    @BindView(R.id.tv_tab4)
-    TextView tvTab4;
+
     @BindView(R.id.ll_tab1)
     LinearLayout llTab1;
     @BindView(R.id.ll_tab2)
     LinearLayout llTab2;
     @BindView(R.id.ll_tab3)
     LinearLayout llTab3;
-    @BindView(R.id.ll_tab4)
-    LinearLayout llTab4;
+
 
 
     private Context ct;
@@ -71,10 +67,10 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
     private void init() {
         View view = View.inflate(ct, R.layout.m_bottom, this);
         ButterKnife.bind(this, view);
-        setBackgroundColor(ContextCompat.getColor(ct, R.color.title_color));
+        setBackgroundColor(ContextCompat.getColor(ct, R.color.bg_color));
     }
 
-    @OnClick({R.id.ll_tab1, R.id.ll_tab2, R.id.ll_tab3, R.id.ll_tab4})
+    @OnClick({R.id.ll_tab1, R.id.ll_tab2, R.id.ll_tab3})
     public void onClick(View view) {
         int clickPosition = -1;
         switch (view.getId()) {
@@ -86,9 +82,6 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
                 break;
             case R.id.ll_tab3:
                 clickPosition = 2;
-                break;
-            case R.id.ll_tab4:
-                clickPosition = 3;
                 break;
         }
         setItemChecked(clickPosition);
@@ -136,13 +129,8 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
                 break;
             case 2:
                 resetColors();
-                ivTab3.setImageResource(R.mipmap.tab3_y);
+                ivTab3.setImageResource(R.mipmap.tab4_y);
                 tvTab3.setTextColor(ContextCompat.getColor(ct,R.color.white));
-                break;
-            case 3:
-                resetColors();
-                ivTab4.setImageResource(R.mipmap.tab4_y);
-                tvTab4.setTextColor(ContextCompat.getColor(ct,R.color.white));
                 break;
         }
     }
@@ -150,12 +138,12 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
     private void resetColors(){
         ivTab1.setImageResource(R.mipmap.tab1_n);
         ivTab2.setImageResource(R.mipmap.tab2_n);
-        ivTab3.setImageResource(R.mipmap.tab3_n);
-        ivTab4.setImageResource(R.mipmap.tab4_n);
-        tvTab1.setTextColor(Color.parseColor("#7EC2D4"));
-        tvTab2.setTextColor(Color.parseColor("#7EC2D4"));
-        tvTab3.setTextColor(Color.parseColor("#7EC2D4"));
-        tvTab4.setTextColor(Color.parseColor("#7EC2D4"));
+        ivTab3.setImageResource(R.mipmap.tab4_n);
+
+        tvTab1.setTextColor(Color.parseColor("#dddddd"));
+        tvTab2.setTextColor(Color.parseColor("#dddddd"));
+        tvTab3.setTextColor(Color.parseColor("#dddddd"));
+
     }
 
 

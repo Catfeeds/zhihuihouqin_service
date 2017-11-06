@@ -22,17 +22,10 @@ import mvp.cn.common.MvpActivity;
 import mvp.cn.common.MvpView;
 
 
-public abstract class MvpRxBaseActivity<M extends MvpModel, V extends MvpView, P extends MvpRxBasePresenter<M, V>>
+public abstract class MvpRxBaseActivity<V extends MvpView, P extends MvpRxBasePresenter<V>>
         extends MvpActivity<V, P> {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MvpRxBasePresenter p = getPresenter();
-        if (p != null) {
-            p.setModel(createModel());
-        }
     }
-
-    public abstract M createModel();
 }

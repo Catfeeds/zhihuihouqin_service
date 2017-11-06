@@ -24,17 +24,10 @@ import mvp.cn.common.MvpFragment;
 import mvp.cn.common.MvpView;
 
 
-public abstract class MvpRxBaseFragment<M extends MvpModel, V extends MvpView, P extends MvpRxBasePresenter<M, V>>
+public abstract class MvpRxBaseFragment<V extends MvpView, P extends MvpRxSimplePresenter<V>>
         extends MvpFragment<V, P> {
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        MvpRxBasePresenter p = getPresenter();
-        if (p != null) {
-            p.setModel(createModel());
-        }
     }
-
-    public abstract M createModel();
 }

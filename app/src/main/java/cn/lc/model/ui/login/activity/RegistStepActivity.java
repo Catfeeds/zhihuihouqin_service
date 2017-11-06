@@ -25,7 +25,7 @@ import mvp.cn.util.StringUtil;
 import mvp.cn.util.VerifyCheck;
 
 
-public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, RegistStep1Presenter> implements RegistStep1View {
+public class RegistStepActivity extends MvpSimpleActivity<RegistStep1View, RegistStep1Presenter> implements RegistStep1View {
     @BindView(R.id.mTitleBar)
     TitleBar mTitleBar;
     @BindView(R.id.et_phone)
@@ -91,7 +91,6 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             case R.id.btn_getcode:
                 doGetCode();
                 break;
-
             case R.id.bt_next:
                 doNext();
                 break;
@@ -116,6 +115,7 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             showToast("验证码错误");
             return;
         }
+
         CommonUtil.closeSoftKeyboard(this, etCode);
         if (from == Constants.BIND) {
 //            doBindRequest(mobile, captcha);
@@ -132,7 +132,7 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
         b.putString("thirdType", thirdType);
         b.putString("thirdNum", thirdNum);
         b.putInt("from", from);
-        UIManager.turnToAct(RegistStep1Activity.this, RegistStep2Activity.class, b);
+        UIManager.turnToAct(RegistStepActivity.this, RegistStep2Activity.class, b);
     }
 
     private void turnToAgreen() {

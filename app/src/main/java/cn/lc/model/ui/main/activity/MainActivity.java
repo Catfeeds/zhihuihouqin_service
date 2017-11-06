@@ -12,10 +12,10 @@ import butterknife.BindView;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.widget.TabBar;
-import cn.lc.model.ui.main.fragment.Tab1Fragment;
+
+import cn.lc.model.ui.main.fragment.Tab1_1Fragment;
 import cn.lc.model.ui.main.fragment.Tab2Fragment;
 import cn.lc.model.ui.main.fragment.Tab3Fragment;
-import cn.lc.model.ui.main.fragment.Tab4Fragment;
 import cn.lc.model.ui.main.presenter.MainPresenter;
 import cn.lc.model.ui.main.view.MainView;
 
@@ -34,10 +34,9 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
     }
 
     public void initView() {
-        fragments.add(new Tab1Fragment());
+      fragments.add(new Tab1_1Fragment());
         fragments.add(new Tab2Fragment());
         fragments.add(new Tab3Fragment());
-        fragments.add(new Tab4Fragment());
         //默认选中的界面
         mBottom.setOnItemChangedListener(onBottomItemClickListener);
         mBottom.setItemChecked(0);

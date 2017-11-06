@@ -17,13 +17,14 @@ import mvp.cn.common.MvpView;
 import mvp.cn.rx.MvpModel;
 import mvp.cn.rx.MvpRxBaseFragment;
 import mvp.cn.rx.MvpRxBasePresenter;
+import mvp.cn.rx.MvpRxSimplePresenter;
 import mvp.cn.util.LogUtil;
 
 /**
  * Created by hh on 2016/5/18.
  */
-public abstract class BaseFragment<M extends MvpModel, V extends MvpView, P extends MvpRxBasePresenter<M, V>>
-        extends MvpRxBaseFragment<M,V,P> {
+public abstract class BaseFragment<V extends MvpView, P extends MvpRxSimplePresenter<V>>
+        extends MvpRxBaseFragment<V,P> {
 
 
     protected SoftApplication softApplication;

@@ -45,7 +45,7 @@ public abstract class MvpSimpleActivity<V extends MvpView, P extends MvpRxSimple
             setFullScreen(false);
         }
         if (isAllowOneScreen) {
-            setTranslucentStatus(R.color.title_color);
+            setTranslucentStatus(R.color.bg_color);
         } else {
             setTranslucentStatus(R.color.transparent);
         }

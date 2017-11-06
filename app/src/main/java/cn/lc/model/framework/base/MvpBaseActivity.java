@@ -27,7 +27,7 @@ import mvp.cn.rx.MvpRxBasePresenter;
 import mvp.cn.util.LogUtil;
 
 
-public abstract class MvpBaseActivity<M extends MvpModel, V extends MvpView, P extends MvpRxBasePresenter<M, V>> extends MvpRxBaseActivity<M,V,P> {
+public abstract class MvpBaseActivity<M extends MvpModel, V extends MvpView, P extends MvpRxBasePresenter<V>> extends MvpRxBaseActivity<V,P> {
     protected SoftApplication softApplication;
     public boolean isAllowFullScreen;// 是否允许全屏
     public boolean isAllowOneScreen = true;// 是否允许一體化

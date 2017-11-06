@@ -29,11 +29,11 @@
     <application
         android:name=".framework.application.SoftApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/zhhq"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cn.lc.model.ui.main.activity.MainActivity">
+        <activity android:name=".ui.login.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,9 @@
         <activity
             android:name=".ui.login.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        <activity
+            android:name=".ui.main.activity.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ui.login.activity.RegistStep1Activity"
             android:windowSoftInputMode="stateHidden|adjustResize" />

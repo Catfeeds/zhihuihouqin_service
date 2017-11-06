@@ -16,18 +16,8 @@ import rx.Subscriber;
  * @author Hannes Dorfmann
  * @since 1.1.0
  */
-public abstract class MvpRxBasePresenter<M extends MvpModel, V extends MvpView>
+public abstract class MvpRxBasePresenter< V extends MvpView>
         extends MvpBasePresenter<V> {
-
-    protected M mvpModel;
-
-    public void setModel(M model) {
-        this.mvpModel = model;
-    }
-
-    public M getModel() {
-        return mvpModel;
-    }
 
     protected Subscriber subscriber;
 

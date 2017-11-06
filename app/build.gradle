@@ -33,4 +33,5 @@ dependencies {
     //本项目引用包
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
 }

@@ -92,4 +92,14 @@ public class SharedPrefHelper {
     public UserInfo getUserInfo() {
         return null;
     }
+  /*
+  服务类型
+    1维修人员端，2办公用品服务端，3订水服务端 4.会议室服务端
+  * */
+  public  void setServicetype(int servicetype){
+     sharedPreferences.edit().putInt("serivcetype",servicetype).commit();
+  }
+  public  int  getServicetype(){
+      return sharedPreferences.getInt("serivcetype",1);
+  }
 }
