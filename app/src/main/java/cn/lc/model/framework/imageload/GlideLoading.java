@@ -27,7 +27,7 @@ public class GlideLoading {
 
     private static GlideLoading load;
 
-
+//
     private GlideLoading() {
 
     }
