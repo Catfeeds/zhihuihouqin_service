@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -26,85 +27,79 @@ import mvp.cn.util.VerifyCheck;
 
 
 public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, RegistStep1Presenter> implements RegistStep1View {
-    @BindView(R.id.mTitleBar)
-    TitleBar mTitleBar;
-    @BindView(R.id.et_phone)
-    EditText etPhone;
-    @BindView(R.id.et_code)
-    EditText etCode;
-    @BindView(R.id.btn_getcode)
-    Button btnGetcode;
+    @BindView(R.id.iv_back)
+    ImageView iv_back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.ed_mobile)
+    EditText ed_mobile;
+    @BindView(R.id.ed_code)
+    EditText ed_code;
+    @BindView(R.id.tx_gainecode)
+    TextView tx_gainecode;
     @BindView(R.id.bt_next)
     Button btNext;
     private Handler handler = new Handler();
     public static final int MAX_TIME = 60;// 按钮 60秒内不能点击
     private int totalSecond = MAX_TIME;// 按钮 60秒内不能点击
     private int from = -1;
+    private int type = 1;
     private String mobile;
     /**
      * 服务器返回的验证码
      */
-    private String mCaptchaServer;
-    private String thirdType;
-    private String thirdNum;
+    private String mCaptchaServer = "8888";
 
     @Override
     public void setContentLayout() {
-        setContentView(R.layout.login_regist);
+        setContentView(R.layout.login_regist_1);
         ButterKnife.bind(this);
     }
 
-
     @Override
     public void initView() {
-        mTitleBar.setBack(true);
         getPerfromData();
     }
 
     @Override
     public RegistStep1Presenter createPresenter() {
-        return null;
+        return new RegistStep1Presenter();
     }
-
 
     private void getPerfromData() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             from = extras.getInt("from");
-            thirdType = extras.getString("thirdType");
-            thirdNum = extras.getString("thirdNum");
+           type= extras.getInt("type");
             if (from == Constants.FORGET) {
-//                cbAgreen.setVisibility(View.INVISIBLE);
-                mTitleBar.setTitle("找回密码");
+                tv_title.setText("找回密码");
             } else if (from == Constants.REGIST) {
-                mTitleBar.setTitle("注册");
-            } else if (from == Constants.BIND) {
-                mTitleBar.setTitle("绑定手机号");
+                tv_title.setText("注册");
             }
         }
     }
 
-
-    @OnClick({R.id.btn_getcode, R.id.bt_next})
+    @OnClick({R.id.iv_back, R.id.tx_gainecode, R.id.bt_next})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_getcode:
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.tx_gainecode:
                 doGetCode();
                 break;
-
             case R.id.bt_next:
                 doNext();
                 break;
         }
     }
 
-
     /**
      * 下一步
      */
     public void doNext() {
-        String captcha = etCode.getText().toString().trim();
-        mobile = etPhone.getText().toString().trim();
+        String captcha = ed_code.getText().toString().trim();
+        mobile = ed_mobile.getText().toString().trim();
         if (!isPhoneChecked(mobile)) {
             return;
         }
@@ -116,21 +111,14 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             showToast("验证码错误");
             return;
         }
-        CommonUtil.closeSoftKeyboard(this, etCode);
-        if (from == Constants.BIND) {
-//            doBindRequest(mobile, captcha);
-        } else {
-//            doNextRequest(mobile, captcha);
-            turnToPwdSet(captcha);
-        }
+        CommonUtil.closeSoftKeyboard(this, ed_code);
+        turnToPwdSet(captcha);
     }
 
     private void turnToPwdSet(String captcha) {
         Bundle b = new Bundle();
         b.putString("mobile", mobile);
         b.putString("captcha", captcha);
-        b.putString("thirdType", thirdType);
-        b.putString("thirdNum", thirdNum);
         b.putInt("from", from);
         UIManager.turnToAct(RegistStep1Activity.this, RegistStep2Activity.class, b);
     }
@@ -140,20 +128,15 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
     }
 
     /**
-     * 返回
-     */
-    public void doBack() {
-        finish();
-    }
-
-    /**
      * 获取验证码
      */
     public void doGetCode() {
-        mobile = etPhone.getText().toString();
+        mobile = ed_mobile.getText().toString();
         if (!isPhoneChecked(mobile)) {
             return;
         }
+        showToast("验证码发送成功，请注意查收！");
+        doTimer();
 //        doGetCodeRequest(mobile);
     }
 
@@ -163,7 +146,7 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             runnable = new MyRunnable();
         }
         handler.post(runnable);
-        btnGetcode.setClickable(false);
+        tx_gainecode.setClickable(false);
     }
 
     void stopTimmer() {
@@ -173,9 +156,9 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
         }
         totalSecond = MAX_TIME;
         // 倒计时完成后让按钮可点击
-        btnGetcode.setEnabled(true);
-        btnGetcode.setClickable(true);
-        btnGetcode.setText("重新获取验证码");
+        tx_gainecode.setEnabled(true);
+        tx_gainecode.setClickable(true);
+        tx_gainecode.setText("重新获取验证码");
     }
 
     public MyRunnable runnable;
@@ -187,14 +170,13 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
         @Override
         public void run() {
             handler.postDelayed(runnable, 1000);
-            btnGetcode.setText(totalSecond + "s后重新发送");
+            tx_gainecode.setText(totalSecond + "s后重新发送");
             totalSecond--;
             if (totalSecond < 0) {
                 stopTimmer();
             }
         }
     }
-
 
     /**
      * 手机号校验

@@ -40,6 +40,8 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     EditTextWithDel etUname;
     @BindView(R.id.et_psw)
     EditTextWithDel etPsw;
+    @BindView(R.id.tx_trans)
+    TextView tx_trans;
     @BindView(R.id.l_tv_register)
     TextView l_tv_register;
     @BindView(R.id.l_tv_findPsw)
@@ -50,8 +52,8 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     TextView title;
 @BindView(R.id.rl_title)
     RelativeLayout rl_title;
-    @BindView(R.id.ll_type)
-    LinearLayout ll_type;
+    @BindView(R.id.rl_type)
+   RelativeLayout rl_type;
     @BindView(R.id.tx_maintain)
     TextView tx_maintain;
     @BindView(R.id.tx_work)
@@ -91,47 +93,50 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     }
 
 
-    @OnClick({R.id.l_tv_findPsw,R.id.l_tv_register, R.id.bt_login,R.id.rl_title,R.id.tx_maintain,R.id.tx_work,R.id.tx_water,R.id.tx_metting})
+    @OnClick({R.id.l_tv_findPsw,R.id.tx_trans,R.id.l_tv_register, R.id.bt_login,R.id.rl_title,R.id.tx_maintain,R.id.tx_work,R.id.tx_water,R.id.tx_metting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.l_tv_register:
-               // turnToRegist();
+               turnToRegist();
                 break;
             case R.id.l_tv_findPsw:
-             //   turnToFindPwd();
+             turnToFindPwd();
                 break;
             case R.id.bt_login:
                 doLogin();
                 break;
             case R.id.rl_title:
                 if (type==0) {
-                    ll_type.setVisibility(View.VISIBLE);
+                    rl_type.setVisibility(View.VISIBLE);
                     type=1;
                 }else if(type==1) {
-                    ll_type.setVisibility(View.GONE);
+                    rl_type.setVisibility(View.GONE);
                     type=0;
                 }
                 break;
 
             case R.id.tx_maintain:
-                ll_type.setVisibility(View.GONE);
+               rl_type.setVisibility(View.GONE);
                 SharedPrefHelper.getInstance().setServicetype(1);
                 title.setText("维修人员端");
                 break;
             case R.id.tx_work:
-                ll_type.setVisibility(View.GONE);
+                rl_type.setVisibility(View.GONE);
                 SharedPrefHelper.getInstance().setServicetype(2);
                 title.setText("办公用品服务端");
                 break;
             case R.id.tx_water:
-                ll_type.setVisibility(View.GONE);
+                rl_type.setVisibility(View.GONE);
                 SharedPrefHelper.getInstance().setServicetype(3);
                 title.setText("订水服务端");
                 break;
             case R.id.tx_metting:
-                ll_type.setVisibility(View.GONE);
+               rl_type.setVisibility(View.GONE);
                 SharedPrefHelper.getInstance().setServicetype(4);
                 title.setText("会议室服务端");
+                break;
+            case  R.id.tx_trans:
+                rl_type.setVisibility(View.GONE);
                 break;
         }
     }
@@ -150,6 +155,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     public void turnToFindPwd() {
         Bundle b = new Bundle();
         b.putInt("from", Constants.FORGET);
+        b.putInt("type", type);
         UIManager.turnToAct(this, RegistStep1Activity.class, b);
     }
 
@@ -159,6 +165,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     public void turnToRegist() {
         Bundle b = new Bundle();
         b.putInt("from", Constants.REGIST);
+        b.putInt("type", type);
         UIManager.turnToAct(this, RegistStep1Activity.class, b);
     }
 

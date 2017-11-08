@@ -13,11 +13,12 @@
     <color name="tv_gray_light">#A4ABAE</color>
     <color name="tv_blue">#0B8BAE</color>
     <color name="tv_red">#F95759</color>
-
+    <color name="blue_trans">#5551AEFE</color>
     <color name="bg_color">#51AEFE</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="title_color">#0B8BAE</color>
+    <color name="gray_deep">#666666</color>
     <color name="gray">#868686</color>
     <color name="gray_title">#F8F8F8</color>
     <color name="gray_light">#cccccc</color>
@@ -31,6 +32,7 @@
     <color name="white">#FFFFFF</color>
     <color name="white_light">#BBBBBB</color>
     <color name="orange">#EE936C</color>
+    <color name="blank">#F8F8F8</color>
 
 
 </resources>

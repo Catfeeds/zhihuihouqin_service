@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import cn.lc.model.R;
-import cn.lc.model.framework.base.BaseFragment;
+import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.main.presenter.Tab2Presenter;
 import cn.lc.model.ui.main.view.Tab2View;
 
@@ -12,7 +12,7 @@ import cn.lc.model.ui.main.view.Tab2View;
 /**
  * Created by hh on 2016/5/18.
  */
-public class Tab2Fragment extends BaseFragment<Tab2View,Tab2Presenter> implements Tab2View {
+public class Tab2Fragment extends MvpSimpleFragment<Tab2View,Tab2Presenter> implements Tab2View {
 
 
     @Override

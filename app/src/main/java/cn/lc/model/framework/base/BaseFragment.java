@@ -1,6 +1,7 @@
 package cn.lc.model.framework.base;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,25 +15,19 @@ import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.CustomerDialog;
 import cn.lc.model.ui.login.activity.LoginActivity;
 import mvp.cn.common.MvpView;
-import mvp.cn.rx.MvpModel;
 import mvp.cn.rx.MvpRxBaseFragment;
-import mvp.cn.rx.MvpRxBasePresenter;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import mvp.cn.util.LogUtil;
 
 /**
  * Created by hh on 2016/5/18.
  */
-public abstract class BaseFragment<V extends MvpView, P extends MvpRxSimplePresenter<V>>
-        extends MvpRxBaseFragment<V,P> {
-
+public abstract class BaseFragment extends Fragment {
 
     protected SoftApplication softApplication;
-    private CustomerDialog progressDialog;
+
     private View inflate;
     private int contentViewRes = -1;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +45,7 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpRxSimplePrese
                 return null;
             }
             inflate = inflater.inflate(contentViewRes, null);
-            ButterKnife.bind(this,inflate);
+            ButterKnife.bind(this, inflate);
             if (inflate != null)
                 initView(inflate);
         } else {
@@ -59,7 +54,6 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpRxSimplePrese
 
         return inflate;
     }
-
 
     @Override
     public void onDestroy() {
@@ -74,51 +68,6 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpRxSimplePrese
 
     public void setContentView(int resId) {
         this.contentViewRes = resId;
-    }
-
-    @Override
-    public void showToast(String info) {
-        Toast.makeText(getActivity(), info, Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    public void showToastLong(String info) {
-        Toast.makeText(getActivity(), info, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
-        progressDialog = new CustomerDialog(getActivity(), R.style.dialog_style);
-        progressDialog.setMessage("加载中...");
-        try {
-            progressDialog.show();
-        } catch (WindowManager.BadTokenException exception) {
-            exception.printStackTrace();
-        }
-    }
-    @Override
-    public void showProgressDialog(String msg) {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
-        progressDialog = new CustomerDialog(getActivity(), R.style.dialog_style);
-        progressDialog.setMessage(msg);
-        try {
-            progressDialog.show();
-        } catch (WindowManager.BadTokenException exception) {
-            exception.printStackTrace();
-        }
-    }
-    @Override
-    public void dismissProgressDialog() {
-        if (null != progressDialog && progressDialog.isShowing() == true) {
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
     }
 
 

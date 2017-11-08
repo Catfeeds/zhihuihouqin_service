@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -11,10 +11,10 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/bg_color">
+        android:background="@mipmap/login_title">
         <TextView
             android:id="@+id/title"
-            style="@style/tvStyle_white"
+            style="@style/tvStyle_black_big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -27,89 +27,38 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:src="@mipmap/down_icon" />
+
     </RelativeLayout>
-<LinearLayout
-    android:id="@+id/ll_type"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:visibility="gone">
-    <TextView
-        android:id="@+id/tx_maintain"
-        style="@style/tvStyle_gray"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="维修人员端"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_light"/>
-    <TextView
-        android:id="@+id/tx_work"
-        style="@style/tvStyle_gray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="办公用品服务端"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_light"/>
-    <TextView
-        android:id="@+id/tx_water"
-        style="@style/tvStyle_gray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="订水服务端"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_light"/>
-    <TextView
-        android:id="@+id/tx_metting"
-        style="@style/tvStyle_gray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="会议室服务端"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_light"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title"
+        android:orientation="vertical">
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:src="@mipmap/zhhq" />
+        android:src="@mipmap/logo" />
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_common"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginRight="40dp">
 
         <ImageView
             android:id="@+id/iv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/phone" />
 
         <cn.lc.model.framework.widget.EditTextWithDel
             android:id="@+id/et_uname"
-            style="@style/tvStyle_white_small"
+            style="@style/tvStyle_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -120,15 +69,14 @@
             android:hint="手机号"
             android:inputType="number"
             android:paddingLeft="10dip"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/gray_light" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_toRightOf="@+id/iv_phone"
             android:layout_alignParentBottom="true"
-            android:background="@color/white" />
+            android:background="@color/gray_light" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -142,11 +90,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/psw" />
 
         <cn.lc.model.framework.widget.EditTextWithDel
             android:id="@+id/et_psw"
-            style="@style/tvStyle_white_small"
+            style="@style/tvStyle_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -157,15 +105,14 @@
             android:hint="密码"
             android:inputType="textPassword"
             android:paddingLeft="10dip"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/gray_light" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_toRightOf="@+id/iv_pwd"
             android:layout_alignParentBottom="true"
-            android:background="@color/white" />
+            android:background="@color/gray_light" />
     </RelativeLayout>
 
 
@@ -178,7 +125,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/corner_black"
+        android:background="@mipmap/bt"
         android:gravity="center"
         android:text="登录" />
 
@@ -187,106 +134,95 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp">
-
+        android:layout_marginTop="10dp">
         <TextView
-            android:id="@+id/l_tv_findPsw"
-            style="@style/tvStyle_white_small"
+            android:id="@+id/l_tv_register"
+            style="@style/tvStyle_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:padding="10dp"
-            android:text="忘记密码?" />
-
+            android:text="没有账号,去注册" />
         <TextView
-            android:id="@+id/l_tv_register"
-            style="@style/tvStyle_white_small"
+            android:id="@+id/l_tv_findPsw"
+            style="@style/tvStyle_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:padding="10dp"
-            android:text="注册" />
+            android:text="忘记密码" />
+
+
     </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_type"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title"
+        android:visibility="gone"
+       >
+        <TextView
+            android:id="@+id/tx_trans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_trans"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+          android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tx_maintain"
+            style="@style/tvStyle_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="维修人员端"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_light"/>
+        <TextView
+            android:id="@+id/tx_work"
+            style="@style/tvStyle_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="办公用品服务端"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_light"/>
+        <TextView
+            android:id="@+id/tx_water"
+            style="@style/tvStyle_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="订水服务端"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_light"/>
+        <TextView
+            android:id="@+id/tx_metting"
+            style="@style/tvStyle_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="会议室服务端"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_light"/>
+        </LinearLayout>
 
-
-    <!--&lt;!&ndash;++++++++++++++++++三方登陆++++++++++++++++++++++++++++&ndash;&gt;-->
-    <!--<View-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="40dp"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center_vertical">-->
-
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@color/white" />-->
-
-            <!--<TextView-->
-                <!--style="@style/tvStyle_white_small"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:text="第三方登录"-->
-                <!--android:textColor="@color/gray"/>-->
-
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@color/white" />-->
-        <!--</LinearLayout>-->
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="20dp">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/l_iv_wecat"-->
-                <!--style="@style/tvStyle_white_smaller"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawablePadding="2dp"-->
-                <!--android:drawableTop="@mipmap/ic_launcher"-->
-                <!--android:text="微信" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/l_iv_weibo"-->
-                <!--style="@style/tvStyle_white_smaller"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawablePadding="2dp"-->
-                <!--android:drawableTop="@mipmap/ic_launcher"-->
-                <!--android:text="微博" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/l_iv_qq"-->
-                <!--style="@style/tvStyle_white_smaller"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:drawablePadding="2dp"-->
-                <!--android:drawableTop="@mipmap/ic_launcher"-->
-                <!--android:text="QQ" />-->
-
-        <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

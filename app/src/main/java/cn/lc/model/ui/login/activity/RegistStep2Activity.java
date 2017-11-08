@@ -5,10 +5,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
+import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.TitleBar;
 import cn.lc.model.ui.login.presenter.RegistStep2Presenter;
 import cn.lc.model.ui.login.view.RegistStep2View;
@@ -16,39 +22,34 @@ import mvp.cn.util.CommonUtil;
 
 
 public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, RegistStep2Presenter> implements View.OnClickListener {
-
-
-    // Content View Elements
-
-    private TitleBar mTitleBar;
-    private EditText et_password;
-    private EditText et_repassword;
-    private Button bt_next;
+    @BindView(R.id.iv_back)
+    ImageView iv_back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.ed_psw1)
+    EditText ed_psw1;
+    @BindView(R.id.ed_psw2)
+    EditText ed_psw2;
+    @BindView(R.id.bt_next)
+    Button btNext;
     private String mMobile;
     private String mCptcha;
-    private int from;
-    private String thirdType;
-    private String thirdNum;
-
-
+    private int from=-1;
+    private int type=1;
     @Override
     public void setContentLayout() {
         setContentView(R.layout.login_regist_2);
     }
-
-
     @Override
     public void initView() {
-        bindViews();
-
+        ButterKnife.bind(this);
         getPerformData();
 
-        initLayout();
     }
 
     @Override
     public RegistStep2Presenter createPresenter() {
-        return null;
+        return new RegistStep2Presenter();
     }
 
     private void getPerformData() {
@@ -57,54 +58,44 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
             mMobile = extras.getString("mobile");
             mCptcha = extras.getString("captcha");
             from = extras.getInt("from");
-            thirdType = extras.getString("thirdType");
-            thirdNum = extras.getString("thirdNum");
+            type = extras.getInt("type");
+            if (from == Constants.FORGET) {
+                tv_title.setText("设置密码");
+                btNext.setText("注册");
+            } else if (from == Constants.REGIST) {
+                tv_title.setText("设置新密码");
+                btNext.setText("完成");
+            }
         }
     }
 
-    private void initLayout() {
-        mTitleBar.setBack(true);
-        if (from == Constants.REGIST) {
-            mTitleBar.setTitle("设置资料");
-        } else if (from == Constants.FORGET) {
-            mTitleBar.setTitle("设置密码");
+    @OnClick({R.id.iv_back, R.id.bt_next})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.bt_next:
+                doRegist();
+                break;
         }
-    }
-
-    private void bindViews() {
-        mTitleBar = (TitleBar) findViewById(R.id.mTitleBar);
-        et_password = (EditText) findViewById(R.id.et_password);
-        et_repassword = (EditText) findViewById(R.id.et_repassword);
-        bt_next = (Button) findViewById(R.id.bt_next);
-        bt_next.setOnClickListener(this);
-
-
-    }
-
-    /**
-     * 返回
-     */
-    public void doBack() {
-        finish();
     }
 
     /**
      * 注册
      */
     public void doRegist() {
-        String pwd1 = et_password.getText().toString().trim();
-        String pwd2 = et_repassword.getText().toString().trim();
+        String pwd1 = ed_psw1.getText().toString().trim();
+        String pwd2 = ed_psw2.getText().toString().trim();
 
         if (!isOtherChecked(pwd1, pwd2)) {
             return;
         }
-        CommonUtil.closeSoftKeyboard(this, et_password);
-
-        if (from == Constants.BIND) {
-//            doBindRequest(mMobile, mCptcha, pwd1);
-        } else {
-//            doResistRequest(mMobile, mCptcha, pwd1);
-        }
+        CommonUtil.closeSoftKeyboard(this, ed_psw1);
+        showToast("注册成功");
+        UIManager.turnToAct(RegistStep2Activity.this, LoginActivity.class);
+        finishActivityAndAboveIt(RegistStep1Activity.class.getName());
+          //doResistRequest(mMobile, mCptcha, pwd1);
     }
 
     /**
@@ -203,17 +194,6 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
             }
         });
     }*/
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_next:
-                doRegist();
-                break;
-        }
-    }
-
 
 
 }

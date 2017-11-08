@@ -6,31 +6,47 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/tvStyle_white_big"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
-        android:background="@color/bg_color"
-        android:gravity="center"
-
-        android:text="个人中心" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/bg_color">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/person_bc">
+        <TextView
+            android:id="@+id/title"
+            style="@style/tvStyle_white_big"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
 
+            android:text="个人中心" />
         <ImageView
+            android:id="@+id/iv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/user_header" />
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/user_header"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tx_name"
+            style="@style/tvStyle_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_header"
+            android:layout_marginTop="10dp"
+            android:text="教育部小杨" />
+        <TextView
+            android:id="@+id/tx_dis"
+            style="@style/tvStyle_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tx_name"
+            android:layout_marginTop="10dp"
+            android:text="已认证" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl1"
+        android:id="@+id/rl_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
@@ -39,7 +55,7 @@
             android:id="@+id/iv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/order_mesg" />
+            android:src="@mipmap/person_order" />
 
         <TextView
             android:id="@+id/tx1"
@@ -52,7 +68,7 @@
             android:text="我的订单" />
 
         <TextView
-            style="@style/tvStyle_gray"
+            style="@style/tvStyle_gray_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -67,7 +83,7 @@
         android:background="@color/gray_trans" />
 
     <RelativeLayout
-        android:id="@+id/rl2"
+        android:id="@+id/rl_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
@@ -77,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:src="@mipmap/order_mesg" />
+            android:src="@mipmap/person_comment" />
 
         <TextView
             android:id="@+id/tx2"
@@ -104,7 +120,7 @@
         android:background="@color/gray_trans" />
 
     <RelativeLayout
-        android:id="@+id/rl3"
+        android:id="@+id/rl_wallet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
@@ -114,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:src="@mipmap/order_mesg" />
+            android:src="@mipmap/person_wallet" />
 
         <TextView
             android:id="@+id/tx3"
@@ -140,7 +156,7 @@
         android:background="@color/gray_trans" />
 
     <RelativeLayout
-        android:id="@+id/rl4"
+        android:id="@+id/rl_sys"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
@@ -149,7 +165,7 @@
             android:id="@+id/iv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/order_mesg" />
+            android:src="@mipmap/person_sys" />
 
         <TextView
             android:id="@+id/tx4"

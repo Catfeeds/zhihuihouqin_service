@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.BaseFragment;
+import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.FragmentAdapter;
@@ -34,7 +34,7 @@ import cn.lc.model.ui.tab1.fragment.Tab1_1Fragment0;
 /**
  * Created by hh on 2016/5/18.
  */
-public class Tab1_1Fragment extends BaseFragment<Tab1View,Tab1Presenter> {
+public class Tab1_1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
     @BindView(R.id.mIndicator)
     MagicIndicator mIndicator;
     @BindView(R.id.score_pager)

@@ -150,4 +150,9 @@
         <item name="android:textSize">@dimen/sp_small</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="tvStyle_bg_blue">
+        <item name="android:textColor">@color/bg_color</item>
+        <item name="android:textSize">@dimen/sp_small</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

@@ -67,7 +67,7 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
     private void init() {
         View view = View.inflate(ct, R.layout.m_bottom, this);
         ButterKnife.bind(this, view);
-        setBackgroundColor(ContextCompat.getColor(ct, R.color.bg_color));
+        setBackgroundColor(ContextCompat.getColor(ct, R.color.white));
     }
 
     @OnClick({R.id.ll_tab1, R.id.ll_tab2, R.id.ll_tab3})
@@ -120,17 +120,17 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
             case 0:
                 resetColors();
                 ivTab1.setImageResource(R.mipmap.tab1_y);
-                tvTab1.setTextColor(ContextCompat.getColor(ct,R.color.white));
+                tvTab1.setTextColor(ContextCompat.getColor(ct,R.color.bg_color));
                 break;
             case 1:
                 resetColors();
                 ivTab2.setImageResource(R.mipmap.tab2_y);
-                tvTab2.setTextColor(ContextCompat.getColor(ct,R.color.white));
+                tvTab2.setTextColor(ContextCompat.getColor(ct,R.color.bg_color));
                 break;
             case 2:
                 resetColors();
-                ivTab3.setImageResource(R.mipmap.tab4_y);
-                tvTab3.setTextColor(ContextCompat.getColor(ct,R.color.white));
+                ivTab3.setImageResource(R.mipmap.tab3_y);
+                tvTab3.setTextColor(ContextCompat.getColor(ct,R.color.bg_color));
                 break;
         }
     }
@@ -138,11 +138,11 @@ public class TabBar extends LinearLayout implements View.OnClickListener {
     private void resetColors(){
         ivTab1.setImageResource(R.mipmap.tab1_n);
         ivTab2.setImageResource(R.mipmap.tab2_n);
-        ivTab3.setImageResource(R.mipmap.tab4_n);
+        ivTab3.setImageResource(R.mipmap.tab3_n);
 
-        tvTab1.setTextColor(Color.parseColor("#dddddd"));
-        tvTab2.setTextColor(Color.parseColor("#dddddd"));
-        tvTab3.setTextColor(Color.parseColor("#dddddd"));
+        tvTab1.setTextColor(Color.parseColor("#666666"));
+        tvTab2.setTextColor(Color.parseColor("#666666"));
+        tvTab3.setTextColor(Color.parseColor("#666666"));
 
     }
 

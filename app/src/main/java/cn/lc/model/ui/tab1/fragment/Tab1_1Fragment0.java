@@ -7,8 +7,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.BaseFragment;
-import cn.lc.model.ui.main.fragment.Tab1_1Fragment;
+import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.constant.Tab1Constants;
@@ -17,7 +16,7 @@ import cn.lc.model.ui.tab1.constant.Tab1Constants;
  * Created by Administrator on 2017/11/6.
  */
 
-public class Tab1_1Fragment0 extends BaseFragment<Tab1View,Tab1Presenter>{
+public class Tab1_1Fragment0 extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
 
 @BindView(R.id.title)
     TextView title;

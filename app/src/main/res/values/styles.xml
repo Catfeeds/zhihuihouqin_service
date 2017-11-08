@@ -19,7 +19,10 @@
         <!--<item name="@android:windowEnterAnimation">@anim/dialog_enter</item>  //进入时的动画
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>    //退出时的动画-->
     </style>
-
+    <style name="AnimationDialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
+    </style>
     <style name="main_tab">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
