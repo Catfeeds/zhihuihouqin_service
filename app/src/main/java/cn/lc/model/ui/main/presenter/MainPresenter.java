@@ -16,25 +16,25 @@ public class MainPresenter extends MvpRxSimplePresenter<MainView> {
 
 
     public void getData() {
-        LogUtil.log("MainPresenter发出请求");
-        Observable login = RetrofitUtils.getInstance().login("", "");
-        getNetWork(login, new RetrofitCallBack<BaseResponse>() {
-
-            @Override
-            public void onPostFail(Throwable e) {
-
-            }
-
-            @Override
-            public void onSuccess(BaseResponse baseResponse) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+//        LogUtil.log("MainPresenter发出请求");
+//       // Observable login = RetrofitUtils.getInstance().login("", "");
+//        getNetWork(login, new RetrofitCallBack<BaseResponse>() {
+//
+//            @Override
+//            public void onPostFail(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(BaseResponse baseResponse) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
     }
 
     @Override

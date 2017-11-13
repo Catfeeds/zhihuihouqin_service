@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@mipmap/login_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -10,11 +10,10 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        android:background="@mipmap/login_title">
+        android:layout_height="@dimen/title_height">
         <TextView
             android:id="@+id/title"
-            style="@style/tvStyle_black_big"
+            style="@style/tvStyle_white_big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -26,7 +25,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/down_icon" />
+            android:src="@mipmap/login_down" />
 
     </RelativeLayout>
 
@@ -37,10 +36,11 @@
         android:orientation="vertical">
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/logo" />
+        android:src="@mipmap/login_logo" />
 
 
     <RelativeLayout
@@ -54,11 +54,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/phone" />
+            android:src="@mipmap/login_phone" />
 
         <cn.lc.model.framework.widget.EditTextWithDel
             android:id="@+id/et_uname"
-            style="@style/tvStyle_gray"
+            style="@style/tvStyle_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -69,14 +69,14 @@
             android:hint="手机号"
             android:inputType="number"
             android:paddingLeft="10dip"
-            android:textColorHint="@color/gray_light" />
+            android:textColorHint="@color/white" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/gray_light" />
+            android:background="@color/white" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -90,11 +90,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/psw" />
+            android:src="@mipmap/login_pwd" />
 
         <cn.lc.model.framework.widget.EditTextWithDel
             android:id="@+id/et_psw"
-            style="@style/tvStyle_gray"
+            style="@style/tvStyle_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -105,27 +105,27 @@
             android:hint="密码"
             android:inputType="textPassword"
             android:paddingLeft="10dip"
-            android:textColorHint="@color/gray_light" />
+            android:textColorHint="@color/white" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/gray_light" />
+            android:background="@color/white" />
     </RelativeLayout>
 
 
     <Button
         android:id="@+id/bt_login"
-        style="@style/tvStyle_white"
+        style="@style/tvStyle_bg_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="30dp"
-        android:background="@mipmap/bt"
+        android:background="@color/white"
         android:gravity="center"
         android:text="登录" />
 
@@ -134,10 +134,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
         <TextView
             android:id="@+id/l_tv_register"
-            style="@style/tvStyle_gray"
+            style="@style/tvStyle_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -145,7 +145,7 @@
             android:text="没有账号,去注册" />
         <TextView
             android:id="@+id/l_tv_findPsw"
-            style="@style/tvStyle_gray"
+            style="@style/tvStyle_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -161,26 +161,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_title"
-        android:visibility="gone"
-       >
+        android:visibility="gone">
         <TextView
             android:id="@+id/tx_trans"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_trans"/>
+            android:background="@color/transparent"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-          android:layout_alignParentBottom="true"
+             android:layout_alignParentBottom="true"
             android:orientation="vertical">
         <TextView
             android:id="@+id/tx_maintain"
             style="@style/tvStyle_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:padding="10dp"
-            android:text="维修人员端"
+            android:text="维修工作人员"
             />
         <View
             android:layout_width="match_parent"
@@ -192,7 +192,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="办公用品服务端"
+            android:text="办公用品人员"
             />
         <View
             android:layout_width="match_parent"
@@ -204,7 +204,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="订水服务端"
+            android:text="水站工作人员"
             />
         <View
             android:layout_width="match_parent"
@@ -216,7 +216,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="会议室服务端"
+            android:text="会议室预定"
             />
         <View
             android:layout_width="match_parent"

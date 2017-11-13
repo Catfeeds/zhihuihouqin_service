@@ -59,6 +59,18 @@
         <activity
             android:name=".ui.tab3.activity.PersonInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.PersonPhoneActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.PersonNameActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.SysSettingActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.MyWalletActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

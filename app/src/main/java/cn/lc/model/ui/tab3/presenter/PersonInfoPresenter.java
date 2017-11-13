@@ -17,25 +17,25 @@ public class PersonInfoPresenter extends MvpRxSimplePresenter<PersonInfoView> {
 
 
     public void getData() {
-        LogUtil.log("PersonInfo发出请求");
-        Observable login = RetrofitUtils.getInstance().login("", "");
-        getNetWork(login, new RetrofitCallBack<BaseResponse>() {
-
-            @Override
-            public void onPostFail(Throwable e) {
-
-            }
-
-            @Override
-            public void onSuccess(BaseResponse baseResponse) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+//        LogUtil.log("PersonInfo发出请求");
+//        Observable login = RetrofitUtils.getInstance().login("", "");
+//        getNetWork(login, new RetrofitCallBack<BaseResponse>() {
+//
+//            @Override
+//            public void onPostFail(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(BaseResponse baseResponse) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
     }
 
     @Override

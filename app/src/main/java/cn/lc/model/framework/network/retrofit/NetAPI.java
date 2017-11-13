@@ -2,7 +2,7 @@ package cn.lc.model.framework.network.retrofit;
 
 import java.util.Map;
 
-import cn.lc.model.ui.home.bean.LoginBean;
+import cn.lc.model.ui.login.bean.LoginBean;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -15,7 +15,7 @@ import rx.Observable;
 public interface NetAPI {
 
     @FormUrlEncoded
-    @POST(NetUrl.signup)
+    @POST(NetUrl.login)
     Observable<LoginBean> login (@FieldMap Map<String,Object> map);
 
 }

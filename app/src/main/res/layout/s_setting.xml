@@ -6,6 +6,7 @@
     android:background="@color/blank"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="fill_parent"
@@ -24,64 +25,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="个人信息" />
+            android:text="设置" />
+
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray_trans" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:text="头像"
-            android:textColor="@color/tv_black_light" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-        <cn.lc.model.framework.widget.CircleImageView
-            android:id="@+id/iv_header"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@mipmap/user_header" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/arrow_right" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"/>
     <cn.lc.model.framework.widget.MySettingView
-        android:id="@+id/s_name"
+        android:id="@+id/s_psw"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_common"
+        android:background="@color/white"
+        android:paddingRight="10dp"
+        app:iv_right="@mipmap/arrow_right"
+        app:tv_left="修改密码" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <cn.lc.model.framework.widget.MySettingView
+        android:id="@+id/s_cache"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_common"
+        android:background="@color/white"
+        app:iv_right="@mipmap/arrow_right"
+        app:tv_left="清除本地缓存" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <cn.lc.model.framework.widget.MySettingView
+        android:id="@+id/s_version"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_common"
         android:layout_marginTop="1dp"
         android:background="@color/white"
         app:iv_right="@mipmap/arrow_right"
-        app:tv_left="真实姓名" />
-
+        app:tv_left="版本信息" />
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp" />
+        android:layout_height="5dp"/>
     <cn.lc.model.framework.widget.MySettingView
-        android:id="@+id/s_phone"
+        android:id="@+id/s_aboatus"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_common"
         android:layout_marginTop="1dp"
         android:background="@color/white"
         app:iv_right="@mipmap/arrow_right"
-        app:tv_left="电话" />
+        app:tv_left="关于我们" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <cn.lc.model.framework.widget.MySettingView
+        android:id="@+id/s_feedBack"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_common"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        app:iv_right="@mipmap/arrow_right"
+        app:tv_left="意见反馈" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <cn.lc.model.framework.widget.MySettingView
+        android:id="@+id/s_loginOut"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_common"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        app:iv_right="@mipmap/arrow_right"
+        app:tv_left="退出登录" />
 </LinearLayout>

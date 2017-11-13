@@ -21,8 +21,11 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.imageload.GlideLoading;
+import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.utils.SelectImageHelper;
+import cn.lc.model.framework.widget.CircleImageView;
+import cn.lc.model.framework.widget.MySettingView;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
 import mvp.cn.util.LogUtil;
@@ -31,40 +34,41 @@ import mvp.cn.util.LogUtil;
  * Created by Administrator on 2017/11/8.
  */
 
-public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView,PersonInfoPresenter>implements PersonInfoView{
+public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, PersonInfoPresenter> implements PersonInfoView {
     @BindView(R.id.iv_back)
     ImageView iv_back;
-
     @BindView(R.id.iv_header)
-    ImageView iv_header;
-    @BindView(R.id.rl_name)
-    RelativeLayout rl_name;
-    @BindView(R.id.tx_name)
-    TextView tx_name;
-    @BindView(R.id.rl_phone)
-   RelativeLayout rl_phone;
-    @BindView(R.id.tx_phone)
-    TextView tx_phone;
+    CircleImageView iv_header;
+    @BindView(R.id.s_name)
+    MySettingView s_name;
+    @BindView(R.id.s_phone)
+    MySettingView s_phone;
     SelectImageHelper imgHelper;
     private List<LocalMedia> selectList = new ArrayList<>();
+
     @Override
     public void setContentLayout() {
         setContentView(R.layout.personinfo);
         ButterKnife.bind(this);
+
     }
+
     @Override
     public void initView() {
+        s_name.setRightText("张大可");
+        s_phone.setRightText("12345678901");
     }
-@OnClick({R.id.iv_back,R.id.iv_header,R.id.rl_name,R.id.rl_phone})
-public  void onClick(View view ){
-    switch (view.getId()){
-        case R.id.iv_back:
-            finish();
-            break;
-        case R.id.iv_header:
-            imgHelper = new SelectImageHelper(this);
-            imgHelper.setCropParams(1, 1, 160, 160);
-            imgHelper.showChooseImgDialog();
+
+    @OnClick({R.id.iv_back, R.id.iv_header, R.id.s_phone, R.id.s_name})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.iv_header:
+                imgHelper = new SelectImageHelper(this);
+                imgHelper.setCropParams(1, 1, 160, 160);
+                imgHelper.showChooseImgDialog();
 //            PictureSelector.create(PersonInfoActivity.this)
 //                    .openGallery(PictureMimeType.ofImage())
 //                    .maxSelectNum(1)
@@ -75,13 +79,16 @@ public  void onClick(View view ){
 //                    .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
 //                    .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false
 //                    .forResult(PictureConfig.CHOOSE_REQUEST);
-            break;
-        case R.id.rl_name:
-            break;
-        case R.id.rl_phone:
-            break;
+                break;
+            case R.id.s_name:
+                UIManager.turnToAct(PersonInfoActivity.this, PersonNameActivity.class);
+                break;
+            case R.id.s_phone:
+                UIManager.turnToAct(PersonInfoActivity.this, PersonPhoneActivity.class);
+                break;
+        }
     }
-}
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -92,8 +99,8 @@ public  void onClick(View view ){
             @Override
             public void onGetPhoto(File photoFile) {
                 LogUtil.log("photoFile==" + photoFile.getAbsolutePath());
-                GlideLoading.getInstance().loadImgFile(getActivity(), photoFile ,iv_header);
-             String   mPhotoFile = photoFile.getAbsolutePath();
+                GlideLoading.getInstance().loadImgFile(getActivity(), photoFile, iv_header);
+                String mPhotoFile = photoFile.getAbsolutePath();
             }
         });
 //        if (resultCode == RESULT_OK) {
@@ -115,6 +122,7 @@ public  void onClick(View view ){
 //            }
 //        }
     }
+
     @Override
     public PersonInfoPresenter createPresenter() {
         return new PersonInfoPresenter();

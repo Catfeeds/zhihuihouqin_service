@@ -15,7 +15,9 @@ import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.ui.main.presenter.Tab3Presenter;
 import cn.lc.model.ui.main.view.Tab3View;
+import cn.lc.model.ui.tab3.activity.MyWalletActivity;
 import cn.lc.model.ui.tab3.activity.PersonInfoActivity;
+import cn.lc.model.ui.tab3.activity.SysSettingActivity;
 
 /**
  * Created by hh on 2016/5/18.
@@ -64,10 +66,10 @@ public void onClick(View view ){
 
             break;
         case R.id.rl_wallet:
-
+            UIManager.turnToAct(getActivity(), MyWalletActivity.class);
             break;
         case R.id.rl_sys:
-
+    UIManager.turnToAct(getActivity(), SysSettingActivity.class);
             break;
     }
 }

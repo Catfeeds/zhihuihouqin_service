@@ -19,7 +19,9 @@ import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.widget.EditTextWithDel;
+import cn.lc.model.ui.login.bean.LoginBean;
 import cn.lc.model.ui.login.presenter.LoginPresenter;
 import cn.lc.model.ui.login.view.LoginView;
 import cn.lc.model.ui.main.activity.MainActivity;
@@ -33,7 +35,7 @@ import mvp.cn.util.CrcUtil;
  * @author --FY
  * @version 创建时间：2015-8-3 上午11:07:24
  */
-public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> {
+public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> implements LoginView{
     @BindView(R.id.iv_logo)
     ImageView ivLogo;
     @BindView(R.id.et_uname)
@@ -50,10 +52,10 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     Button btLogin;
     @BindView(R.id.title)
     TextView title;
-@BindView(R.id.rl_title)
+    @BindView(R.id.rl_title)
     RelativeLayout rl_title;
     @BindView(R.id.rl_type)
-   RelativeLayout rl_type;
+    RelativeLayout rl_type;
     @BindView(R.id.tx_maintain)
     TextView tx_maintain;
     @BindView(R.id.tx_work)
@@ -63,92 +65,78 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     @BindView(R.id.tx_metting)
     TextView tx_metting;
     //0隐藏  1显示
-    private int type=0;
-        private int servicetype;
+    private int type = 0;
+    private int servicetype;
     @Override
     public void setContentLayout() {
         setContentView(R.layout.login);
         ButterKnife.bind(this);
-        servicetype=SharedPrefHelper.getInstance().getServicetype();
-        if (servicetype==1){
-            title.setText("维修人员端");
-        }else if (servicetype==2){
-            title.setText("办公用品服务端");
-        }else if (servicetype==3){
-            title.setText("订水服务端");
-        }else if (servicetype==4){
-            title.setText("会议室服务端");
+        servicetype = SharedPrefHelper.getInstance().getServicetype();
+        if (servicetype == 1) {
+            title.setText("维修工作人员");
+        } else if (servicetype == 8) {
+            title.setText("办公用品人员");
+        } else if (servicetype == 18) {
+            title.setText("水站工作人员");
+        } else if (servicetype == 7) {
+            title.setText("会议室预定");
         }
     }
-
     @Override
     public void initView() {
 //        ShareSDK.initSDK(this);
 //        etUname.setText(SharedPrefHelper.getInstance().getLoginAccount());
     }
-
     @Override
     public LoginPresenter createPresenter() {
         return new LoginPresenter();
     }
-
-
-    @OnClick({R.id.l_tv_findPsw,R.id.tx_trans,R.id.l_tv_register, R.id.bt_login,R.id.rl_title,R.id.tx_maintain,R.id.tx_work,R.id.tx_water,R.id.tx_metting})
+    @OnClick({R.id.l_tv_findPsw, R.id.tx_trans, R.id.l_tv_register, R.id.bt_login, R.id.rl_title, R.id.tx_maintain, R.id.tx_work, R.id.tx_water, R.id.tx_metting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.l_tv_register:
-               turnToRegist();
+                turnToRegist();
                 break;
             case R.id.l_tv_findPsw:
-             turnToFindPwd();
+                turnToFindPwd();
                 break;
             case R.id.bt_login:
                 doLogin();
                 break;
             case R.id.rl_title:
-                if (type==0) {
+                if (type == 0) {
                     rl_type.setVisibility(View.VISIBLE);
-                    type=1;
-                }else if(type==1) {
+                    type = 1;
+                } else if (type == 1) {
                     rl_type.setVisibility(View.GONE);
-                    type=0;
+                    type = 0;
                 }
                 break;
-
             case R.id.tx_maintain:
-               rl_type.setVisibility(View.GONE);
+                rl_type.setVisibility(View.GONE);
                 SharedPrefHelper.getInstance().setServicetype(1);
-                title.setText("维修人员端");
+                title.setText("维修工作人员");
                 break;
             case R.id.tx_work:
                 rl_type.setVisibility(View.GONE);
-                SharedPrefHelper.getInstance().setServicetype(2);
-                title.setText("办公用品服务端");
+                SharedPrefHelper.getInstance().setServicetype(8);
+                title.setText("办公用品人员");
                 break;
             case R.id.tx_water:
                 rl_type.setVisibility(View.GONE);
-                SharedPrefHelper.getInstance().setServicetype(3);
-                title.setText("订水服务端");
+                SharedPrefHelper.getInstance().setServicetype(18);
+                title.setText("水站工作人员");
                 break;
             case R.id.tx_metting:
-               rl_type.setVisibility(View.GONE);
-                SharedPrefHelper.getInstance().setServicetype(4);
-                title.setText("会议室服务端");
+                rl_type.setVisibility(View.GONE);
+                SharedPrefHelper.getInstance().setServicetype(7);
+                title.setText("会议室预定");
                 break;
-            case  R.id.tx_trans:
+            case R.id.tx_trans:
                 rl_type.setVisibility(View.GONE);
                 break;
         }
     }
-
-
-    /**
-     * 返回
-     */
-    public void doBack() {
-        finish();
-    }
-
     /**
      * 找回密码
      */
@@ -168,7 +156,6 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
         b.putInt("type", type);
         UIManager.turnToAct(this, RegistStep1Activity.class, b);
     }
-
     /**
      * 注册
      *
@@ -205,7 +192,8 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
 //        CommonUtil.closeSoftKeyboard(this, etUname);
         UIManager.turnToAct(this, MainActivity.class);
         finish();
-//        doLoginRequest(mobile, md5Pwd);
+     // getPresenter().getData(mobile, md5Pwd,servicetype+"");
+       //doLoginRequest(mobile, md5Pwd);
     }
 
   /*  private void doLoginRequest(final String mobile, final String md5Pwd) {
@@ -371,4 +359,13 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
         ButterKnife.bind(this);
     }
 
+    @Override
+    public void loginSucc(LoginBean loginBean) {
+        LogUtils.d("登录"+loginBean.msg);
+    }
+
+    @Override
+    public void showToast() {
+
+    }
 }

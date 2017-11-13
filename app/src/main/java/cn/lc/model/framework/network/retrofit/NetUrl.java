@@ -6,5 +6,5 @@ package cn.lc.model.framework.network.retrofit;
 
 public interface NetUrl {
 
-    String signup="/login/isos";
+    String login="appservice/login?";
 }
