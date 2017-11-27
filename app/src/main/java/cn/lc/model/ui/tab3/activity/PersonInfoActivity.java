@@ -11,6 +11,9 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +25,12 @@ import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.imageload.GlideLoading;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.utils.SelectImageHelper;
 import cn.lc.model.framework.widget.CircleImageView;
 import cn.lc.model.framework.widget.MySettingView;
+import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
 import mvp.cn.util.LogUtil;
@@ -50,9 +55,14 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     public void setContentLayout() {
         setContentView(R.layout.personinfo);
         ButterKnife.bind(this);
-
+        EventBus.getDefault().register(this);//订阅
     }
-
+    @Subscribe //在ui线程执行
+    public void onEventMainThread(PersonInfoEnvent event) {
+        s_name.setRightText(SharedPrefHelper.getInstance().getUserName());
+        s_phone.setRightText(SharedPrefHelper.getInstance().getRealPhone());
+        EventBus.getDefault().unregister(event);
+    }
     @Override
     public void initView() {
         s_name.setRightText("张大可");

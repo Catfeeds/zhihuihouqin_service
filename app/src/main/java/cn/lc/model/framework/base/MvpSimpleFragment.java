@@ -59,7 +59,7 @@ public abstract class MvpSimpleFragment<V extends MvpView, P extends MvpRxSimple
 
         return inflate;
     }
-
+    public abstract void setContentLayout(Bundle savedInstanceState);
 
     @Override
     public void onDestroy() {
@@ -68,7 +68,7 @@ public abstract class MvpSimpleFragment<V extends MvpView, P extends MvpRxSimple
 //        NetChangeManager.newInstance(softApplication).removeMinitor(this);
     }
 
-    public abstract void setContentLayout(Bundle savedInstanceState);
+
 
     public abstract void initView(View v);
 

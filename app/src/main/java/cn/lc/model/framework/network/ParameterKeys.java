@@ -13,7 +13,13 @@ public interface ParameterKeys {
     String KEY_TOKEN = "token";
     String KEY_SIGN_PARAM = "Sign-Param";
     String KEY_USERID = "userId";
-
+    String TIMESTAMP  ="timestamp";
+    String BIZ="biz";
+    String DEVICE="device";
+    String REPLACE_BIZ="replaceBiz";
+    String REPLACE_DEVICE="replaceDevice";
+    String TOKEN  ="token";
+    String SIGN="sign";
     String KEY_INFO  ="info";
 
 }

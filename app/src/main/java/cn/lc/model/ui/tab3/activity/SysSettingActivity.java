@@ -8,6 +8,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.BaseActivity;
+import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.MySettingView;
 
 /**
@@ -58,7 +59,7 @@ public class SysSettingActivity extends BaseActivity{
 
                 break;
             case R.id.s_feedBack:
-
+                UIManager.turnToAct(this,SysFeedBackActivity.class);
                 break;
             case R.id.s_loginOut :
 

@@ -15,10 +15,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
+import cn.lc.model.framework.base.BaseResponse;
+import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.framework.utils.CommonUtils;
+import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.widget.TitleBar;
+import cn.lc.model.ui.login.bean.CaptchaBean;
 import cn.lc.model.ui.login.presenter.RegistStep1Presenter;
 import cn.lc.model.ui.login.view.RegistStep1View;
 import mvp.cn.util.CommonUtil;
@@ -45,10 +51,11 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
     private int from = -1;
     private int type = 1;
     private String mobile;
+    private  String captcha;
     /**
      * 服务器返回的验证码
      */
-    private String mCaptchaServer = "8888";
+    private String mCaptchaServer = "";
 
     @Override
     public void setContentLayout() {
@@ -75,6 +82,12 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
                 tv_title.setText("找回密码");
             } else if (from == Constants.REGIST) {
                 tv_title.setText("注册");
+            }else if (from == Constants.SETPAY) {
+                tv_title.setText("设置交易密码");
+            }else if (from == Constants.RESETPAY) {
+                tv_title.setText("修改交易密码");
+            }else if (from == Constants.FORGETPAY) {
+                tv_title.setText("找回交易密码");
             }
         }
     }
@@ -83,6 +96,7 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                CommonUtils.hintKbTwo(this);
                 finish();
                 break;
             case R.id.tx_gainecode:
@@ -98,7 +112,7 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
      * 下一步
      */
     public void doNext() {
-        String captcha = ed_code.getText().toString().trim();
+         captcha = ed_code.getText().toString().trim();
         mobile = ed_mobile.getText().toString().trim();
         if (!isPhoneChecked(mobile)) {
             return;
@@ -107,15 +121,17 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             showToast("请填写验证码");
             return;
         }
-        if (!captcha.equals(mCaptchaServer)) {
-            showToast("验证码错误");
-            return;
-        }
+//        if (!captcha.equals(mCaptchaServer)) {
+//            showToast("验证码错误");
+//            return;
+//        }
         CommonUtil.closeSoftKeyboard(this, ed_code);
+      //  getPresenter().checkcapture(mobile, SharedPrefHelper.getInstance().getServicetype()+"",captcha,"");
         turnToPwdSet(captcha);
     }
 
     private void turnToPwdSet(String captcha) {
+        CommonUtils.hintKbTwo(this);
         Bundle b = new Bundle();
         b.putString("mobile", mobile);
         b.putString("captcha", captcha);
@@ -135,8 +151,8 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
         if (!isPhoneChecked(mobile)) {
             return;
         }
-        showToast("验证码发送成功，请注意查收！");
-        doTimer();
+
+        getPresenter().getData(mobile);
 //        doGetCodeRequest(mobile);
     }
 
@@ -160,10 +176,17 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
         tx_gainecode.setClickable(true);
         tx_gainecode.setText("重新获取验证码");
     }
-
     public MyRunnable runnable;
+    @Override
+    public void getSucc(CaptchaBean bean) {
+        showToast("验证码发送成功，请注意查收！");
+        doTimer();
+        LogUtils.d("验证码"+bean.getCaptcha());
+    }
+    @Override
+    public void checkSucc(CommonBean bean) {
 
-
+    }
     public class MyRunnable implements Runnable {
 
         @SuppressLint("NewApi")
@@ -177,7 +200,6 @@ public class RegistStep1Activity extends MvpSimpleActivity<RegistStep1View, Regi
             }
         }
     }
-
     /**
      * 手机号校验
      *

@@ -7,13 +7,12 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.widget.TabBar;
-
-import cn.lc.model.ui.main.fragment.Tab1_1Fragment;
+import cn.lc.model.ui.main.fragment.Tab1Fragment;
 import cn.lc.model.ui.main.fragment.Tab2Fragment;
 import cn.lc.model.ui.main.fragment.Tab3Fragment;
 import cn.lc.model.ui.main.presenter.MainPresenter;
@@ -30,18 +29,20 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
 
     @Override
     public void setContentLayout() {
+
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
 
     public void initView() {
-      fragments.add(new Tab1_1Fragment());
+        getPresenter().getData();
+        fragments.add(new Tab1Fragment());
         fragments.add(new Tab2Fragment());
         fragments.add(new Tab3Fragment());
         //默认选中的界面
         mBottom.setOnItemChangedListener(onBottomItemClickListener);
         mBottom.setItemChecked(0);
 
-        getData();
     }
 
     /**
@@ -61,6 +62,10 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
         }
     };
 
+    public void refresh() {
+        mBottom.setItemChecked(0);
+        changeFragment(fragments.get(0));
+    }
 
     private void changeFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
@@ -74,8 +79,5 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
         return new MainPresenter();
     }
 
-    public void getData() {
-        getPresenter().getData();
-    }
 
 }

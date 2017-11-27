@@ -25,7 +25,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--配置权限，用来记录应用配置信息 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:name=".framework.application.SoftApplication"
         android:allowBackup="true"
@@ -43,7 +43,7 @@
 
         <activity
             android:name=".ui.login.activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".ui.main.activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -55,6 +55,9 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ui.login.activity.AgreeActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab1.activity.OrderDetailActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ui.tab3.activity.PersonInfoActivity"
@@ -69,7 +72,28 @@
             android:name=".ui.tab3.activity.SysSettingActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
+            android:name=".ui.tab3.activity.SysFeedBackActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
             android:name=".ui.tab3.activity.MyWalletActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.AddBank1Activity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.AddBank2Activity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.MyBankActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.GetMoneyActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.PwdManagerActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.tab3.activity.MyEvaluateActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 

@@ -1,19 +1,26 @@
 package cn.lc.model.framework.network.retrofit;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import cn.lc.model.framework.application.SoftApplication;
+import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.network.AppConstants;
 import cn.lc.model.framework.network.ParameterKeys;
 import cn.lc.model.framework.network.ServerConstants;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import mvp.cn.util.DateUtil;
+import mvp.cn.util.LogUtil;
+import mvp.cn.util.Md5Util;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -60,51 +67,33 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
         return okHttpClient;
     }
+    private static String getSign(String biz, String timestamp) throws UnsupportedEncodingException {
+        return Md5Util.getMD5(URLEncoder.encode(biz, "UTF-8") + timestamp + Constants.KEY_SECRET);
+    }
     private static void addParam(Map<String, Object> paramsMap, Map<String, String> tempMap) {
         Gson gson = new Gson();
-
         String biz = gson.toJson(tempMap);
-        paramsMap.put("biz", biz);
+        paramsMap.put(ParameterKeys.BIZ, biz);
         LogUtils.d("biz请求参数：" + biz);
+        String timestamp = DateUtil.getCurrentDateTimeyyyyMMddHHmmss();
+        paramsMap.put(ParameterKeys.TIMESTAMP, timestamp);
+        LogUtils.d("时间戳请求参数：" + timestamp);
+        SoftApplication sf = new SoftApplication();
+        sf.getToken();
+        LogUtils.d("token::" + sf.getToken());
+        if (sf.getToken() != null && !sf.getToken().equals("")) {
+            paramsMap.put(ParameterKeys.TOKEN, sf.getToken());
+        } else {
+            paramsMap.put(ParameterKeys.TOKEN, "");
+        }
+            try {
+                paramsMap.put(ParameterKeys.SIGN, getSign(biz, timestamp));
+                //   LogUtils.d("sign戳请求参数：" + getSign(device,biz, timestamp));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
-//        String replaceBiz = biz.replaceAll(" ", "");
-//        paramsMap.put(ParameterKeys.REPLACE_BIZ, replaceBiz);
-//
-//        String device = gson.toJson(getdevice());
-//        paramsMap.put(ParameterKeys.DEVICE, device);
-//        LogUtils.d("device请求参数：" + device);
-//
-//        String replaceDevice = device.replaceAll(" ", "");
-//        paramsMap.put(ParameterKeys.REPLACE_DEVICE, replaceDevice);
-//
-//        String timestamp = DateUtil.getCurrentDateTimeyyyyMMddHHmmss();
-//        paramsMap.put(ParameterKeys.TIMESTAMP, timestamp);
-//        LogUtils.d("时间戳请求参数：" + timestamp);
-//        SoftApplication sf = new SoftApplication();
-//        sf.getToken();
-//        LogUtils.d("token::" + sf.getToken());
-//        if (sf.getToken() != null && !sf.getToken().equals("")) {
-//            paramsMap.put(TOKEN, sf.getToken());
-//        } else {
-//            paramsMap.put(TOKEN, "");
-//        }
-//        if (SharedPrefHelper.getInstance().getToken() != null && !SharedPrefHelper.getInstance().getToken().equals("")) {
-//            LogUtils.d("getToken请求参数：" + SharedPrefHelper.getInstance().getToken());
-//            paramsMap.put(TOKEN, SharedPrefHelper.getInstance().getToken());
-//
-//        } else {
-//            LogUtil.log(SharedPrefHelper.getInstance().getyouke() + "");
-//            if (SharedPrefHelper.getInstance().getyouke() == true) {
-//                paramsMap.put(TOKEN, "0");
-//            } else {
-//            }
-//        try {
-//            paramsMap.put(ParameterKeys.SIGN, getSign(replaceDevice, replaceBiz, timestamp));
-//            //   LogUtils.d("sign戳请求参数：" + getSign(device,biz, timestamp));
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-    }
     public static RetrofitUtils getInstance() {
         if (instance == null) {
             createApi();
@@ -129,17 +118,102 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
             tempMap.put("password", pwd);
             tempMap.put("servicetypeid", service);
             addParam(paramsMap,tempMap);
-//            Gson gson = new Gson();
-//            String info = gson.toJson(tempMap);
-//            paramsMap.put(ParameterKeys.KEY_INFO, info);
-//            paramsMap.put(ParameterKeys.KEY_SIGN, "");
-//            paramsMap.put(ParameterKeys.KEY_TOKEN, "");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return api.login(paramsMap);
     }
 
+    /**
+     * 获取验证码
+     *
+     *
+     *
+     * @return
+     */
+    public static Observable capture(String mobile) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("mobile", mobile);
 
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.capture(paramsMap);
+    }
+    /**
+     * 校验验证码
+     *
+     *
+     *
+     * @return
+     */
+    public static Observable checkcapture(String mobile,String serviceid,String capture ,String uid)  {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("mobile", mobile);
+            tempMap.put("servicetypeid", serviceid);
+            tempMap.put("captcha", capture);
+            tempMap.put("uid", uid);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.checkcapture(paramsMap);
+    }
+    /**
+     * 注册
+     * @return
+     */
+    public static Observable register(String mobile,String password,String servicetypeid ,String captcha)  {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("username", mobile);
+            tempMap.put("password", password);
+            tempMap.put("servicetypeid", servicetypeid);
+            tempMap.put("captcha",captcha);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.register(paramsMap);
+    }
+    /**
+     * 订单列表
+     * @return
+     */
+    public static Observable getOrder(String serviceOrderStatus,String page,String limit )  {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("serviceOrderStatus", serviceOrderStatus);
+            tempMap.put("page", page);
+            tempMap.put("limit", limit);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.getorder(paramsMap);
+    }
+    /**
+     * 真实姓名。电话
+     * @return
+     */
+    public static Observable updatename(String name,String mobile)  {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("realname", name);
+            tempMap.put("mobile",mobile);
+
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.updatename(paramsMap);
+    }
 }

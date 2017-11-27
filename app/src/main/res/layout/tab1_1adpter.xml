@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@mipmap/time" />
+
+        <TextView
+            style="@style/tvStyle_black_smaller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="上门时间:" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="立即"
+            android:textColor="@color/bg_color" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_lighter" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:id="@+id/iv_header"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/user_header" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/iv_header">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/tvStyle_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:drawableLeft="@mipmap/blue_circle"
+                android:drawablePadding="5dp"
+                android:text="时代广场2211" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/tvStyle_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_address"
+                android:drawableLeft="@mipmap/red_circle"
+                android:drawablePadding="5dp"
+                android:text="1786543333" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_tel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:src="@mipmap/tel" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_lighter" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+         android:layout_margin="10dp"
+            android:text="维修项目:" />
+        <TextView
+            android:id="@+id/tv_project"
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="器材养护" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="问题描述:" />
+        <TextView
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="我是一只小小鸟" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tx_ordernumtype"
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单号:" />
+        <TextView
+            style="@style/tvStyle_blacklight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tx_ordernumtype"
+
+            android:layout_marginLeft="10dp"
+            android:text="3354642564" />
+            <TextView
+                style="@style/tvStyle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                android:text="立即服务"
+                android:background="@mipmap/blue_bt"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/gray_lighter" />
+</LinearLayout>

@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.BaseActivity;
+import cn.lc.model.framework.manager.UIManager;
 
 /**
  * Created by Administrator on 2017/11/9.
@@ -39,10 +40,13 @@ public void onClick(View view){
             finish();
             break;
         case R.id.tv_card:
+            UIManager.turnToAct(this,MyBankActivity.class);
             break;
         case  R.id.tv_tixian:
+            UIManager.turnToAct(this,GetMoneyActivity.class);
             break;
         case R.id.tv_pwd:
+            UIManager.turnToAct(this,PwdManagerActivity.class);
             break;
     }
 }

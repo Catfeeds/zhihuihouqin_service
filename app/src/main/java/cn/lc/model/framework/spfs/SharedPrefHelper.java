@@ -44,7 +44,6 @@ public class SharedPrefHelper {
     public String getPhoneNumber() {
         return sharedPreferences.getString("phoneNumber", "");
     }
-
     public void setPassword(String password) {
         sharedPreferences.edit().putString("password", password).commit();
     }
@@ -102,4 +101,22 @@ public class SharedPrefHelper {
   public  int  getServicetype(){
       return sharedPreferences.getInt("serivcetype",1);
   }
+    /*
+   姓名
+   * */
+    public  void setUserName(String name){
+        sharedPreferences.edit().putString("userName",name).commit();
+    }
+    public  String  getUserName(){
+        return sharedPreferences.getString("userName","");
+    }
+    /*
+ 真实电话
+  * */
+    public  void setRealPhone(String realPhone){
+        sharedPreferences.edit().putString("realPhone",realPhone).commit();
+    }
+    public  String  getRealPhone(){
+        return sharedPreferences.getString("realPhone","");
+    }
 }

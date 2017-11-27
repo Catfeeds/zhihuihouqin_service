@@ -9,5 +9,5 @@ import mvp.cn.common.MvpView;
 
 public interface LoginView extends MvpView{
     void loginSucc(LoginBean loginBean);
-    void showToast();
+
 }

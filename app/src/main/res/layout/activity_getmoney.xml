@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dp_common"
+
+        >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/back" />
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/tvStyle_black_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="提现" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_trans"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_getcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="到账银行卡: "/>
+            <TextView
+                android:id="@+id/tx_cardtype"
+                style="@style/tvStyle_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="招商银行(3231)"
+                android:layout_gravity="center"
+                android:background="@null"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light"/>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/tvStyle_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="金额(元): "/>
+        <EditText
+            android:id="@+id/ed_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入提现金额"
+            android:textColorHint="@color/gray"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:background="@null"
+            android:inputType="number"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp_common"
+            />
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/tvStyle_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="可提现余额(元): "/>
+            <TextView
+                android:id="@+id/tx_allmoney"
+                style="@style/tvStyle_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="20000"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light"/>
+        <TextView
+            android:id="@+id/tx_next"
+            style="@style/tvStyle_white_big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="40dp"
+            android:background="@color/gray_light"
+            android:text="下一步"/>
+    </LinearLayout>
+
+</LinearLayout>

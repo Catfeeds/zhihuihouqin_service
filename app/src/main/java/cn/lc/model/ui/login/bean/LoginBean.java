@@ -8,48 +8,45 @@ import cn.lc.model.framework.base.BaseResponse;
 
 public class LoginBean extends BaseResponse{
 
+
     /**
-     * loginresult : {"servicetypeid":2,"token":"48611854-c4a9-4c24-b0e0-e67897c40ad0","uid":1,"userName":"18515826536"}
+     * token : b0cbad90-fb97-4f6b-a91a-8ff0f400be86
+     * userinfo : {"uid":5,"username":"13263280712","servicetypeid":8,"photo":"http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png","mobile":"13263280712"}
      */
 
-    private LoginresultBean loginresult;
+    private String token;
+    private UserinfoBean userinfo;
 
-    public LoginresultBean getLoginresult() {
-        return loginresult;
+    public String getToken() {
+        return token;
     }
 
-    public void setLoginresult(LoginresultBean loginresult) {
-        this.loginresult = loginresult;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public static class LoginresultBean {
+    public UserinfoBean getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(UserinfoBean userinfo) {
+        this.userinfo = userinfo;
+    }
+
+    public static class UserinfoBean {
         /**
-         * servicetypeid : 2
-         * token : 48611854-c4a9-4c24-b0e0-e67897c40ad0
-         * uid : 1
-         * userName : 18515826536
+         * uid : 5
+         * username : 13263280712
+         * servicetypeid : 8
+         * photo : http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png
+         * mobile : 13263280712
          */
 
-        private int servicetypeid;
-        private String token;
         private int uid;
-        private String userName;
-
-        public int getServicetypeid() {
-            return servicetypeid;
-        }
-
-        public void setServicetypeid(int servicetypeid) {
-            this.servicetypeid = servicetypeid;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
+        private String username;
+        private int servicetypeid;
+        private String photo;
+        private String mobile;
 
         public int getUid() {
             return uid;
@@ -59,12 +56,36 @@ public class LoginBean extends BaseResponse{
             this.uid = uid;
         }
 
-        public String getUserName() {
-            return userName;
+        public String getUsername() {
+            return username;
         }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public int getServicetypeid() {
+            return servicetypeid;
+        }
+
+        public void setServicetypeid(int servicetypeid) {
+            this.servicetypeid = servicetypeid;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(String photo) {
+            this.photo = photo;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
     }
 }

@@ -31,7 +31,7 @@ public class SoftApplication extends QuickApplication {
     private static AppInfo appInfo;
     private static UserInfo userInfo ;
     private static boolean isLogin;// 判断是否已经登录
-
+    private static String token = "";
     private static int authStatus;
 
     private double longitude;
@@ -54,6 +54,7 @@ public class SoftApplication extends QuickApplication {
         //极光推送
 //		JPushInterface.setDebugMode(true);
 //		JPushInterface.init(this);
+
     }
 
     /**
@@ -69,6 +70,7 @@ public class SoftApplication extends QuickApplication {
     /**
      * 实例化AppInfo
      */
+
     private AppInfo initAppInfo() {
         AppInfo appInfo = AppConfig.getAppConfigInfo(softApplication);
         appInfo.imei = NetUtil.getIMEI(getApplicationContext());
@@ -226,6 +228,12 @@ public class SoftApplication extends QuickApplication {
         }
         return userInfo;
     }
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String tokens) {
+        token = tokens;
+    }
 }
 

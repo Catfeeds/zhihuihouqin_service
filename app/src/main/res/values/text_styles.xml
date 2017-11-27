@@ -140,10 +140,10 @@
     </style>
 
     <style name="tvStyle_orenge">
-        <item name="android:textColor">@color/orange</item>
-        <item name="android:textSize">@dimen/sp_common</item>
-        <item name="android:gravity">center</item>
-    </style>
+    <item name="android:textColor">@color/orange</item>
+    <item name="android:textSize">@dimen/sp_common</item>
+    <item name="android:gravity">center</item>
+</style>
 
     <style name="tvStyle_orenge_small">
         <item name="android:textColor">@color/orange</item>
@@ -152,6 +152,17 @@
     </style>
     <style name="tvStyle_bg_blue">
         <item name="android:textColor">@color/bg_color</item>
+        <item name="android:textSize">@dimen/sp_small</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="tvStyle_red">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">@dimen/sp_common</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tvStyle_red_small">
+        <item name="android:textColor">@color/red</item>
         <item name="android:textSize">@dimen/sp_small</item>
         <item name="android:gravity">center</item>
     </style>

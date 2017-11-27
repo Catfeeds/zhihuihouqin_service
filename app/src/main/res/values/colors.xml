@@ -13,6 +13,8 @@
     <color name="tv_gray_light">#A4ABAE</color>
     <color name="tv_blue">#0B8BAE</color>
     <color name="tv_red">#F95759</color>
+    <color name="red">#E81010</color>
+
     <color name="blue_trans">#5551AEFE</color>
     <color name="bg_color">#51AEFE</color>
     <color name="black">#000000</color>

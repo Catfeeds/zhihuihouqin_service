@@ -12,16 +12,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
+import cn.lc.model.framework.base.BaseResponse;
+import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.framework.utils.CommonUtils;
 import cn.lc.model.framework.widget.TitleBar;
 import cn.lc.model.ui.login.presenter.RegistStep2Presenter;
 import cn.lc.model.ui.login.view.RegistStep2View;
 import mvp.cn.util.CommonUtil;
+import mvp.cn.util.CrcUtil;
+import mvp.cn.util.Md5Util;
 
 
-public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, RegistStep2Presenter> implements View.OnClickListener {
+public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, RegistStep2Presenter> implements View.OnClickListener,RegistStep2View {
     @BindView(R.id.iv_back)
     ImageView iv_back;
     @BindView(R.id.tv_title)
@@ -36,6 +42,7 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
     private String mCptcha;
     private int from=-1;
     private int type=1;
+    private String md5Pwd;
     @Override
     public void setContentLayout() {
         setContentView(R.layout.login_regist_2);
@@ -65,6 +72,15 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
             } else if (from == Constants.REGIST) {
                 tv_title.setText("设置新密码");
                 btNext.setText("完成");
+            }else if (from == Constants.SETPAY) {
+                tv_title.setText("设置交易密码");
+                btNext.setText("完成");
+            }else if (from == Constants.RESETPAY) {
+                tv_title.setText("修改交易密码");
+                btNext.setText("完成");
+            }else if (from == Constants.FORGETPAY) {
+                tv_title.setText("找回交易密码");
+                btNext.setText("完成");
             }
         }
     }
@@ -73,10 +89,21 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                CommonUtils.hintKbTwo(this);
                 finish();
                 break;
             case R.id.bt_next:
-                doRegist();
+                if (from == Constants.FORGET) {
+                    doRegist();
+                } else if (from == Constants.REGIST) {
+                    doRegist();
+                }else if (from == Constants.SETPAY) {
+
+                }else if (from == Constants.RESETPAY) {
+
+                }else if (from == Constants.FORGETPAY) {
+
+                }
                 break;
         }
     }
@@ -91,11 +118,15 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
         if (!isOtherChecked(pwd1, pwd2)) {
             return;
         }
-        CommonUtil.closeSoftKeyboard(this, ed_psw1);
-        showToast("注册成功");
-        UIManager.turnToAct(RegistStep2Activity.this, LoginActivity.class);
-        finishActivityAndAboveIt(RegistStep1Activity.class.getName());
-          //doResistRequest(mMobile, mCptcha, pwd1);
+
+        try {
+          md5Pwd = CrcUtil.MD5(pwd1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        CommonUtils.hintKbTwo(this);
+        getPresenter().register(mMobile, md5Pwd, SharedPrefHelper.getInstance().getServicetype()+"",mCptcha);
+          //doResistRequest(mMobile, mCptcha, pwd1);''
     }
 
     /**
@@ -123,6 +154,14 @@ public class RegistStep2Activity extends MvpSimpleActivity<RegistStep2View, Regi
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void RegisterSucc(CommonBean bean) {
+        showToast("注册成功");
+        UIManager.turnToAct(RegistStep2Activity.this, LoginActivity.class);
+        finishActivityAndAboveIt(RegistStep1Activity.class.getName());
+        finish();;
     }
 
     /**

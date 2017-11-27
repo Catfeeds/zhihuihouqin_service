@@ -14,10 +14,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
+import cn.lc.model.framework.base.BaseResponse;
+import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.TitleBar;
+import cn.lc.model.ui.login.bean.CaptchaBean;
 import cn.lc.model.ui.login.presenter.RegistStep1Presenter;
 import cn.lc.model.ui.login.view.RegistStep1View;
 import mvp.cn.util.CommonUtil;
@@ -78,8 +81,6 @@ public class RegistStepActivity extends MvpSimpleActivity<RegistStep1View, Regis
                 mTitleBar.setTitle("找回密码");
             } else if (from == Constants.REGIST) {
                 mTitleBar.setTitle("注册");
-            } else if (from == Constants.BIND) {
-                mTitleBar.setTitle("绑定手机号");
             }
         }
     }
@@ -117,12 +118,11 @@ public class RegistStepActivity extends MvpSimpleActivity<RegistStep1View, Regis
         }
 
         CommonUtil.closeSoftKeyboard(this, etCode);
-        if (from == Constants.BIND) {
-//            doBindRequest(mobile, captcha);
-        } else {
+
+
 //            doNextRequest(mobile, captcha);
             turnToPwdSet(captcha);
-        }
+
     }
 
     private void turnToPwdSet(String captcha) {
@@ -179,6 +179,16 @@ public class RegistStepActivity extends MvpSimpleActivity<RegistStep1View, Regis
     }
 
     public MyRunnable runnable;
+
+    @Override
+    public void getSucc(CaptchaBean bean) {
+
+    }
+
+    @Override
+    public void checkSucc(CommonBean bean) {
+
+    }
 
 
     public class MyRunnable implements Runnable {

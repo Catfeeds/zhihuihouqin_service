@@ -8,7 +8,18 @@ import cn.lc.model.framework.base.BaseResponse;
  */
 public class CaptchaBean extends BaseResponse {
 
-    public CaptchaBean data;
-    public String captcha;
-    public String uid;
+
+    /**
+     * captcha : 757532
+     */
+
+    private String captcha;
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
 }

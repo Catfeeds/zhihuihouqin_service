@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
+import cn.lc.model.framework.application.SoftApplication;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
@@ -35,7 +36,7 @@ import mvp.cn.util.CrcUtil;
  * @author --FY
  * @version 创建时间：2015-8-3 上午11:07:24
  */
-public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> implements LoginView{
+public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> implements LoginView {
     @BindView(R.id.iv_logo)
     ImageView ivLogo;
     @BindView(R.id.et_uname)
@@ -67,11 +68,16 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     //0隐藏  1显示
     private int type = 0;
     private int servicetype;
+
     @Override
     public void setContentLayout() {
         setContentView(R.layout.login);
         ButterKnife.bind(this);
         servicetype = SharedPrefHelper.getInstance().getServicetype();
+        if (SharedPrefHelper.getInstance().getPhoneNumber() != null) {
+            etUname.setText(SharedPrefHelper.getInstance().getPhoneNumber());
+            etPsw.setText(SharedPrefHelper.getInstance().getPassword());
+        }
         if (servicetype == 1) {
             title.setText("维修工作人员");
         } else if (servicetype == 8) {
@@ -82,15 +88,18 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
             title.setText("会议室预定");
         }
     }
+
     @Override
     public void initView() {
 //        ShareSDK.initSDK(this);
 //        etUname.setText(SharedPrefHelper.getInstance().getLoginAccount());
     }
+
     @Override
     public LoginPresenter createPresenter() {
         return new LoginPresenter();
     }
+
     @OnClick({R.id.l_tv_findPsw, R.id.tx_trans, R.id.l_tv_register, R.id.bt_login, R.id.rl_title, R.id.tx_maintain, R.id.tx_work, R.id.tx_water, R.id.tx_metting})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -137,6 +146,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 break;
         }
     }
+
     /**
      * 找回密码
      */
@@ -156,44 +166,63 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
         b.putInt("type", type);
         UIManager.turnToAct(this, RegistStep1Activity.class, b);
     }
-    /**
-     * 注册
-     *
-     * @param thirdType
-     */
-    public void turnToBind(String thirdType, String thirdNum) {
-        Bundle b = new Bundle();
-        b.putInt("from", Constants.BIND);
-        b.putString("thirdType", thirdType);
-        b.putString("thirdNum", thirdNum);
-        UIManager.turnToAct(this, RegistStep1Activity.class, b);
-    }
+//    /**
+//     * 注册
+//     *
+//     * @param thirdType
+//     */
+//    public void turnToBind(String thirdType, String thirdNum) {
+//        Bundle b = new Bundle();
+//        b.putInt("from", Constants.BIND);
+//        b.putString("thirdType", thirdType);
+//        b.putString("thirdNum", thirdNum);
+//        UIManager.turnToAct(this, RegistStep1Activity.class, b);
+//    }
 
     /**
      * 登录
      */
     public void doLogin() {
-//        String mobile = etUname.getText().toString().trim();
-//        String pwd = etPsw.getText().toString().trim();
-//        if (TextUtils.isEmpty(mobile)) {
-//            showToast("请输入手机号");
-//            return;
-//        }
-//        if (TextUtils.isEmpty(pwd)) {
-//            showToast("请输入密码");
-//            return;
-//        }
-//        String md5Pwd = null;
-//        try {
-//            md5Pwd = CrcUtil.MD5(pwd);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        CommonUtil.closeSoftKeyboard(this, etUname);
+        String mobile = etUname.getText().toString().trim();
+        String pwd = etPsw.getText().toString().trim();
+        if (TextUtils.isEmpty(mobile)) {
+            showToast("请输入手机号");
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            showToast("请输入密码");
+            return;
+        }
+        String md5Pwd = null;
+        try {
+            md5Pwd = CrcUtil.MD5(pwd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        CommonUtil.closeSoftKeyboard(this, etUname);
+        SharedPrefHelper.getInstance().setPhoneNumber(mobile);
+        SharedPrefHelper.getInstance().setPassword(pwd);
+        getPresenter().getData(mobile, md5Pwd, servicetype + "");
+        //doLoginRequest(mobile, md5Pwd);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent it) {
+        super.onActivityResult(requestCode, resultCode, it);
+        if (resultCode == RESULT_OK) {
+            String mobile = it.getStringExtra("mobile");
+            String pwd = it.getStringExtra("pwd");
+            etUname.setText(mobile);
+            etPsw.setText(pwd);
+        }
+    }
+    @Override
+    public void loginSucc(LoginBean loginBean) {
+        showToast("登陆成功");
+        SoftApplication.softApplication.setToken(loginBean.getToken());
+        SharedPrefHelper.getInstance().setPhoneNumber(loginBean.getUserinfo().getMobile());
         UIManager.turnToAct(this, MainActivity.class);
         finish();
-     // getPresenter().getData(mobile, md5Pwd,servicetype+"");
-       //doLoginRequest(mobile, md5Pwd);
     }
 
   /*  private void doLoginRequest(final String mobile, final String md5Pwd) {
@@ -341,31 +370,5 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
         api.login(this);
 
     }*/
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent it) {
-        super.onActivityResult(requestCode, resultCode, it);
-        if (resultCode == RESULT_OK) {
-            String mobile = it.getStringExtra("mobile");
-            String pwd = it.getStringExtra("pwd");
-            etUname.setText(mobile);
-            etPsw.setText(pwd);
-        }
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public void loginSucc(LoginBean loginBean) {
-        LogUtils.d("登录"+loginBean.msg);
-    }
-
-    @Override
-    public void showToast() {
-
-    }
 }

@@ -17,7 +17,7 @@ import rx.Observable;
 public class LoginPresenter extends MvpRxSimplePresenter<LoginView> {
 
     public void getData(String mobie,String psw,String servicetype) {
-        LogUtil.log("LoginPresenter发出请求");
+        LogUtils.d("LoginPresenter发出请求");
         Observable login = RetrofitUtils.getInstance().login(mobie,psw,servicetype);
         getNetWork(login, new RetrofitCallBack<LoginBean>() {
             @Override
@@ -26,7 +26,7 @@ public class LoginPresenter extends MvpRxSimplePresenter<LoginView> {
             }
             @Override
             public void onSuccess(LoginBean baseResponse) {
-            getView().loginSucc(baseResponse);
+                getView().loginSucc(baseResponse);
             }
 
             @Override

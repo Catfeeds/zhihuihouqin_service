@@ -24,17 +24,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.FragmentAdapter;
 import cn.lc.model.ui.tab1.bean.Mytab1Title;
 import cn.lc.model.ui.tab1.constant.Tab1Constants;
-import cn.lc.model.ui.tab1.fragment.Tab1_1Fragment0;
+import cn.lc.model.ui.tab1.fragment.MaintainFragment;
+import cn.lc.model.ui.tab1.fragment.MeettingRoomFragment;
+import cn.lc.model.ui.tab1.fragment.OrderWaterFragment;
+import cn.lc.model.ui.tab1.fragment.StationeryFragment;
 
 /**
  * Created by hh on 2016/5/18.
  */
-public class Tab1_1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
+public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
     @BindView(R.id.mIndicator)
     MagicIndicator mIndicator;
     @BindView(R.id.score_pager)
@@ -62,20 +66,68 @@ public class Tab1_1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
     }
 
     private void initTitles() {
-        titleList.add(new Mytab1Title("待接单", Tab1Constants.TAB1_0));
-        titleList.add(new Mytab1Title("已接单", Tab1Constants.TAB1_1));
-        titleList.add(new Mytab1Title("配送中", Tab1Constants.TAB1_2));
-        titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_3));
-        titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_4));
+        if (SharedPrefHelper.getInstance().getServicetype()==1){
+            titleList.add(new Mytab1Title("待服务", Tab1Constants.TAB1_1));
+            titleList.add(new Mytab1Title("服务中", Tab1Constants.TAB1_2));
+            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_3));
+            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_4));
+        }else if(SharedPrefHelper.getInstance().getServicetype()==8){
+            titleList.add(new Mytab1Title("待接单", Tab1Constants.TAB1_1));
+            titleList.add(new Mytab1Title("已接单", Tab1Constants.TAB1_2));
+            titleList.add(new Mytab1Title("配送中", Tab1Constants.TAB1_3));
+            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_4));
+            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_5));
+        }else if(SharedPrefHelper.getInstance().getServicetype()==18){
+            titleList.add(new Mytab1Title("待接单", Tab1Constants.TAB1_1));
+            titleList.add(new Mytab1Title("已接单", Tab1Constants.TAB1_2));
+            titleList.add(new Mytab1Title("配送中", Tab1Constants.TAB1_3));
+            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_4));
+            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_5));
+        }else if(SharedPrefHelper.getInstance().getServicetype()==7){
+            titleList.add(new Mytab1Title("待服务", Tab1Constants.TAB1_1));
+            titleList.add(new Mytab1Title("服务中", Tab1Constants.TAB1_2));
+            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_3));
+            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_4));
+        }
+
     }
     private void initFragments() {
-        for (Mytab1Title title : titleList) {
-            Fragment f;
-            f=new Tab1_1Fragment0();
-            Bundle b = new Bundle();
-            b.putInt("type", title.type);
-            f.setArguments(b);
-            fragmentList.add(f);
+        if (SharedPrefHelper.getInstance().getServicetype()==1) {
+            for (Mytab1Title title : titleList) {
+                Fragment f;
+                f = new MaintainFragment();
+                Bundle b = new Bundle();
+                b.putInt("type", title.type);
+                f.setArguments(b);
+                fragmentList.add(f);
+            }
+        }else if(SharedPrefHelper.getInstance().getServicetype()==8) {
+            for (Mytab1Title title : titleList) {
+                Fragment f;
+                f = new StationeryFragment();
+                Bundle b = new Bundle();
+                b.putInt("type", title.type);
+                f.setArguments(b);
+                fragmentList.add(f);
+            }
+        } else if(SharedPrefHelper.getInstance().getServicetype()==18) {
+            for (Mytab1Title title : titleList) {
+                Fragment f;
+                f = new OrderWaterFragment();
+                Bundle b = new Bundle();
+                b.putInt("type", title.type);
+                f.setArguments(b);
+                fragmentList.add(f);
+            }
+        }else if(SharedPrefHelper.getInstance().getServicetype()==7){
+            for (Mytab1Title title : titleList) {
+                Fragment f;
+                f = new MeettingRoomFragment();
+                Bundle b = new Bundle();
+                b.putInt("type", title.type);
+                f.setArguments(b);
+                fragmentList.add(f);
+            }
         }
     }
     private void initViewPager() {

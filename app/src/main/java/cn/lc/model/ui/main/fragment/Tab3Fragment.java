@@ -13,8 +13,10 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.ui.main.activity.MainActivity;
 import cn.lc.model.ui.main.presenter.Tab3Presenter;
 import cn.lc.model.ui.main.view.Tab3View;
+import cn.lc.model.ui.tab3.activity.MyEvaluateActivity;
 import cn.lc.model.ui.tab3.activity.MyWalletActivity;
 import cn.lc.model.ui.tab3.activity.PersonInfoActivity;
 import cn.lc.model.ui.tab3.activity.SysSettingActivity;
@@ -60,10 +62,10 @@ public void onClick(View view ){
 
             break;
         case R.id.rl_order:
-
+            ((MainActivity) getActivity()).refresh();
             break;
         case R.id.rl_comment:
-
+            UIManager.turnToAct(getActivity(), MyEvaluateActivity.class);
             break;
         case R.id.rl_wallet:
             UIManager.turnToAct(getActivity(), MyWalletActivity.class);
