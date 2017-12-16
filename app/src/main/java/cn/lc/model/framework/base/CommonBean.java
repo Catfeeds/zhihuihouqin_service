@@ -5,4 +5,5 @@ package cn.lc.model.framework.base;
  */
 
 public class CommonBean extends BaseResponse{
+
 }

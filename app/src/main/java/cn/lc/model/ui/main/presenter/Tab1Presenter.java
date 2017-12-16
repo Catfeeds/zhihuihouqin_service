@@ -1,5 +1,6 @@
 package cn.lc.model.ui.main.presenter;
 
+import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
@@ -26,6 +27,74 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onSuccess(StationeryBean baseResponse) {
                 getView().getSucc(baseResponse);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    // 维修人员立即服务/接单
+    public void goService(String serviceType,String orderId){
+        LogUtils.d("即服务的请求发出");
+        Observable receiveOrder = RetrofitUtils.getInstance().receiveOrder(serviceType, orderId);
+        getNetWork(receiveOrder, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("下单成功");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    // 维修人员结束订单/订单完成
+    public void finishService(String serviceType,String orderId) {
+        LogUtils.d("结束订单");
+        Observable finishOrder = RetrofitUtils.getInstance().finishOrder(serviceType, orderId);
+        getNetWork(finishOrder,new RetrofitCallBack<CommonBean>(){
+
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("订单已结束");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    // 删除已完成/已取消订单.
+    public void deleteOrder(String serviceType,String orderId) {
+        LogUtils.d("删除订单");
+        Observable deleteOrder = RetrofitUtils.getInstance().deleteOrder(serviceType, orderId);
+        getNetWork(deleteOrder,new RetrofitCallBack<CommonBean>(){
+
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("订单已删除");
             }
 
             @Override

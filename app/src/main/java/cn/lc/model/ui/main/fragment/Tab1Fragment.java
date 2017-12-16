@@ -38,7 +38,7 @@ import cn.lc.model.ui.tab1.fragment.StationeryFragment;
 /**
  * Created by hh on 2016/5/18.
  */
-public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
+public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
     @BindView(R.id.mIndicator)
     MagicIndicator mIndicator;
     @BindView(R.id.score_pager)
@@ -53,6 +53,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
         setContentView(R.layout.f_tab1_1);
 
     }
+
     @Override
     public void initView(View v) {
         ButterKnife.bind(this, v);
@@ -60,39 +61,41 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
         initFragments();
         initViewPager();
     }
+
     @Override
     public Tab1Presenter createPresenter() {
         return new Tab1Presenter();
     }
 
     private void initTitles() {
-        if (SharedPrefHelper.getInstance().getServicetype()==1){
+        if (SharedPrefHelper.getInstance().getServicetype() == 1) {                         // 维修报修
+            titleList.add(new Mytab1Title("待服务", Tab1Constants.MAINTAIN_UNSERVICE));
+            titleList.add(new Mytab1Title("服务中", Tab1Constants.MAINTAIN_SERVICING));
+            titleList.add(new Mytab1Title("已完成", Tab1Constants.MAINTAIN_FINISH));
+            titleList.add(new Mytab1Title("已取消", Tab1Constants.MAINTAIN_CANCEL));
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 8) {                  // 办公用品
+            titleList.add(new Mytab1Title("待接单", Tab1Constants.WORK_UNRECEIVE_ORDER));
+            titleList.add(new Mytab1Title("已接单", Tab1Constants.WORK_RECEIVED_ORDER));
+            titleList.add(new Mytab1Title("配送中", Tab1Constants.WORK_DELIVERY));
+            titleList.add(new Mytab1Title("已完成", Tab1Constants.WORK_FINISH));
+            titleList.add(new Mytab1Title("已取消", Tab1Constants.WORK_CANCEL));
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 18) {                 // 订水服务
+            titleList.add(new Mytab1Title("待接单", Tab1Constants.WATER_UNRECEIVE_ORDER));
+            titleList.add(new Mytab1Title("已接单", Tab1Constants.WATER_RECEIVED_ORDER));
+            titleList.add(new Mytab1Title("配送中", Tab1Constants.WATER_DELIVERY));
+            titleList.add(new Mytab1Title("已完成", Tab1Constants.WATER_FINISH));
+            titleList.add(new Mytab1Title("已取消", Tab1Constants.WATER_CANCEL));
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {                  // 会议室
             titleList.add(new Mytab1Title("待服务", Tab1Constants.TAB1_1));
             titleList.add(new Mytab1Title("服务中", Tab1Constants.TAB1_2));
-            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_3));
-            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_4));
-        }else if(SharedPrefHelper.getInstance().getServicetype()==8){
-            titleList.add(new Mytab1Title("待接单", Tab1Constants.TAB1_1));
-            titleList.add(new Mytab1Title("已接单", Tab1Constants.TAB1_2));
-            titleList.add(new Mytab1Title("配送中", Tab1Constants.TAB1_3));
-            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_4));
-            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_5));
-        }else if(SharedPrefHelper.getInstance().getServicetype()==18){
-            titleList.add(new Mytab1Title("待接单", Tab1Constants.TAB1_1));
-            titleList.add(new Mytab1Title("已接单", Tab1Constants.TAB1_2));
-            titleList.add(new Mytab1Title("配送中", Tab1Constants.TAB1_3));
-            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_4));
-            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_5));
-        }else if(SharedPrefHelper.getInstance().getServicetype()==7){
-            titleList.add(new Mytab1Title("待服务", Tab1Constants.TAB1_1));
-            titleList.add(new Mytab1Title("服务中", Tab1Constants.TAB1_2));
-            titleList.add(new Mytab1Title("已完成",Tab1Constants.TAB1_3));
-            titleList.add(new Mytab1Title("已取消",Tab1Constants.TAB1_4));
+            titleList.add(new Mytab1Title("已完成", Tab1Constants.TAB1_3));
+            titleList.add(new Mytab1Title("已取消", Tab1Constants.TAB1_4));
         }
 
     }
+
     private void initFragments() {
-        if (SharedPrefHelper.getInstance().getServicetype()==1) {
+        if (SharedPrefHelper.getInstance().getServicetype() == 1) {
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new MaintainFragment();
@@ -101,7 +104,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        }else if(SharedPrefHelper.getInstance().getServicetype()==8) {
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 8) {
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new StationeryFragment();
@@ -110,7 +113,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        } else if(SharedPrefHelper.getInstance().getServicetype()==18) {
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 18) {
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new OrderWaterFragment();
@@ -119,7 +122,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        }else if(SharedPrefHelper.getInstance().getServicetype()==7){
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new MeettingRoomFragment();
@@ -130,6 +133,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View,Tab1Presenter> {
             }
         }
     }
+
     private void initViewPager() {
         fragmentAdapter = new FragmentAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(fragmentAdapter);

@@ -27,7 +27,6 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
-import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 
 /**
@@ -85,13 +84,14 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
 //        list.add(s4);
         myAdpater = new MaintainAdpater(list, getActivity(), type);
         mRecyclerView.setAdapter(myAdpater);
-        myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
+        myAdpater.setMyOnClickListener(new MaintainAdpater.MyOnClickListener() {
+            // 打电话
             @Override
-            public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话" + bean.getMendermobile())
+            public void call(final String phoneNum) {
+                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话" + phoneNum)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
+                                Intent intent = new Intent(Intent.ACTION_CALL , Uri.parse("tel:" + phoneNum));
                                 try {
                                     startActivity(intent);
                                 } catch (Exception e) {
@@ -100,6 +100,23 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
                         })
                         .setNegativeButton("取消", null)
                         .show();
+            }
+            // 待服务去立即服务
+            @Override
+            public void service(StationeryBean.ListBean bean) {
+                getPresenter().goService(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getOrderid()));
+            }
+
+            // 服务中点击完成
+            @Override
+            public void finishOrder(StationeryBean.ListBean bean) {
+                getPresenter().finishService(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getOrderid()));
+            }
+
+            // 删除
+            @Override
+            public void removeOrder(StationeryBean.ListBean bean) {
+                getPresenter().deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getOrderid()));
             }
         });
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {

@@ -1,6 +1,6 @@
 package cn.lc.model.ui.tab1.view;
 
-import cn.lc.model.framework.base.CommonBean;
+import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import mvp.cn.common.MvpView;
 
 /**
@@ -8,5 +8,5 @@ import mvp.cn.common.MvpView;
  */
 
 public interface OrderDetailView extends MvpView{
-    void getSucc(CommonBean bean);
+    void getSucc(OrderDetailBean bean);
 }

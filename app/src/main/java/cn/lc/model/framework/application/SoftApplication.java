@@ -36,6 +36,7 @@ public class SoftApplication extends QuickApplication {
     private static boolean isLogin;// 判断是否已经登录
     private static String token = "";
     private static int authStatus;
+    private static int serviceId;            // 用户的服务类型Id;
 
     private double longitude;
     private double latitude;
@@ -49,6 +50,9 @@ public class SoftApplication extends QuickApplication {
         refWatcher =  LeakCanary.install(this);
         // fresco的初始化
         Fresco.initialize(this);
+        // 获取用户的服务ID
+        serviceId = SharedPrefHelper.getInstance().getServicetype();
+
 //        appInfo = initAppInfo();
 
 //		CrashHandler catchHandler = CrashHandler.getInstance();
@@ -239,6 +243,10 @@ public class SoftApplication extends QuickApplication {
 
     public void setToken(String tokens) {
         token = tokens;
+    }
+
+    public String getServiceId() {
+        return String.valueOf(serviceId);
     }
 
     /**

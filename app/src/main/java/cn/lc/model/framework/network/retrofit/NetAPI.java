@@ -2,10 +2,10 @@ package cn.lc.model.framework.network.retrofit;
 
 import java.util.Map;
 
-import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.ui.login.bean.CaptchaBean;
 import cn.lc.model.ui.login.bean.LoginBean;
+import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -30,9 +30,29 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.register)
     Observable<CommonBean> register (@FieldMap Map<String,Object> map);
+
+    /***************************************  订单 ****************************************************/
+    // 获取订单列表
     @FormUrlEncoded
     @POST(NetUrl.getorder)
     Observable<StationeryBean> getorder (@FieldMap Map<String,Object> map);
+    // 获取订单详情
+    @FormUrlEncoded
+    @POST(NetUrl.getOrderDetail)
+    Observable<OrderDetailBean> getorderDetail (@FieldMap Map<String,Object> map);
+    // 接单
+    @FormUrlEncoded
+    @POST(NetUrl.receiveOrder)
+    Observable<CommonBean> receiveOrder(@FieldMap Map<String,Object> map);
+    // 完成订单
+    @FormUrlEncoded
+    @POST(NetUrl.finishOrder)
+    Observable<CommonBean> finishOrder(@FieldMap Map<String,Object> map);
+    // 删除订单
+    @FormUrlEncoded
+    @POST(NetUrl.deleteOrder)
+    Observable<CommonBean> deleteOrder(@FieldMap Map<String,Object> map);
+
     @FormUrlEncoded
     @POST(NetUrl.updatename)
     Observable<CommonBean> updatename (@FieldMap Map<String,Object> map);

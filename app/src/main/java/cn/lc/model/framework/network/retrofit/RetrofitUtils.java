@@ -197,6 +197,74 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
         return api.getorder(paramsMap);
     }
+
+    /**
+     *  获取订单详情
+     */
+    public static Observable getOrderDetail(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("orderid",orderId);
+            addParam(paramsMap,tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getorderDetail(paramsMap);
+    }
+
+    /**
+     *  维修保修人员去接单
+     */
+    public static Observable receiveOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try {
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            addParam(paramsMap, tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.receiveOrder(paramsMap);
+    }
+
+    /**
+     *  维修保修人员结束订单.
+     */
+    public static Observable finishOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try {
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            addParam(paramsMap, tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.finishOrder(paramsMap);
+    }
+
+    /**
+     *  删除订单
+     */
+    public static Observable deleteOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            addParam(paramsMap, tempMap);
+        } catch (Exception e) {
+            e.toString();
+        }
+
+        return api.deleteOrder(paramsMap);
+    }
+
     /**
      * 真实姓名。电话
      * @return
