@@ -7,9 +7,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
+import cn.lc.model.framework.application.SoftApplication;
 import cn.lc.model.framework.base.BaseActivity;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.MySettingView;
+import cn.lc.model.ui.login.activity.LoginActivity;
 
 /**
  * Created by Administrator on 2017/11/9.
@@ -62,7 +64,8 @@ public class SysSettingActivity extends BaseActivity{
                 UIManager.turnToAct(this,SysFeedBackActivity.class);
                 break;
             case R.id.s_loginOut :
-
+                UIManager.turnToAct(SysSettingActivity.this, LoginActivity.class);
+                SoftApplication.softApplication.finishOther();
                 break;
         }
     }

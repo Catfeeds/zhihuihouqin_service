@@ -115,7 +115,8 @@
         android:layout_marginTop="100dp"
         android:padding="10dp"
         android:text="下一步"
+        android:textColor="@color/white"
         android:background="@mipmap/bt"
-        android:textSize="16sp" />
+        android:textSize="@dimen/sp_bigger" />
 
 </LinearLayout>

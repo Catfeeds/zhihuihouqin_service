@@ -1,6 +1,5 @@
 package cn.lc.model.framework.network.retrofit;
 
-import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -16,10 +15,8 @@ import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.network.AppConstants;
 import cn.lc.model.framework.network.ParameterKeys;
 import cn.lc.model.framework.network.ServerConstants;
-import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import mvp.cn.util.DateUtil;
-import mvp.cn.util.LogUtil;
 import mvp.cn.util.Md5Util;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -114,7 +111,7 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         Map<String, Object> paramsMap = new HashMap<>();
         try {
             Map<String, String> tempMap = new HashMap<String, String>();
-            tempMap.put("userName", username);
+            tempMap.put("username", username);
             tempMap.put("password", pwd);
             tempMap.put("servicetypeid", service);
             addParam(paramsMap,tempMap);
@@ -186,13 +183,14 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
      * 订单列表
      * @return
      */
-    public static Observable getOrder(String serviceOrderStatus,String page,String limit )  {
+    public static Observable getOrder(String serviceType, String page, String limit, String orderstatus)  {
         Map<String, Object> paramsMap = new HashMap<>();
         try {
             Map<String, String> tempMap = new HashMap<String, String>();
-            tempMap.put("serviceOrderStatus", serviceOrderStatus);
+            tempMap.put("serviceType", serviceType);
             tempMap.put("page", page);
             tempMap.put("limit", limit);
+            tempMap.put("orderstatus", orderstatus);
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();

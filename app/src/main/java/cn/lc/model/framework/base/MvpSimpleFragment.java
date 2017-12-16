@@ -1,5 +1,6 @@
 package cn.lc.model.framework.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,7 @@ import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.widget.CustomerDialog;
 import cn.lc.model.ui.login.activity.LoginActivity;
 import mvp.cn.common.MvpView;
-import mvp.cn.rx.MvpModel;
 import mvp.cn.rx.MvpRxBaseFragment;
-import mvp.cn.rx.MvpRxBasePresenter;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import mvp.cn.util.LogUtil;
 
@@ -31,12 +30,13 @@ public abstract class MvpSimpleFragment<V extends MvpView, P extends MvpRxSimple
     private CustomerDialog progressDialog;
     private View inflate;
     private int contentViewRes = -1;
-
+    private Activity activity;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         softApplication = SoftApplication.softApplication;
+        activity = getActivity();
         super.onCreate(savedInstanceState);
     }
 

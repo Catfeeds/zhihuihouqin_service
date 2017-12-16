@@ -1,17 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/tx_null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-            android:text="请求数据为空!"/>
-    <ImageView
+    android:id="@+id/view_error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tx_null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="请求数据为空!" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tx_null"
-        android:src="@mipmap/loaderror"/>
-    </RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/loaderror" />
+</RelativeLayout>

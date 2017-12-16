@@ -19,6 +19,7 @@
     <color name="bg_color">#51AEFE</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="transparent_50">#55000000</color>
     <color name="title_color">#0B8BAE</color>
     <color name="gray_deep">#666666</color>
     <color name="gray">#868686</color>
@@ -36,5 +37,18 @@
     <color name="orange">#EE936C</color>
     <color name="blank">#F8F8F8</color>
 
-
+    <color name="app_bg_color">#efeff4</color>
+    <color name="app_tv_red">#ff5035</color>
+    <color name="app_tv_yew">#fbb724</color>
+    <color name="app_tv_yellow">#ebcd9a</color>
+    <color name="app_fenge_color">#d6d6d6</color>
+    <color name="app_title_tv_color">#020202</color>
+    <color name="app_se_title_tv_color">#333333</color>
+    <color name="app_ins_tv_color">#666666</color>
+    <color name="app_ex_ins_tv_color">#999999</color>
+    <color name="app_subo_tv_color">#aaaaaa</color>
+    <color name="app_adorn_color">#4392f1</color>
+    <color name="app_green_color">#3eb935</color>
+    <color name="app_gule_color">#4392f1</color>
+    <color name="app_black_color">#1a1f24</color>
 </resources>

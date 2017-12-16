@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
@@ -35,13 +36,14 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
-     TextView tx_null;
+    TextView tx_null;
     private List<StationeryBean.ListBean> list = new ArrayList<>();
     private int type;
     private int page = 1;
     private int limit = 10;
     private StationeryAdpater myAdpater;
-        private ViewStub viewStub;
+    private ViewStub viewStub;
+
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
         setContentView(R.layout.tab1_1_0);
@@ -50,6 +52,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         ButterKnife.bind(getActivity());
 
     }
+
     @Override
     public void initView(View v) {
 
@@ -57,7 +60,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(type + "", page + "", limit + "");
+        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
 //        s1.setUsername("隔壁老王");
 //        s1.setMobile("100086");
@@ -74,18 +77,18 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
 //        list.add(s2);
 //        list.add(s3);
 //        list.add(s4);
-        myAdpater = new StationeryAdpater(list, getActivity(),type);
+        myAdpater = new StationeryAdpater(list, getActivity(), type);
         mRecyclerView.setAdapter(myAdpater);
         myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
             @Override
             public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMobile())
+                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话" + bean.getMendermobile())
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMobile()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
                                 try {
                                     startActivity(intent);
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                 }
                             }
                         })
@@ -99,7 +102,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
                 page = 1;
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        getPresenter().getOrder(type + "", page + "", limit + "");
+                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
                         mRecyclerView.refreshComplete();
                     }
 
@@ -112,7 +115,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
                 new Handler().postDelayed(new Runnable() {
 
                     public void run() {
-                        getPresenter().getOrder(type + "", page + "", limit + "");
+                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
                         mRecyclerView.loadMoreComplete();
                     }
                 }, 2000);
@@ -128,18 +131,16 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
 
     @Override
     public void getSucc(StationeryBean bean) {
-        LogUtils.d("错误"+bean.errCode);
-        if (bean.errCode!=0){
+        LogUtils.d("错误" + bean.errCode);
+        if (bean.errCode != 0) {
 
             tx_null.setText("暂无数据");
             return;
         }
-        if (page==1){
+        if (page == 1) {
             list.clear();
         }
         list.addAll(bean.getList());
-
         myAdpater.notifyDataSetChanged();
-
     }
 }

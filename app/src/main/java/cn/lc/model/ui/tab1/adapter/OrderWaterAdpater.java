@@ -41,6 +41,8 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        StationeryBean.ListBean bean = datas.get(position);
+
         if (type==1){
             holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
@@ -61,12 +63,12 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
             holder.tv_cancel_order.setText("删除订单");
         }
 
-        holder.tv_ordernum.setText(datas.get(position).getOrdercode()+"");
-        holder.tv_ordertime.setText(datas.get(position).getCreatetime()+"");
-        holder.tv_orderaddress.setText(datas.get(position).getAddress()+"");
-        holder.tv_name.setText(datas.get(position).getUsername()+"");
-        holder.tv_phone.setText(datas.get(position).getMobile()+"");
-        holder.tv_sendtime.setText(datas.get(position).getSendtime()+"");
+        holder.tv_ordernum.setText(bean.getOrdercode());
+        holder.tv_ordertime.setText(bean.getCreatetime());
+        holder.tv_orderaddress.setText(bean.getServiceplace());
+        holder.tv_name.setText(bean.getMendername());
+        holder.tv_phone.setText(bean.getMendermobile());
+        //holder.tv_sendtime.setText(bean.getSendtime());
         holder.iv_tel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

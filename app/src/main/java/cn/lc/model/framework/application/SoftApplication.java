@@ -3,7 +3,9 @@ package cn.lc.model.framework.application;
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.multidex.MultiDex;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -17,6 +19,7 @@ import cn.lc.model.framework.config.AppConfig;
 import cn.lc.model.framework.config.AppInfo;
 import cn.lc.model.framework.config.UserInfo;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.ui.login.activity.LoginActivity;
 import mvp.cn.common.QuickApplication;
 import mvp.cn.util.DateUtil;
 import mvp.cn.util.NetUtil;
@@ -42,8 +45,10 @@ public class SoftApplication extends QuickApplication {
     public void onCreate() {
         super.onCreate();
         softApplication = this;
+        MultiDex.install(this);
         refWatcher =  LeakCanary.install(this);
-
+        // fresco的初始化
+        Fresco.initialize(this);
 //        appInfo = initAppInfo();
 
 //		CrashHandler catchHandler = CrashHandler.getInstance();
@@ -234,6 +239,21 @@ public class SoftApplication extends QuickApplication {
 
     public void setToken(String tokens) {
         token = tokens;
+    }
+
+    /**
+     * 关闭出了登录页面的其他所有页面
+     */
+    public void finishOther() {
+        for (int i = 0; i < unDestroyActivityList.size(); i++) {
+            if (unDestroyActivityList.get(i) instanceof LoginActivity) {
+
+            } else {
+                unDestroyActivityList.get(i).finish();
+                unDestroyActivityList.remove(i);
+                i--;
+            }
+        }
     }
 }
 

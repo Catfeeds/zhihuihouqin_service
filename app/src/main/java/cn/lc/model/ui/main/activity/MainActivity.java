@@ -11,12 +11,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.widget.TabBar;
 import cn.lc.model.ui.main.fragment.Tab1Fragment;
 import cn.lc.model.ui.main.fragment.Tab2Fragment;
 import cn.lc.model.ui.main.fragment.Tab3Fragment;
 import cn.lc.model.ui.main.presenter.MainPresenter;
 import cn.lc.model.ui.main.view.MainView;
+import mvp.cn.util.LogUtil;
 
 public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> implements MainView {
 
@@ -42,6 +44,8 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
         //默认选中的界面
         mBottom.setOnItemChangedListener(onBottomItemClickListener);
         mBottom.setItemChecked(0);
+
+        LogUtil.log(SharedPrefHelper.getInstance().getServicetype() + "==============登录类型====================");
 
     }
 

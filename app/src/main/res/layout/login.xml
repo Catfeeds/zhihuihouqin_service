@@ -11,6 +11,7 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height">
+
         <TextView
             android:id="@+id/title"
             style="@style/tvStyle_white_big"
@@ -34,194 +35,210 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_title"
         android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="240dp"
-        android:layout_height="80dp"
-        android:layout_margin="20dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@mipmap/login_logo" />
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_common"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
 
         <ImageView
-            android:id="@+id/iv_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/login_phone" />
+            android:id="@+id/iv_logo"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:src="@mipmap/login_logo" />
 
-        <cn.lc.model.framework.widget.EditTextWithDel
-            android:id="@+id/et_uname"
-            style="@style/tvStyle_white"
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_common"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+
+            <ImageView
+                android:id="@+id/iv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/login_phone" />
+
+            <cn.lc.model.framework.widget.EditTextWithDel
+                android:id="@+id/et_uname"
+                style="@style/tvStyle_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_phone"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:gravity="left|center"
+                android:hint="手机号"
+                android:inputType="number"
+                android:paddingLeft="10dip"
+                android:textColorHint="@color/white" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_common"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+
+            <ImageView
+                android:id="@+id/iv_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/login_pwd" />
+
+            <cn.lc.model.framework.widget.EditTextWithDel
+                android:id="@+id/et_psw"
+                style="@style/tvStyle_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_pwd"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:gravity="left|center"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:paddingLeft="10dip"
+                android:textColorHint="@color/white" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/bt_login"
+            style="@style/tvStyle_bg_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_phone"
-            android:background="@color/transparent"
-            android:ems="10"
-            android:gravity="left|center"
-            android:hint="手机号"
-            android:inputType="number"
-            android:paddingLeft="10dip"
-            android:textColorHint="@color/white" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_bg_write"
+            android:gravity="center"
+            android:text="登录"
+            android:textSize="@dimen/sp_bigger" />
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_common"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
-
-        <ImageView
-            android:id="@+id/iv_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/login_pwd" />
-
-        <cn.lc.model.framework.widget.EditTextWithDel
-            android:id="@+id/et_psw"
-            style="@style/tvStyle_white"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_pwd"
-            android:background="@color/transparent"
-            android:ems="10"
-            android:gravity="left|center"
-            android:hint="密码"
-            android:inputType="textPassword"
-            android:paddingLeft="10dip"
-            android:textColorHint="@color/white" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="5dp">
 
+            <TextView
+                android:id="@+id/l_tv_register"
+                style="@style/tvStyle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:text="没有账号,去注册" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white" />
-    </RelativeLayout>
-
-
-    <Button
-        android:id="@+id/bt_login"
-        style="@style/tvStyle_bg_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="登录" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:id="@+id/l_tv_register"
-            style="@style/tvStyle_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:padding="10dp"
-            android:text="没有账号,去注册" />
-        <TextView
-            android:id="@+id/l_tv_findPsw"
-            style="@style/tvStyle_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:text="忘记密码" />
-
-
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/l_tv_findPsw"
+                style="@style/tvStyle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:text="忘记密码" />
+        </RelativeLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/tr_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_50"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:id="@+id/rl_type"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_title"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/tx_trans"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent"/>
+            android:background="@color/transparent" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
-             android:layout_alignParentBottom="true"
             android:orientation="vertical">
-        <TextView
-            android:id="@+id/tx_maintain"
-            style="@style/tvStyle_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:padding="10dp"
-            android:text="维修工作人员"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_light"/>
-        <TextView
-            android:id="@+id/tx_work"
-            style="@style/tvStyle_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="办公用品人员"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_light"/>
-        <TextView
-            android:id="@+id/tx_water"
-            style="@style/tvStyle_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="水站工作人员"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_light"/>
-        <TextView
-            android:id="@+id/tx_metting"
-            style="@style/tvStyle_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="会议室预定"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_light"/>
+            <TextView
+                android:id="@+id/tx_maintain"
+                style="@style/tvStyle_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:text="维修工作人员" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_light" />
+
+            <TextView
+                android:id="@+id/tx_work"
+                style="@style/tvStyle_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="办公用品人员" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_light" />
+
+            <TextView
+                android:id="@+id/tx_water"
+                style="@style/tvStyle_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="水站工作人员" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_light" />
+
+            <TextView
+                android:id="@+id/tx_metting"
+                style="@style/tvStyle_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="会议室预定" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_light" />
         </LinearLayout>
 
     </RelativeLayout>

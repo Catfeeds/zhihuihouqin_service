@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -21,10 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
-import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
 import cn.lc.model.ui.tab1.adapter.MettingRoomAdpater;
 import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
@@ -58,7 +57,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(type + "", page + "", limit + "");
+        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+//        getPresenter().getOrder(type + "", page + "", limit + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
 //        s1.setUsername("隔壁老王");
 //        s1.setMobile("100086");
@@ -80,10 +80,10 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
             @Override
             public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMobile())
+                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMendermobile())
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMobile()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
                                 try {
                                     startActivity(intent);
                                 }catch (Exception e){
@@ -100,7 +100,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
                 page = 1;
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        getPresenter().getOrder(type + "", page + "", limit + "");
+                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+//                        getPresenter().getOrder(type + "", page + "", limit + "");
                         mRecyclerView.refreshComplete();
                     }
 
@@ -113,7 +114,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
                 new Handler().postDelayed(new Runnable() {
 
                     public void run() {
-                        getPresenter().getOrder(type + "", page + "", limit + "");
+                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+//                        getPresenter().getOrder(type + "", page + "", limit + "");
                         mRecyclerView.loadMoreComplete();
                     }
                 }, 2000);

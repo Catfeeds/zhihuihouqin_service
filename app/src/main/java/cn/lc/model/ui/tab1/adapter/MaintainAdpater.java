@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.List;
 
 import cn.lc.model.R;
@@ -42,8 +44,10 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        StationeryBean.ListBean bean = datas.get(position);
+
         if (type == 1) {
-        holder.tv_nowservice.setText("立即服务");
+            holder.tv_nowservice.setText("立即服务");
         } else if (type == 2) {
             holder.tv_nowservice.setText("已完成");
         } else if (type == 3) {
@@ -51,6 +55,17 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
         } else if (type == 4) {
             holder.tv_nowservice.setText("删除");
         }
+
+        // 设置订单数据:
+        holder.tv_inviteTime.setText(bean.getInvitetime());
+        holder.iv_header.setImageURI(bean.getMenderphoto());
+        holder.tv_name.setText(bean.getMendername());
+        holder.tv_address.setText(bean.getServiceplace());
+        holder.tv_phone.setText(bean.getMendermobile());
+        holder.tv_project.setText(bean.getItemname());
+        //holder.tv_dis.setText(bean.);
+        holder.tv_ordersn.setText(bean.getOrdercode());
+
         holder.ll_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,25 +103,32 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
         public TextView tv_nowservice;
         private LinearLayout ll_item;
         public ImageView iv_tel;
-        public ImageView iv_header;
+        public SimpleDraweeView iv_header;
+        public TextView tv_inviteTime;      // 上门时间
+        public TextView tv_ordersn;         // 订单号
+
         public ViewHolder(View view) {
             super(view);
             tv_name = (TextView) view.findViewById(R.id.tv_name);
             tv_address = (TextView) view.findViewById(R.id.tv_address);
-            tv_phone= (TextView) view.findViewById(R.id.tv_phone);
+            tv_phone = (TextView) view.findViewById(R.id.tv_phone);
             tv_project = (TextView) view.findViewById(R.id.tv_project);
-            tv_ordernumtype= (TextView) view.findViewById(R.id.tv_ordernumtype);
+            tv_ordernumtype = (TextView) view.findViewById(R.id.tv_ordernumtype);
             tv_dis = (TextView) view.findViewById(R.id.tv_dis);
             tv_nowservice = (TextView) view.findViewById(R.id.tv_nowservice);
-            ll_item=(LinearLayout)view.findViewById(R.id.ll_item) ;
-            iv_tel= (ImageView) view.findViewById(R.id.iv_tel);
-            iv_header = (ImageView) view.findViewById(R.id.iv_header);
+            ll_item = (LinearLayout) view.findViewById(R.id.ll_item);
+            iv_tel = (ImageView) view.findViewById(R.id.iv_tel);
+            iv_header = (SimpleDraweeView) view.findViewById(R.id.iv_header);      //订单发起人头像
+            tv_inviteTime = (TextView) view.findViewById(R.id.tv_time);
+            tv_ordersn = (TextView) view.findViewById(R.id.tv_order_id);
         }
     }
+
     public interface MyOnClickListener {
         void myOnClickListener(StationeryBean.ListBean bean);
     }
-    public void setMyOnClickListener(StationeryAdpater.MyOnClickListener myOnClickListener){
-        this.myOnClickListener=myOnClickListener;
+
+    public void setMyOnClickListener(StationeryAdpater.MyOnClickListener myOnClickListener) {
+        this.myOnClickListener = myOnClickListener;
     }
 }

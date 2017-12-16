@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">机关后勤管理</string>
+    <string name="emojicon_test_name">Test</string>
+    <string name="action_settings">Settings</string>
 </resources>

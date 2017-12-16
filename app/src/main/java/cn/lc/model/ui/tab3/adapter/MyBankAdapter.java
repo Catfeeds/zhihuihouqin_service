@@ -44,9 +44,9 @@ public class MyBankAdapter extends RecyclerView.Adapter<MyBankAdapter.ViewHolder
         }else if (datas.size()!=0){
             holder.llItem.setVisibility(View.VISIBLE);
             holder.llitemAdd.setVisibility(View.GONE);
-            holder.itemBankName.setText(datas.get(position).getUsername());
-            holder.itemCardType.setText(datas.get(position).getUsername());
-            holder.itemCardNo.setText(datas.get(position).getUsername());
+            holder.itemBankName.setText(datas.get(position).getMendername());
+            holder.itemCardType.setText(datas.get(position).getMendername());
+            holder.itemCardNo.setText(datas.get(position).getMendername());
         }
 
         holder.llItem.setOnClickListener(new View.OnClickListener() {

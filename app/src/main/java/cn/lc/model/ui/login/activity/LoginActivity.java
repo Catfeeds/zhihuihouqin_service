@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
-import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.widget.EditTextWithDel;
 import cn.lc.model.ui.login.bean.LoginBean;
 import cn.lc.model.ui.login.presenter.LoginPresenter;
@@ -65,6 +62,8 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     TextView tx_water;
     @BindView(R.id.tx_metting)
     TextView tx_metting;
+    @BindView(R.id.tr_rl)
+    RelativeLayout tr_rl;
     //0隐藏  1显示
     private int type = 0;
     private int servicetype;
@@ -110,39 +109,52 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 turnToFindPwd();
                 break;
             case R.id.bt_login:
+                //UIManager.turnToAct(this, MainActivity.class);
                 doLogin();
                 break;
             case R.id.rl_title:
                 if (type == 0) {
                     rl_type.setVisibility(View.VISIBLE);
+                    tr_rl.setVisibility(View.VISIBLE);
                     type = 1;
                 } else if (type == 1) {
                     rl_type.setVisibility(View.GONE);
+                    tr_rl.setVisibility(View.GONE);
                     type = 0;
                 }
                 break;
             case R.id.tx_maintain:
+                tr_rl.setVisibility(View.GONE);
                 rl_type.setVisibility(View.GONE);
+                type = 0;
                 SharedPrefHelper.getInstance().setServicetype(1);
                 title.setText("维修工作人员");
                 break;
             case R.id.tx_work:
                 rl_type.setVisibility(View.GONE);
+                tr_rl.setVisibility(View.GONE);
+                type = 0;
                 SharedPrefHelper.getInstance().setServicetype(8);
                 title.setText("办公用品人员");
                 break;
             case R.id.tx_water:
                 rl_type.setVisibility(View.GONE);
+                tr_rl.setVisibility(View.GONE);
+                type = 0;
                 SharedPrefHelper.getInstance().setServicetype(18);
                 title.setText("水站工作人员");
                 break;
             case R.id.tx_metting:
                 rl_type.setVisibility(View.GONE);
+                tr_rl.setVisibility(View.GONE);
+                type = 0;
                 SharedPrefHelper.getInstance().setServicetype(7);
                 title.setText("会议室预定");
                 break;
             case R.id.tx_trans:
                 rl_type.setVisibility(View.GONE);
+                tr_rl.setVisibility(View.GONE);
+                type = 0;
                 break;
         }
     }
@@ -216,9 +228,10 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
             etPsw.setText(pwd);
         }
     }
+
     @Override
     public void loginSucc(LoginBean loginBean) {
-        showToast("登陆成功");
+//        showToast("登陆成功");
         SoftApplication.softApplication.setToken(loginBean.getToken());
         SharedPrefHelper.getInstance().setPhoneNumber(loginBean.getUserinfo().getMobile());
         UIManager.turnToAct(this, MainActivity.class);
