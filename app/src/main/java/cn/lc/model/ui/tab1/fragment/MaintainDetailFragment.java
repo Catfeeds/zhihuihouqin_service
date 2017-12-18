@@ -15,6 +15,7 @@ import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
+import cn.lc.model.ui.tab1.constant.Tab1Constants;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
 import cn.lc.model.ui.tab1.view.OrderDetailView;
 
@@ -41,9 +42,12 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
     TextView tx_beizhu;
     @BindView(R.id.tx_ordernum)
     TextView tx_ordernum;
+    @BindView(R.id.tv_maintain_function)
+    TextView tv_function;
 
     String serviceType;
     String orderid;
+    int type;
     String phoneNum;       // 电话号码;
 
     @Override
@@ -59,6 +63,22 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
     @Override
     public void initView(View v) {
         presenter.getData(serviceType,orderid);
+        switch (type) {
+            case Tab1Constants.MAINTAIN_UNSERVICE:          // 未服务
+                tv_function.setVisibility(View.VISIBLE);
+                tv_function.setText("立即服务");
+                break;
+            case Tab1Constants.MAINTAIN_SERVICING:          // 服务中
+                tv_function.setVisibility(View.VISIBLE);
+                tv_function.setText("已完成");
+                break;
+            case Tab1Constants.MAINTAIN_FINISH:             // 已完成.
+                tv_function.setVisibility(View.GONE);
+                break;
+            case Tab1Constants.MAINTAIN_CANCEL:             // 取消.
+                tv_function.setVisibility(View.GONE);
+                break;
+        }
     }
 
     @Override
@@ -83,12 +103,13 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
 
     }
 
-    public void setOrderId(String serviceType,String orderId) {
+    public void setOrderId(String serviceType,String orderId,int type) {
         this.serviceType = serviceType;
         this.orderid = orderId;
+        this.type = type;
     }
 
-    @OnClick({R.id.iv_call})
+    @OnClick({R.id.iv_call,R.id.tv_maintain_function})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_call:
@@ -104,6 +125,20 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
                         })
                         .setNegativeButton("取消", null)
                         .show();
+                break;
+            case R.id.tv_maintain_function:
+                switch (type) {
+                    case Tab1Constants.MAINTAIN_UNSERVICE:          // 未服务
+                        tv_function.setVisibility(View.VISIBLE);
+                        tv_function.setText("立即服务");
+                        getPresenter().goService(serviceType,orderid);
+                        break;
+                    case Tab1Constants.MAINTAIN_SERVICING:          // 服务中
+                        tv_function.setVisibility(View.VISIBLE);
+                        tv_function.setText("已完成");
+                        getPresenter().finishService(serviceType,orderid);
+                        break;
+                }
                 break;
         }
     }

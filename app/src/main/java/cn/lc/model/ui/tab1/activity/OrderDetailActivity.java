@@ -46,7 +46,7 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
 
         if (SharedPrefHelper.getInstance().getServicetype() == 1) {                 // 维修.
             MaintainDetailFragment fragment = new MaintainDetailFragment();
-            fragment.setOrderId(serviceType,orderid);
+            fragment.setOrderId(serviceType,orderid,type);
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.layout_orderDetail_content,fragment)

@@ -75,6 +75,7 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
                 Bundle bundle = new Bundle();
                 bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                 bundle.putString("orderid",datas.get(position).getOrderid() + "");
+                bundle.putInt("type",type);
 
                 UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
             }

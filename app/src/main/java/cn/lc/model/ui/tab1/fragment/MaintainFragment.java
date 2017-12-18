@@ -64,8 +64,10 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-//        getPresenter().getOrder(type + "", page + "", limit + "");
+
         getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        //list.add(new StationeryBean.ListBean());
+
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
 //        s1.setUsername("隔壁老王");
 //        s1.setMobile("100086");
