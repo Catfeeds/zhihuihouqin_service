@@ -249,6 +249,10 @@ public class SoftApplication extends QuickApplication {
         return String.valueOf(serviceId);
     }
 
+    public void setServiceId(int serviceId){
+        this.serviceId = serviceId;
+    }
+
     /**
      * 关闭出了登录页面的其他所有页面
      */

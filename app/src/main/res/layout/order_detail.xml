@@ -35,7 +35,13 @@
         android:layout_height="2dp"
         android:background="@color/gray_trans" />
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/layout_orderDetail_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -270,6 +276,6 @@
                     android:text="34234645424242" />
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 
 </LinearLayout>

@@ -5,7 +5,7 @@
 
     <dimen name="sp_smaller">12sp</dimen>
     <dimen name="sp_small">14sp</dimen>
-    <dimen name="sp_common">15sp</dimen>
+    <dimen name="sp_common">12sp</dimen>
     <dimen name="sp_big">16sp</dimen>
     <dimen name="sp_bigger">18sp</dimen>
     <dimen name="sp_biggest">30sp</dimen>

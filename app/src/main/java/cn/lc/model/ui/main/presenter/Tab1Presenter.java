@@ -6,6 +6,7 @@ import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import rx.Observable;
 
@@ -36,6 +37,52 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
         });
     }
 
+    // 获取办公用品订单列表:
+    public void getStationeryOrder(String serviceType, String page, String limit, String orderstatus) {
+        Observable stationeryOrder = RetrofitUtils.getInstance().getStationeryOrder(serviceType, page, limit, orderstatus);
+        getNetWork(stationeryOrder,new RetrofitCallBack<StationeryNewBean>() {
+
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(StationeryNewBean stationeryNewBean) {
+                getView().getSucc(stationeryNewBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+
+    //立即配送
+    public void peiSongOrder(String serviceType,String orderId) {
+        LogUtils.d("配送商品");
+        Observable observable = RetrofitUtils.getInstance().peiSongOrder(serviceType, orderId);
+        getNetWork(observable, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+                getView().showToast(e.toString());
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("开始配送");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
     // 维修人员立即服务/接单
     public void goService(String serviceType,String orderId){
         LogUtils.d("即服务的请求发出");
@@ -44,11 +91,34 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onPostFail(Throwable e) {
                 LogUtils.d("erre...." + e);
+                getView().showToast("下单失败");
             }
 
             @Override
             public void onSuccess(CommonBean commonBean) {
                 getView().showToast("下单成功");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+    //取消订单
+    public void cancelOrder(String serviceType,String orderId) {
+        LogUtils.d("取消订单");
+        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId);
+        getNetWork(observable, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+                getView().showToast("订单取消失败");
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("订单取消成功");
             }
 
             @Override
@@ -67,6 +137,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onPostFail(Throwable e) {
                 LogUtils.d("erre...." + e);
+                getView().showToast("网络异常请重试");
             }
 
             @Override

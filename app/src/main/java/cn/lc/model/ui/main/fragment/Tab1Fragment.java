@@ -95,7 +95,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
     }
 
     private void initFragments() {
-        if (SharedPrefHelper.getInstance().getServicetype() == 1) {
+        if (SharedPrefHelper.getInstance().getServicetype() == 1) {         // 维修.
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new MaintainFragment();
@@ -104,7 +104,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        } else if (SharedPrefHelper.getInstance().getServicetype() == 8) {
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 8) {     //办公用品
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new StationeryFragment();
@@ -113,7 +113,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        } else if (SharedPrefHelper.getInstance().getServicetype() == 18) {
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 18) {     // 订水
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new OrderWaterFragment();
@@ -122,7 +122,7 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
                 f.setArguments(b);
                 fragmentList.add(f);
             }
-        } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {
+        } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {          // 会议.
             for (Mytab1Title title : titleList) {
                 Fragment f;
                 f = new MeettingRoomFragment();

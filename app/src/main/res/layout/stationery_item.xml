@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_img"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:src="@mipmap/icon_null" />
@@ -112,6 +112,8 @@
                 style="@style/tvStyle_blacklight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/tv_name"
                 android:text="18765432123" />
@@ -120,7 +122,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-
                 android:src="@mipmap/tel"/>
         </RelativeLayout>
 
@@ -149,7 +150,7 @@
     <View
         android:id="@+id/iv1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_below="@+id/ll_1"
         android:background="@color/gray_lighter"/>
     <LinearLayout

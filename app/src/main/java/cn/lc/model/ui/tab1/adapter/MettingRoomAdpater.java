@@ -20,7 +20,7 @@ import cn.lc.model.ui.tab1.bean.StationeryBean;
  * Tab1适配器
  */
 public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.ViewHolder> {
-    private StationeryAdpater.MyOnClickListener myOnClickListener;
+    private MyOnClickListener myOnClickListener;
     public Context context;
     public List<StationeryBean.ListBean> datas = null;
     private int type;
@@ -106,7 +106,7 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
     public interface MyOnClickListener {
         void myOnClickListener(StationeryBean.ListBean bean);
     }
-    public void setMyOnClickListener(StationeryAdpater.MyOnClickListener myOnClickListener){
+    public void setMyOnClickListener(MyOnClickListener myOnClickListener){
         this.myOnClickListener=myOnClickListener;
     }
 }

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
@@ -27,6 +27,7 @@ import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
 /**
  * Created by Administrator on 2017/11/6.
@@ -37,7 +38,10 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
     TextView tx_null;
-    private List<StationeryBean.ListBean> list = new ArrayList<>();
+    @BindView(R.id.view_error)
+    RelativeLayout layout_error;
+
+    private List<StationeryNewBean.ListBean> list = new ArrayList<>();
     private int type;
     private int page = 1;
     private int limit = 10;
@@ -49,7 +53,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         setContentView(R.layout.tab1_1_0);
         Bundle argument = getArguments();
         type = argument.getInt("type");
-        ButterKnife.bind(getActivity());
+        //ButterKnife.bind(getActivity());
 
     }
 
@@ -60,32 +64,18 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-//        StationeryBean.ListBean s1=new StationeryBean.ListBean();
-//        s1.setUsername("隔壁老王");
-//        s1.setMobile("100086");
-//        StationeryBean.ListBean s2=new StationeryBean.ListBean();
-//        s2.setUsername("隔壁老张");
-//        s1.setMobile("18765903803");
-//        StationeryBean.ListBean s3=new StationeryBean.ListBean();
-//        s3.setUsername("隔壁老宋");
-//        s1.setMobile("100086");
-//        StationeryBean.ListBean s4=new StationeryBean.ListBean();
-//        s4.setUsername("隔壁老李");
-//        s1.setMobile("100086");
-//        list.add(s1);
-//        list.add(s2);
-//        list.add(s3);
-//        list.add(s4);
-        myAdpater = new StationeryAdpater(list, getActivity(), type);
+        getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+
+        //list.add(new StationeryNewBean.ListBean());
+        myAdpater = new StationeryAdpater(list, getActivity(), type,getPresenter());
         mRecyclerView.setAdapter(myAdpater);
         myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
             @Override
-            public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话" + bean.getMendermobile())
+            public void myOnClickListener(final StationeryNewBean.ListBean bean) {
+                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话" + bean.getMobile())
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMobile()));
                                 try {
                                     startActivity(intent);
                                 } catch (Exception e) {
@@ -130,7 +120,10 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     }
 
     @Override
-    public void getSucc(StationeryBean bean) {
+    public void getSucc(StationeryBean bean) {}
+
+    @Override
+    public void getSucc(StationeryNewBean bean) {
         LogUtils.d("错误" + bean.errCode);
         if (bean.errCode != 0) {
 
@@ -139,8 +132,14 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         }
         if (page == 1) {
             list.clear();
+            if (bean.getList().size() == 0) {
+                layout_error.setVisibility(View.VISIBLE);
+            } else {
+                layout_error.setVisibility(View.GONE);
+            }
         }
         list.addAll(bean.getList());
+
         myAdpater.notifyDataSetChanged();
     }
 }

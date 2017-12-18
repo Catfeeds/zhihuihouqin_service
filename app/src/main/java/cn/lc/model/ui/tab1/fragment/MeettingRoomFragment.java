@@ -25,8 +25,8 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.MettingRoomAdpater;
-import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
 /**
  * Created by Administrator on 2017/11/6.
@@ -77,7 +77,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 //        list.add(s4);
         myAdpater = new MettingRoomAdpater(list, getActivity(),type);
         mRecyclerView.setAdapter(myAdpater);
-        myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
+        myAdpater.setMyOnClickListener(new MettingRoomAdpater.MyOnClickListener() {
+
             @Override
             public void myOnClickListener(final StationeryBean.ListBean bean) {
                 new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMendermobile())
@@ -143,6 +144,11 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void getSucc(StationeryNewBean bean) {
 
     }
 }

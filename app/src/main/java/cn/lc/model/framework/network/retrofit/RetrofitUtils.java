@@ -180,7 +180,7 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         return api.register(paramsMap);
     }
     /**
-     * 订单列表
+     * 维修订单列表
      * @return
      */
     public static Observable getOrder(String serviceType, String page, String limit, String orderstatus)  {
@@ -196,6 +196,25 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
             e.printStackTrace();
         }
         return api.getorder(paramsMap);
+    }
+
+    /**
+     *  办公订单列表
+     */
+    public static Observable getStationeryOrder(String serviceType, String page, String limit, String orderstatus) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("serviceType", serviceType);
+            tempMap.put("page", page);
+            tempMap.put("limit", limit);
+            tempMap.put("orderstatus", orderstatus);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getStationeryorder(paramsMap);
     }
 
     /**
@@ -216,6 +235,23 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
 
     /**
+     *  获取办公用品的订单详情
+     */
+    public static Observable getStationeryDetail(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("orderid",orderId);
+            addParam(paramsMap,tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getStationeryDetail(paramsMap);
+    }
+
+    /**
      *  维修保修人员去接单
      */
     public static Observable receiveOrder(String serviceType,String orderId) {
@@ -230,6 +266,41 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
 
         return api.receiveOrder(paramsMap);
+    }
+
+    /**
+     *  立即配送
+     */
+    public static Observable peiSongOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try {
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            addParam(paramsMap, tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.peiSongOrder(paramsMap);
+    }
+
+    /**
+     *  取消订单
+     */
+    public static Observable cancelOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try {
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            tempMap.put("cancelreason","");
+            addParam(paramsMap, tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.cancelOrder(paramsMap);
     }
 
     /**

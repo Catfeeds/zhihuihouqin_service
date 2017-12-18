@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
@@ -28,6 +27,7 @@ import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
 /**
  * Created by Administrator on 2017/11/6.
@@ -53,7 +53,7 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
         setContentView(R.layout.tab1_1_0);
         Bundle argument = getArguments();
         type = argument.getInt("type");
-        ButterKnife.bind(getActivity());
+        //ButterKnife.bind(getActivity());
 
     }
 
@@ -164,7 +164,7 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
         }
         if (page == 1) {
             list.clear();
-            if (list.size() == 0) {
+            if (bean.getList().size() != 0) {
                 layout_error.setVisibility(View.GONE);
             } else {
                 layout_error.setVisibility(View.VISIBLE);
@@ -174,6 +174,11 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void getSucc(StationeryNewBean bean) {
 
     }
 }

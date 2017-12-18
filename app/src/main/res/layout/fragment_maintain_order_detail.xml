@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_person"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:src="@mipmap/personinfo" />
+
+            <TextView
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/iv_person"
+                android:text="客户信息" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/tx1"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名: " />
+
+            <TextView
+                android:id="@+id/tx_personname"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx1"
+                android:text="赵倩" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tx2"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系方式: " />
+
+            <TextView
+                android:id="@+id/tx_personphone"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx2"
+                android:text="12463246722" />
+            <ImageView
+                android:id="@+id/iv_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/bt_call"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tx3"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址: " />
+
+            <TextView
+                android:id="@+id/tx_personaddress"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx3"
+                android:text="大屯路东" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_trans" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/iv_order"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:src="@mipmap/orderinfo" />
+
+            <TextView
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/iv_order"
+                android:text="订单信息" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:id="@+id/tx4"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下单时间: " />
+
+            <TextView
+                android:id="@+id/tx_ordertime"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx4"
+                android:text="2017-11-20" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tx5"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预约(上门)时间: " />
+
+            <TextView
+                android:id="@+id/tx_totime"
+                style="@style/tvStyle_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx5"
+                android:text="2017-11-20" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tx6"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报修内容: " />
+
+            <TextView
+                android:id="@+id/tx_content"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx6"
+                android:text="空调不制冷" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tx7"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注: " />
+
+            <TextView
+                android:id="@+id/tx_beizhu"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx7"
+                android:text="请尽快" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tx8"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单编号: " />
+
+            <TextView
+                android:id="@+id/tx_ordernum"
+                style="@style/tvStyle_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx8"
+                android:text="34234645424242" />
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

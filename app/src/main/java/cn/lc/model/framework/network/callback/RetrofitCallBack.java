@@ -32,11 +32,11 @@ public abstract class RetrofitCallBack<T extends BaseResponse> extends Subscribe
             onPostFail(new Throwable("解析出问题,可能您需要检查bean"));
             return;
         }
-       // if (t.errCode == Constants.ERROR_CODE_OK) {
+        if (t.errCode == Constants.ERROR_CODE_OK) {
             onSuccess(t);
-      //  } else {
+        } else {
             onCodeError(t);
-      //  }
+        }
     }
 
     public abstract void onPostFail(Throwable e);
