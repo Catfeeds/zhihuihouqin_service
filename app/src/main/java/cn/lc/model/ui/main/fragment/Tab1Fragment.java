@@ -86,10 +86,10 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
             titleList.add(new Mytab1Title("已完成", Tab1Constants.WATER_FINISH));
             titleList.add(new Mytab1Title("已取消", Tab1Constants.WATER_CANCEL));
         } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {                  // 会议室
-            titleList.add(new Mytab1Title("待服务", Tab1Constants.TAB1_1));
-            titleList.add(new Mytab1Title("服务中", Tab1Constants.TAB1_2));
-            titleList.add(new Mytab1Title("已完成", Tab1Constants.TAB1_3));
-            titleList.add(new Mytab1Title("已取消", Tab1Constants.TAB1_4));
+            titleList.add(new Mytab1Title("待服务", Tab1Constants.MEETINGROOM_UNSERVICE));
+            titleList.add(new Mytab1Title("服务中", Tab1Constants.MEETINGROOM_SERVICING));
+            titleList.add(new Mytab1Title("已完成", Tab1Constants.MEETINGROOM_FINISH));
+            titleList.add(new Mytab1Title("已取消", Tab1Constants.MEETINGROOM_CANCEL));
         }
 
     }

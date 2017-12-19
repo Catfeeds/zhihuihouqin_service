@@ -1,13 +1,10 @@
 package cn.lc.model.ui.tab1.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -17,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
@@ -38,17 +34,19 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
      TextView tx_null;
+    @BindView(R.id.view_error)
+    RelativeLayout layout_error;
     private List<StationeryBean.ListBean> list = new ArrayList<>();
     private int type;
     private int page = 1;
     private int limit = 10;
     private MettingRoomAdpater myAdpater;
+
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
         setContentView(R.layout.tab1_1_0);
         Bundle argument = getArguments();
         type = argument.getInt("type");
-        ButterKnife.bind(getActivity());
 
     }
     @Override
@@ -59,6 +57,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        //list.add(new StationeryBean.ListBean());
+
 //        getPresenter().getOrder(type + "", page + "", limit + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
 //        s1.setUsername("隔壁老王");
@@ -76,26 +76,29 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 //        list.add(s2);
 //        list.add(s3);
 //        list.add(s4);
-        myAdpater = new MettingRoomAdpater(list, getActivity(),type);
-        mRecyclerView.setAdapter(myAdpater);
-        myAdpater.setMyOnClickListener(new MettingRoomAdpater.MyOnClickListener() {
 
-            @Override
-            public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMendermobile())
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
-                                try {
-                                    startActivity(intent);
-                                }catch (Exception e){
-                                }
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .show();
-            }
-        });
+        myAdpater = new MettingRoomAdpater(list, getActivity(),type,getPresenter());
+        mRecyclerView.setAdapter(myAdpater);
+
+//        myAdpater.setMyOnClickListener(new MettingRoomAdpater.MyOnClickListener() {
+//
+//            @Override
+//            public void myOnClickListener(final StationeryBean.ListBean bean) {
+//                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMendermobile())
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
+//                                try {
+//                                    startActivity(intent);
+//                                }catch (Exception e){
+//                                }
+//                            }
+//                        })
+//                        .setNegativeButton("取消", null)
+//                        .show();
+//            }
+//        });
+
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -142,9 +145,9 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         if (page==1){
             list.clear();
             if (bean.getList().size() != 0) {
-
+                layout_error.setVisibility(View.GONE);
             } else {
-
+                layout_error.setVisibility(View.VISIBLE);
             }
         }
         list.addAll(bean.getList());

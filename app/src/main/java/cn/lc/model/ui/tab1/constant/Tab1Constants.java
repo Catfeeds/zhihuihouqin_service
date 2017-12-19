@@ -23,12 +23,11 @@ public class Tab1Constants {
     public static final int WATER_DELIVERY = 2;
     public static final int WATER_FINISH = 3;
     public static final int WATER_CANCEL = 5;
-
-    public static final int TAB1_1 = 1;
-    public static final int TAB1_2= 2;
-    public static final int TAB1_3= 3;
-    public static final int TAB1_4= 4;
-    public static final int TAB1_5 = 5;
+    // 会议室预定:
+    public static final int MEETINGROOM_UNSERVICE = 1;
+    public static final int MEETINGROOM_SERVICING = 2;
+    public static final int MEETINGROOM_FINISH = 3;
+    public static final int MEETINGROOM_CANCEL = 4;
 
 
 }

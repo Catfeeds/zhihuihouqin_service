@@ -1,20 +1,23 @@
 package cn.lc.model.ui.tab1.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import cn.lc.model.R;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.constant.Tab1Constants;
 
 /**
  * Tab1适配器
@@ -24,17 +27,19 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
     public Context context;
     public List<StationeryBean.ListBean> datas = null;
     private int type;
+    private Tab1Presenter presenter;
 
-    public MettingRoomAdpater(List<StationeryBean.ListBean> datas, Context con, int type) {
+    public MettingRoomAdpater(List<StationeryBean.ListBean> datas, Context con, int type,Tab1Presenter presenter) {
         this.datas = datas;
         this.context = con;
         this.type = type;
+        this.presenter = presenter;
     }
 
     //创建新View，被LayoutManager所调用
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.maintain_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.meet_room_item, viewGroup, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
@@ -42,31 +47,57 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (type == 1) {
-        holder.tv_nowservice.setText("立即服务");
-        } else if (type == 2) {
-            holder.tv_nowservice.setText("已完成");
-        } else if (type == 3) {
-            holder.tv_nowservice.setText("删除");
-        } else if (type == 4) {
-            holder.tv_nowservice.setText("删除");
-        }
-        holder.ll_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UIManager.turnToAct(context, OrderDetailActivity.class);
-            }
-        });
-        holder.iv_tel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myOnClickListener.myOnClickListener(datas.get(position));
-            }
-        });
-        holder.tv_nowservice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        final StationeryBean.ListBean bean = datas.get(position);
 
+        if (type == Tab1Constants.MEETINGROOM_UNSERVICE) {
+            holder.tv_functionLeft.setVisibility(View.VISIBLE);
+            holder.tv_functionRight.setVisibility(View.VISIBLE);
+            holder.tv_functionLeft.setText("立即接单");
+            holder.tv_functionRight.setText("取消订单");
+        } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {
+            holder.tv_functionLeft.setVisibility(View.GONE);
+            holder.tv_functionRight.setVisibility(View.VISIBLE);
+
+            holder.tv_functionRight.setText("已完成");
+        } else if (type == Tab1Constants.MEETINGROOM_FINISH) {
+            holder.tv_functionLeft.setVisibility(View.GONE);
+            holder.tv_functionRight.setVisibility(View.GONE);
+        } else if (type == Tab1Constants.MEETINGROOM_CANCEL) {
+            holder.tv_functionLeft.setVisibility(View.GONE);
+            holder.tv_functionRight.setVisibility(View.VISIBLE);
+
+            holder.tv_functionRight.setText("删除订单");
+        }
+
+        holder.layout_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                bundle.putString("orderid", bean.getOrderid() + "");
+                bundle.putInt("type",type);
+
+                UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
+            }
+        });
+
+        holder.tv_functionLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
+            }
+        });
+
+        holder.tv_functionRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (type == Tab1Constants.MEETINGROOM_UNSERVICE) {
+                    presenter.cancelOrder(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
+                } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {
+                    presenter.finishService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
+                } else if (type == Tab1Constants.MEETINGROOM_CANCEL) {
+                    presenter.deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
+                }
             }
         });
     }
@@ -79,28 +110,32 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name;
-        public TextView tv_address;
-        public TextView tv_phone;
-        public TextView tv_project;
-        public TextView tv_dis;
-        public TextView tv_ordernumtype;
-        public TextView tv_nowservice;
-        private LinearLayout ll_item;
-        public ImageView iv_tel;
-        public ImageView iv_header;
+        public TextView tv_ordernum;            // 订单号
+        public TextView tv_ordertime;           // 下单时间.
+        public TextView tv_meettingType;        // 会议类型.
+        public TextView tv_bookTime;            // 预约时间
+        public TextView tv_meetingPerson;       // 参会领导.
+        public TextView tv_meetingType;         // 会议类型
+        public TextView tv_meetingEquipment;    // 会议设备.
+        public TextView tv_meeting_personCount; // 会议人数.
+
+        public TextView tv_functionLeft;
+        public TextView tv_functionRight;
+        public RelativeLayout layout_item;
+
         public ViewHolder(View view) {
             super(view);
-            tv_name = (TextView) view.findViewById(R.id.tv_name);
-            tv_address = (TextView) view.findViewById(R.id.tv_address);
-            tv_phone= (TextView) view.findViewById(R.id.tv_phone);
-            tv_project = (TextView) view.findViewById(R.id.tv_project);
-            tv_ordernumtype= (TextView) view.findViewById(R.id.tv_ordernumtype);
-            tv_dis = (TextView) view.findViewById(R.id.tv_dis);
-            tv_nowservice = (TextView) view.findViewById(R.id.tv_nowservice);
-            ll_item=(LinearLayout)view.findViewById(R.id.ll_item) ;
-            iv_tel= (ImageView) view.findViewById(R.id.iv_tel);
-            iv_header = (ImageView) view.findViewById(R.id.iv_header);
+            tv_ordernum = (TextView) view.findViewById(R.id.tv_ordernum);
+            tv_ordertime = (TextView) view.findViewById(R.id.tv_ordertime);
+            tv_meettingType= (TextView) view.findViewById(R.id.tv_meettingType);
+            tv_bookTime = (TextView) view.findViewById(R.id.tv_bookTime);
+            tv_meetingType= (TextView) view.findViewById(R.id.tv_meetingType);
+            tv_meetingPerson = (TextView) view.findViewById(R.id.tv_meetingPerson);
+            tv_meetingEquipment = (TextView) view.findViewById(R.id.tv_meetingEquipment);
+            tv_meeting_personCount = (TextView) view.findViewById(R.id.tv_meeting_personCount);
+            tv_functionLeft = (TextView) view.findViewById(R.id.tv_accept_oreder);
+            tv_functionRight = (TextView) view.findViewById(R.id.tv_cancel_order);
+            layout_item = (RelativeLayout) view.findViewById(R.id.rl_item);
         }
     }
     public interface MyOnClickListener {

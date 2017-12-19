@@ -14,6 +14,7 @@ import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.fragment.MaintainDetailFragment;
+import cn.lc.model.ui.tab1.fragment.MeettingRoomDetailFragment;
 import cn.lc.model.ui.tab1.fragment.OrderWaterDetailFragment;
 import cn.lc.model.ui.tab1.fragment.StationeryDetailFragment;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
@@ -70,7 +71,12 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
                     .commit();
 
         } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {          // 会议.
+            MeettingRoomDetailFragment meettingRoomDetailFragment = new MeettingRoomDetailFragment();
+            meettingRoomDetailFragment.setOrderId(serviceType,orderid,type);
 
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.layout_orderDetail_content,meettingRoomDetailFragment)
+                    .commit();
         }
     }
     @OnClick({R.id.iv_back})
