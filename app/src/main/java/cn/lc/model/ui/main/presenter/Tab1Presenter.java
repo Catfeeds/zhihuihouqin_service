@@ -5,6 +5,7 @@ import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.view.Tab1View;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 import mvp.cn.rx.MvpRxSimplePresenter;
@@ -50,6 +51,29 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onSuccess(StationeryNewBean stationeryNewBean) {
                 getView().getSucc(stationeryNewBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    /**
+     *  获取订水服务订单列表
+     */
+    public void getWaterOrder(String serviceType, String page, String limit, String orderstatus) {
+        Observable waterOder = RetrofitUtils.getInstance().getWaterOrder(serviceType,page,limit,orderstatus);
+        getNetWork(waterOder, new RetrofitCallBack<OrderWaterBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(OrderWaterBean orderWaterBean) {
+                getView().getSucc(orderWaterBean);
             }
 
             @Override

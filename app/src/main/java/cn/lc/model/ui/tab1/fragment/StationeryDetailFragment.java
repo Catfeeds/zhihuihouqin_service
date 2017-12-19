@@ -9,10 +9,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.constant.Tab1Constants;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
@@ -58,8 +58,6 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
     @BindView(R.id.tv_stationery_functionBottom)
     TextView tv_funtionBottom;
 
-    Unbinder unbinder;
-
     private String serviceType;
     private String orderid;
     private int type;
@@ -80,6 +78,11 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
         txTotime.setText(bean.getExpertarrivaltme());
         txBeizhu.setText(bean.getRemark());
         txOrdernum.setText(bean.getCode());
+    }
+
+    @Override
+    public void getSucc(OrderWaterDetailBean bean) {
+
     }
 
     @Override

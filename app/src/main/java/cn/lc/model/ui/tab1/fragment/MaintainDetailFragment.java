@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.constant.Tab1Constants;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
@@ -100,6 +101,11 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
 
     @Override
     public void getSucc(StationeryDetailBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(OrderWaterDetailBean bean) {
 
     }
 

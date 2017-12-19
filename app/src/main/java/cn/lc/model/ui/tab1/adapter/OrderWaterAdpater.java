@@ -1,6 +1,7 @@
 package cn.lc.model.ui.tab1.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,11 @@ import java.util.List;
 
 import cn.lc.model.R;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
-import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
+import cn.lc.model.ui.tab1.constant.Tab1Constants;
 
 /**
  * Tab1适配器
@@ -22,12 +26,15 @@ import cn.lc.model.ui.tab1.bean.StationeryBean;
 public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.ViewHolder> {
     private MyOnClickListener myOnClickListener;
     public Context context;
-    public List<StationeryBean.ListBean> datas = null;
+    public List<OrderWaterBean.ListBean> datas = null;
     public int type;
-    public OrderWaterAdpater(List<StationeryBean.ListBean> datas, Context con, int type) {
+    private Tab1Presenter presenter;
+
+    public OrderWaterAdpater(List<OrderWaterBean.ListBean> datas, Context con, int type, Tab1Presenter presenter) {
         this.datas = datas;
         this.context = con;
         this.type=type;
+        this.presenter = presenter;
     }
 
     //创建新View，被LayoutManager所调用
@@ -41,23 +48,23 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        StationeryBean.ListBean bean = datas.get(position);
+        final OrderWaterBean.ListBean bean = datas.get(position);
 
-        if (type==1){
+        if (type== Tab1Constants.WATER_UNRECEIVE_ORDER){
             holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
-        }else if (type==2){
+        }else if (type== Tab1Constants.WATER_RECEIVED_ORDER){
             holder.tv_accept_oreder.setVisibility(View.GONE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setText("立即配送");
-        }else if (type==3){
+        }else if (type== Tab1Constants.WATER_DELIVERY){
             holder.tv_accept_oreder.setVisibility(View.GONE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setText("已送达");
-        }else if (type==4){
+        }else if (type==Tab1Constants.WATER_FINISH){
             holder.tv_accept_oreder.setVisibility(View.GONE);
             holder.tv_cancel_order.setVisibility(View.GONE);
-        }else if (type==5){
+        }else if (type==Tab1Constants.WATER_CANCEL){
             holder.tv_accept_oreder.setVisibility(View.GONE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setText("删除订单");
@@ -65,10 +72,11 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
 
         holder.tv_ordernum.setText(bean.getOrdercode());
         holder.tv_ordertime.setText(bean.getCreatetime());
-        holder.tv_orderaddress.setText(bean.getServiceplace());
-        holder.tv_name.setText(bean.getMendername());
-        holder.tv_phone.setText(bean.getMendermobile());
-        //holder.tv_sendtime.setText(bean.getSendtime());
+        holder.tv_orderaddress.setText(bean.getAddress());
+        holder.tv_name.setText(bean.getRealname());
+        holder.tv_phone.setText(bean.getMobile());
+        holder.tv_sendtime.setText(bean.getEndtime());
+
         holder.iv_tel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,26 +86,33 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
         holder.rl_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIManager.turnToAct(context, OrderDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                bundle.putString("orderid", bean.getId() + "");
+                bundle.putInt("type",type);
+
+                UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
             }
         });
         holder.tv_accept_oreder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId());
             }
         });
         holder.tv_cancel_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type==1){
+                int servicetype = SharedPrefHelper.getInstance().getServicetype();
 
-                }else if (type==2){
-
-                }else if(type==3){
-
-                }else if (type==5){
-
+                if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){
+                    presenter.cancelOrder(String.valueOf(servicetype),bean.getId());
+                }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){
+                    presenter.peiSongOrder(String.valueOf(servicetype),bean.getId());
+                }else if(type == Tab1Constants.WATER_DELIVERY){
+                    presenter.finishService(String.valueOf(servicetype),bean.getId());
+                }else if (type == Tab1Constants.WATER_CANCEL){
+                    presenter.deleteOrder(String.valueOf(servicetype),bean.getId());
                 }
             }
         });
@@ -121,6 +136,7 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
         public TextView tv_accept_oreder;
         public TextView  tv_cancel_order;
         public RelativeLayout rl_item;
+
         public ViewHolder(View view) {
             super(view);
             tv_name = (TextView) view.findViewById(R.id.tv_name);
@@ -137,7 +153,7 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
         }
     }
     public interface MyOnClickListener {
-        void myOnClickListener(StationeryBean.ListBean bean);
+        void myOnClickListener(OrderWaterBean.ListBean bean);
     }
     public void setMyOnClickListener(MyOnClickListener myOnClickListener){
         this.myOnClickListener=myOnClickListener;

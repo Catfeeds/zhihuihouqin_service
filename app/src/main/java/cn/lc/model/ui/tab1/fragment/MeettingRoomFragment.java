@@ -25,6 +25,7 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.MettingRoomAdpater;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
@@ -140,6 +141,11 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         }
         if (page==1){
             list.clear();
+            if (bean.getList().size() != 0) {
+
+            } else {
+
+            }
         }
         list.addAll(bean.getList());
 
@@ -149,6 +155,11 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 
     @Override
     public void getSucc(StationeryNewBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(OrderWaterBean bean) {
 
     }
 }

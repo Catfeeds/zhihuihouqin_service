@@ -6,6 +6,8 @@ import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.ui.login.bean.CaptchaBean;
 import cn.lc.model.ui.login.bean.LoginBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
@@ -46,6 +48,13 @@ public interface NetAPI {
     @POST(NetUrl.getorder)
     Observable<StationeryNewBean> getStationeryorder(@FieldMap Map<String,Object> map);
 
+    /**
+     *  获取订水服务的订单
+     */
+    @FormUrlEncoded
+    @POST(NetUrl.getorder)
+    Observable<OrderWaterBean> getOrderWaterOrder(@FieldMap Map<String,Object> map);
+
     // 获取订单详情
     @FormUrlEncoded
     @POST(NetUrl.getOrderDetail)
@@ -54,6 +63,10 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.getOrderDetail)
     Observable<StationeryDetailBean> getStationeryDetail(@FieldMap Map<String,Object> map);
+    // 获取订水服务的订单详情
+    @FormUrlEncoded
+    @POST(NetUrl.getOrderDetail)
+    Observable<OrderWaterDetailBean> getWaterDetial(@FieldMap Map<String,Object> map);
 
     // 接单
     @FormUrlEncoded

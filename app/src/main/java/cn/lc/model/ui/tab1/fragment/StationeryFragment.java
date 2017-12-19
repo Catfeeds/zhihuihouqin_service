@@ -26,6 +26,7 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
@@ -141,5 +142,10 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getSucc(OrderWaterBean bean) {
+
     }
 }

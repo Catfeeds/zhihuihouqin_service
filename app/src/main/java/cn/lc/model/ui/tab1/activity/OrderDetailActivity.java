@@ -11,8 +11,10 @@ import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.fragment.MaintainDetailFragment;
+import cn.lc.model.ui.tab1.fragment.OrderWaterDetailFragment;
 import cn.lc.model.ui.tab1.fragment.StationeryDetailFragment;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
 import cn.lc.model.ui.tab1.view.OrderDetailView;
@@ -60,6 +62,12 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
                     .commit();
 
         } else if (SharedPrefHelper.getInstance().getServicetype() == 18) {         // 订水
+            OrderWaterDetailFragment detailFragment = new OrderWaterDetailFragment();
+            detailFragment.setOrderId(serviceType,orderid,type);
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.layout_orderDetail_content,detailFragment)
+                    .commit();
 
         } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {          // 会议.
 
@@ -74,14 +82,13 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
         }
     }
     @Override
-    public void getSucc(OrderDetailBean bean) {
-
-    }
+    public void getSucc(OrderDetailBean bean) {}
 
     @Override
-    public void getSucc(StationeryDetailBean bean) {
+    public void getSucc(StationeryDetailBean bean) {}
 
-    }
+    @Override
+    public void getSucc(OrderWaterDetailBean bean) {}
 
     @Override
     public OrderDetailPresenter createPresenter() {

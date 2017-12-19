@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -25,6 +26,7 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.OrderWaterAdpater;
+import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 
@@ -37,7 +39,9 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
      TextView tx_null;
-    private List<StationeryBean.ListBean> list = new ArrayList<>();
+    @BindView(R.id.view_error)
+    RelativeLayout view_error;
+    private List<OrderWaterBean.ListBean> list = new ArrayList<>();
     private int type;
     private int page = 1;
     private int limit = 10;
@@ -57,7 +61,9 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        getPresenter().getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        //list.add(new OrderWaterBean.ListBean());
+
 //        getPresenter().getOrder(type + "", page + "", limit + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
 //        s1.setUsername("隔壁老王");
@@ -75,15 +81,15 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
 //        list.add(s2);
 //        list.add(s3);
 //        list.add(s4);
-        myAdpater = new OrderWaterAdpater(list, getActivity(),type);
+        myAdpater = new OrderWaterAdpater(list, getActivity(),type,getPresenter());
         mRecyclerView.setAdapter(myAdpater);
         myAdpater.setMyOnClickListener(new OrderWaterAdpater.MyOnClickListener() {
             @Override
-            public void myOnClickListener(final StationeryBean.ListBean bean) {
-                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMendermobile())
+            public void myOnClickListener(final OrderWaterBean.ListBean bean) {
+                new AlertDialog.Builder(getActivity()).setTitle("").setMessage("拨打电话"+bean.getMobile())
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMendermobile()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getMobile()));
                                 try {
                                     startActivity(intent);
                                 }catch (Exception e){
@@ -130,6 +136,17 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
 
     @Override
     public void getSucc(StationeryBean bean) {
+
+
+    }
+
+    @Override
+    public void getSucc(StationeryNewBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(OrderWaterBean bean) {
         LogUtils.d("错误"+bean.errCode);
         if (bean.errCode!=0){
 
@@ -138,15 +155,14 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         }
         if (page==1){
             list.clear();
+            if (bean.getList().size() != 0) {
+                view_error.setVisibility(View.GONE);
+            } else {
+                view_error.setVisibility(View.VISIBLE);
+            }
         }
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void getSucc(StationeryNewBean bean) {
-
     }
 }

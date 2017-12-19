@@ -5,6 +5,7 @@ import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
+import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.view.OrderDetailView;
 import mvp.cn.rx.MvpRxSimplePresenter;
@@ -36,7 +37,7 @@ public class OrderDetailPresenter extends MvpRxSimplePresenter<OrderDetailView> 
             }
         });
     }
-
+    // 获取办公用品得订单详情.
     public void getStationeryDetialData(String serviceType,String orderid){
         Observable observable = RetrofitUtils.getInstance().getStationeryDetail(serviceType, orderid);
         getNetWork(observable, new RetrofitCallBack<StationeryDetailBean>() {
@@ -48,6 +49,28 @@ public class OrderDetailPresenter extends MvpRxSimplePresenter<OrderDetailView> 
             @Override
             public void onSuccess(StationeryDetailBean stationeryDetailBean) {
                 getView().getSucc(stationeryDetailBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    // 获取订水服务的订单详情
+    public void getOrderWaterDetail(String serviceType,String orderid) {
+        Observable waterDetail = RetrofitUtils.getInstance().getWaterDetail(serviceType,orderid);
+        getNetWork(waterDetail, new RetrofitCallBack<OrderWaterDetailBean>() {
+
+            @Override
+            public void onPostFail(Throwable e) {
+
+            }
+
+            @Override
+            public void onSuccess(OrderWaterDetailBean orderWaterDetailBean) {
+                getView().getSucc(orderWaterDetailBean);
             }
 
             @Override

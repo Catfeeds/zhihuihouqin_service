@@ -218,6 +218,25 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
 
     /**
+     *  获取订水服务的订单列表
+     */
+    public static Observable getWaterOrder(String serviceType, String page, String limit, String orderstatus) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("serviceType", serviceType);
+            tempMap.put("page", page);
+            tempMap.put("limit", limit);
+            tempMap.put("orderstatus", orderstatus);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getOrderWaterOrder(paramsMap);
+    }
+
+    /**
      *  获取订单详情
      */
     public static Observable getOrderDetail(String serviceType,String orderId) {
@@ -249,6 +268,23 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
 
         return api.getStationeryDetail(paramsMap);
+    }
+
+    /**
+     *  获取订水服务的点单详情
+     */
+    public static Observable getWaterDetail(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("orderid",orderId);
+            addParam(paramsMap,tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getWaterDetial(paramsMap);
     }
 
     /**

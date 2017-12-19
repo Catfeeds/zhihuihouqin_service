@@ -137,7 +137,9 @@
                 android:layout_width="63dp"
                 android:layout_height="66dp"
                 app:roundedCornerRadius="5dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                app:placeholderImage="@mipmap/icon_null"
+                app:placeholderImageScaleType="fitCenter"/>
 
             <TextView
                 android:id="@+id/tv_goodsName"
