@@ -24,6 +24,7 @@
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:layout_margin="6dp">
 
         <ImageView
@@ -70,6 +71,7 @@
         android:id="@+id/rl2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:layout_margin="6dp">
         <ImageView
             android:id="@+id/iv2"
@@ -87,8 +89,8 @@
             android:gravity="center"
             android:text="1"
             android:textColor="@color/white"
-            android:textSize="10sp"
-           />
+            android:textSize="10sp" />
+
         <TextView
             android:id="@+id/tx2"
             android:layout_width="wrap_content"
@@ -105,6 +107,7 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/arrow_right" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

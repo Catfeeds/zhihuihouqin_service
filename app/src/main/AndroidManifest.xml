@@ -51,6 +51,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.tab2.activity.MessageDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".ui.login.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
