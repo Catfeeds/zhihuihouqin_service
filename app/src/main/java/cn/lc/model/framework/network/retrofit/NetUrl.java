@@ -26,6 +26,7 @@ public interface NetUrl {
     // TODO: 2017/12/20 地址错误
     String getIncomeData = "Owner/commentlist";                 // 获取用户收益信息.
     String getIncomeList = "Owner/commentlist";                 // 获取用户收益列表.
+    String changePW = "Owner/commentlist";                      // 修改密码.
 
     String updatename="user/modifyUserinfo?";
 }

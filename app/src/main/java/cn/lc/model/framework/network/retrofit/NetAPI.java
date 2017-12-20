@@ -115,4 +115,8 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.getIncomeList)
     Observable<IncomeDetailBean> getIncomeList(@FieldMap Map<String,Object> map);
+
+    @FormUrlEncoded
+    @POST(NetUrl.changePW)
+    Observable<CommonBean> changePW(@FieldMap Map<String,Object> map);
 }
