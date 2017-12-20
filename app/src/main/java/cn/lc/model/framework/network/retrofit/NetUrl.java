@@ -23,6 +23,9 @@ public interface NetUrl {
     // 用户信息
     String getPersonInfo = "Owner/getUserinfo";                 // 获取用户信息.
     String getEvaluateData = "Owner/commentlist";               // 获取我的评价信息.
+    // TODO: 2017/12/20 地址错误
+    String getIncomeData = "Owner/commentlist";                 // 获取用户收益信息.
+    String getIncomeList = "Owner/commentlist";                 // 获取用户收益列表.
 
     String updatename="user/modifyUserinfo?";
 }

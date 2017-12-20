@@ -12,6 +12,8 @@ import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
 import cn.lc.model.ui.tab3.bean.EvaluateBean;
+import cn.lc.model.ui.tab3.bean.IncomeBean;
+import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
 import cn.lc.model.ui.tab3.bean.PersonInfoBean;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -106,4 +108,11 @@ public interface NetAPI {
     @POST(NetUrl.getEvaluateData)
     Observable<EvaluateBean> getEvaluateData(@FieldMap Map<String,Object> map);
 
+    @FormUrlEncoded
+    @POST(NetUrl.getIncomeData)
+    Observable<IncomeBean> getIncomeData(@FieldMap Map<String,Object> map);
+
+    @FormUrlEncoded
+    @POST(NetUrl.getIncomeList)
+    Observable<IncomeDetailBean> getIncomeList(@FieldMap Map<String,Object> map);
 }

@@ -1,57 +1,32 @@
 package cn.lc.model.ui.tab3.activity;
 
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.BaseActivity;
-import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.base.MvpSimpleActivity;
+import cn.lc.model.ui.tab3.fragment.IncomeFrament;
+import cn.lc.model.ui.tab3.presenter.MyBankPresenter;
+import cn.lc.model.ui.tab3.view.MyBankView;
 
 /**
- * Created by Administrator on 2017/11/9.
+ *  Created by 张海洋 on 2017/11/9.
+ *
  */
 
-public class MyWalletActivity extends BaseActivity{
-    @BindView(R.id.iv_back)
-    ImageView iv_back;
-    @BindView(R.id.tv_money)
-    TextView tv_money;
-    @BindView(R.id.tv_time)
-    TextView tv_time;
-    @BindView(R.id.tv_card)
-    TextView tv_card;
-    @BindView(R.id.tv_tixian)
-    TextView tv_tixian;
-    @BindView(R.id.tv_pwd)
-    TextView tv_psw;
+public class MyWalletActivity extends MvpSimpleActivity<MyBankView, MyBankPresenter> {
+
     @Override
     public void setContentLayout() {
         setContentView(R.layout.mywallet);
-        ButterKnife.bind(this);
     }
-@OnClick({R.id.iv_back,R.id.tv_card,R.id.tv_tixian,R.id.tv_pwd})
-public void onClick(View view){
-    switch (view.getId()){
-        case R.id.iv_back:
-            finish();
-            break;
-        case R.id.tv_card:
-            UIManager.turnToAct(this,MyBankActivity.class);
-            break;
-        case  R.id.tv_tixian:
-            UIManager.turnToAct(this,GetMoneyActivity.class);
-            break;
-        case R.id.tv_pwd:
-            UIManager.turnToAct(this,PwdManagerActivity.class);
-            break;
-    }
-}
+
     @Override
     public void initView() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.income_content,new IncomeFrament())
+                .commit();
+    }
 
+    @Override
+    public MyBankPresenter createPresenter() {
+        return new MyBankPresenter();
     }
 }
