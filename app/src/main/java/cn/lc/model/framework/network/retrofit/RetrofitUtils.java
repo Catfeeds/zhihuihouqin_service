@@ -171,7 +171,7 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
         return api.register(paramsMap);
     }
-
+    /********************************* 用户信息 ***********************************************/
     /**
      *  获取用户信息
      */
@@ -188,6 +188,22 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         return api.getPersonInfo(paramsMap);
     }
 
+    /**
+     *  获取用户评价信息
+     */
+    public static Observable getEvaluateData() {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getEvaluateData(paramsMap);
+    }
+
+    /*************************************  订单 ************************************************/
     /**
      * 维修订单列表
      * @return

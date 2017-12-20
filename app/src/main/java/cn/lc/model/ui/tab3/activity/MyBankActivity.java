@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.CommonBean;
+import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab3.adapter.MyBankAdapter;
@@ -87,7 +87,7 @@ public void onClick(View view){
 
 
     @Override
-    public void getSucc(CommonBean bean) {
+    public void getSucc(BaseResponse bean) {
         if (page==1){
             list.clear();
         }

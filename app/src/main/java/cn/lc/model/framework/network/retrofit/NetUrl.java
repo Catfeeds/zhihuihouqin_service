@@ -22,6 +22,7 @@ public interface NetUrl {
 
     // 用户信息
     String getPersonInfo = "Owner/getUserinfo";                 // 获取用户信息.
+    String getEvaluateData = "Owner/commentlist";               // 获取我的评价信息.
 
     String updatename="user/modifyUserinfo?";
 }

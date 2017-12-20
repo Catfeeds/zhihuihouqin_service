@@ -1,6 +1,6 @@
 package cn.lc.model.ui.tab3.view;
 
-import cn.lc.model.framework.base.CommonBean;
+import cn.lc.model.framework.base.BaseResponse;
 import mvp.cn.common.MvpView;
 
 /**
@@ -8,5 +8,5 @@ import mvp.cn.common.MvpView;
  */
 
 public interface MyBankView extends MvpView {
-    void getSucc(CommonBean bean);
+    void getSucc(BaseResponse bean);
 }

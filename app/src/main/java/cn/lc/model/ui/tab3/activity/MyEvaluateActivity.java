@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -14,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.CommonBean;
+import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.ui.tab3.adapter.MyEvaluateAdapter;
 import cn.lc.model.ui.tab3.bean.EvaluateBean;
@@ -30,6 +31,8 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
     ImageView iv_back;
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
+    @BindView(R.id.view_error)
+    RelativeLayout layout_error;
     private List<EvaluateBean.ListBean> list = new ArrayList<>();
     private int page = 1;
     private int limit = 10;
@@ -56,14 +59,15 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
 
-        //getPresenter().getData();
-        list.add(new EvaluateBean.ListBean());
+        getPresenter().getEvaluateData();
+        //list.add(new EvaluateBean.ListBean());
         myAdpater = new MyEvaluateAdapter(list, getActivity());
         mRecyclerView.setAdapter(myAdpater);
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 page = 1;
+                getPresenter().getEvaluateData();
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
 
@@ -90,11 +94,24 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
 
 
     @Override
-    public void getSucc(CommonBean bean) {
+    public void getSucc(BaseResponse bean) {
+        EvaluateBean data = null;
+
+        if (bean instanceof EvaluateBean) {
+            data = (EvaluateBean) bean;
+        } else {
+            return;
+        }
+
         if (page == 1) {
             list.clear();
+            if (data.getList().size() == 0) {
+                layout_error.setVisibility(View.VISIBLE);
+            } else {
+                layout_error.setVisibility(View.GONE);
+            }
         }
-        //  list.addAll(bean.getList());
+        list.addAll(data.getList());
         myAdpater.notifyDataSetChanged();
     }
 
