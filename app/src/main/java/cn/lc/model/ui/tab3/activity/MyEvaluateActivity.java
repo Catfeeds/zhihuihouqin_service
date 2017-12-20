@@ -12,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
-import cn.lc.model.ui.tab1.adapter.StationeryAdpater;
-import cn.lc.model.ui.tab1.bean.StationeryBean;
+import cn.lc.model.ui.tab3.adapter.MyEvaluateAdapter;
+import cn.lc.model.ui.tab3.bean.EvaluateBean;
 import cn.lc.model.ui.tab3.presenter.MyBankPresenter;
 import cn.lc.model.ui.tab3.view.MyBankView;
 
@@ -31,15 +30,14 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
     ImageView iv_back;
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
-    private List<StationeryBean.ListBean> list = new ArrayList<>();
+    private List<EvaluateBean.ListBean> list = new ArrayList<>();
     private int page = 1;
     private int limit = 10;
-    private StationeryAdpater myAdpater;
+    private MyEvaluateAdapter myAdpater;
 
     @Override
     public void setContentLayout() {
         setContentView(R.layout.evaluete);
-        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.iv_back})
@@ -58,8 +56,10 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
 
-        //   myAdpater = new StationeryAdpater(list, getActivity());
-        //  mRecyclerView.setAdapter(myAdpater);
+        //getPresenter().getData();
+        list.add(new EvaluateBean.ListBean());
+        myAdpater = new MyEvaluateAdapter(list, getActivity());
+        mRecyclerView.setAdapter(myAdpater);
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

@@ -10,6 +10,7 @@ import rx.Observable;
 
 /**
  * Created by hh on 2017/5/12.
+ *  我的评价的Presenter;
  */
 
 public class MyBankPresenter extends MvpRxSimplePresenter<MyBankView> {
@@ -32,6 +33,13 @@ public class MyBankPresenter extends MvpRxSimplePresenter<MyBankView> {
 
             }
         });
+    }
+
+    /**
+     *  获取我的评价的数据
+     */
+    public void getEvaluateData() {
+
     }
 
     @Override

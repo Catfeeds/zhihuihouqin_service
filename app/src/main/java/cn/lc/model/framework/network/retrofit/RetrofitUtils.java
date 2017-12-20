@@ -123,10 +123,6 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
 
     /**
      * 获取验证码
-     *
-     *
-     *
-     * @return
      */
     public static Observable capture(String mobile) {
         Map<String, Object> paramsMap = new HashMap<>();
@@ -142,10 +138,6 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
     /**
      * 校验验证码
-     *
-     *
-     *
-     * @return
      */
     public static Observable checkcapture(String mobile,String serviceid,String capture ,String uid)  {
         Map<String, Object> paramsMap = new HashMap<>();
@@ -179,6 +171,23 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
         return api.register(paramsMap);
     }
+
+    /**
+     *  获取用户信息
+     */
+    public static Observable getPersonInfo(String serviceType) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getPersonInfo(paramsMap);
+    }
+
     /**
      * 维修订单列表
      * @return

@@ -20,6 +20,8 @@ public interface NetUrl {
     String cancelOrder = "CommonOrder/cancelOrder?";            // 取消订单.
     String peiSong = "CommonOrder/immediateDelivery?";          // 立即配送
 
+    // 用户信息
+    String getPersonInfo = "Owner/getUserinfo";                 // 获取用户信息.
 
     String updatename="user/modifyUserinfo?";
 }

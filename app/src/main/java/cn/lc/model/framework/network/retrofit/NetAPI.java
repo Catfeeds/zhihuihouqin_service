@@ -11,6 +11,7 @@ import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
+import cn.lc.model.ui.tab3.bean.PersonInfoBean;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -93,4 +94,11 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.updatename)
     Observable<CommonBean> updatename (@FieldMap Map<String,Object> map);
+
+    /*********************************  用户信息 ************************************************/
+
+    @FormUrlEncoded
+    @POST(NetUrl.getPersonInfo)
+    Observable<PersonInfoBean> getPersonInfo(@FieldMap Map<String,Object> map);
+
 }

@@ -27,7 +27,6 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <!--环信 权限 start-->
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />

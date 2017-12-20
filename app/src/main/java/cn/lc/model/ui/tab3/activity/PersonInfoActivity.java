@@ -1,14 +1,16 @@
 package cn.lc.model.ui.tab3.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
-import cn.lc.model.framework.imageload.GlideLoading;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
@@ -33,7 +34,6 @@ import cn.lc.model.framework.widget.MySettingView;
 import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
-import mvp.cn.util.LogUtil;
 
 /**
  * Created by Administrator on 2017/11/8.
@@ -57,12 +57,14 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);//订阅
     }
+
     @Subscribe //在ui线程执行
     public void onEventMainThread(PersonInfoEnvent event) {
         s_name.setRightText(SharedPrefHelper.getInstance().getUserName());
         s_phone.setRightText(SharedPrefHelper.getInstance().getRealPhone());
         EventBus.getDefault().unregister(event);
     }
+
     @Override
     public void initView() {
         s_name.setRightText("张大可");
@@ -76,9 +78,14 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
                 finish();
                 break;
             case R.id.iv_header:
-                imgHelper = new SelectImageHelper(this);
-                imgHelper.setCropParams(1, 1, 160, 160);
-                imgHelper.showChooseImgDialog();
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+                }else {
+                    imgHelper = new SelectImageHelper(this);
+                    imgHelper.setCropParams(1, 1, 160, 160);
+                    imgHelper.showChooseImgDialog();
+                }
+
 //            PictureSelector.create(PersonInfoActivity.this)
 //                    .openGallery(PictureMimeType.ofImage())
 //                    .maxSelectNum(1)
@@ -102,15 +109,21 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e("photo","111111111111111111111111");
+
         if (imgHelper == null) {
             return;
         }
         imgHelper.doResult(requestCode, resultCode, data, new SelectImageHelper.OnGetPhotoListener() {
             @Override
             public void onGetPhoto(File photoFile) {
-                LogUtil.log("photoFile==" + photoFile.getAbsolutePath());
-                GlideLoading.getInstance().loadImgFile(getActivity(), photoFile, iv_header);
-                String mPhotoFile = photoFile.getAbsolutePath();
+                Log.e("photo",photoFile.getAbsolutePath());
+                LogUtils.d("photoFile==" + photoFile.getAbsolutePath());
+                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                iv_header.setImageBitmap(bitmap);
+                /*GlideLoading.getInstance().loadImgFile(getActivity(), photoFile, iv_header);
+                String mPhotoFile = photoFile.getAbsolutePath();*/
             }
         });
 //        if (resultCode == RESULT_OK) {

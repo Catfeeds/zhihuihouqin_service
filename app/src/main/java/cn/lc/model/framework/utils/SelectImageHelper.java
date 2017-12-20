@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -203,12 +204,15 @@ public class SelectImageHelper {
             startPhotoZoom(data.getData());
         } else if (requestCode == CROP_REQUEST_CODE) {// 裁切返回
             String path = mCurrentPhotoFile.getAbsolutePath();
+            Log.e("photo",path);
             if (mCurrentPhotoFile.getTotalSpace() == 0) {
                 return;
             }
+            Log.e("photo",path);
             if (path != null) {
                 File uploadFile = new File(PHOTO_DIR, getPhotoFileName());// 给新照的照片文件命名
                 if (onGetPhotoListener != null) {
+                    Log.e("photo",path);
                     onGetPhotoListener.onGetPhoto(mCurrentPhotoFile);
                 }
             }

@@ -7,13 +7,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.easeui.ChatActivity;
 import cn.lc.model.easeui.EaseConstant;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.main.activity.MainActivity;
 import cn.lc.model.ui.main.presenter.Tab3Presenter;
 import cn.lc.model.ui.main.view.Tab3View;
@@ -21,6 +21,7 @@ import cn.lc.model.ui.tab3.activity.MyEvaluateActivity;
 import cn.lc.model.ui.tab3.activity.MyWalletActivity;
 import cn.lc.model.ui.tab3.activity.PersonInfoActivity;
 import cn.lc.model.ui.tab3.activity.SysSettingActivity;
+import cn.lc.model.ui.tab3.bean.PersonInfoBean;
 
 /**
  * Created by hh on 2016/5/18.
@@ -44,12 +45,11 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
         setContentView(R.layout.f_tab3);
-        ButterKnife.bind(getActivity());
     }
 
     @Override
     public void initView(View v) {
-
+        getPresenter().getData(SharedPrefHelper.getInstance().getServicetype() + "");
     }
 
     @OnClick({R.id.iv_header, R.id.tx_name, R.id.tx_dis, R.id.rl_order, R.id.rl_comment, R.id.rl_wallet, R.id.rl_sys})
@@ -88,5 +88,10 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
     @Override
     public Tab3Presenter createPresenter() {
         return new Tab3Presenter();
+    }
+
+    @Override
+    public void getSuccess(PersonInfoBean personInfoBean) {
+
     }
 }
