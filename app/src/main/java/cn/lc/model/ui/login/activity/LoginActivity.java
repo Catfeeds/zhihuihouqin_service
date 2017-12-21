@@ -237,7 +237,11 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
     public void loginSucc(LoginBean loginBean) {
 //        showToast("登陆成功");
         SoftApplication.softApplication.setToken(loginBean.getToken());
+        SoftApplication.isLogin = true;
         SharedPrefHelper.getInstance().setPhoneNumber(loginBean.getUserinfo().getMobile());
+        SharedPrefHelper.getInstance().setToken(loginBean.getToken());
+        SharedPrefHelper.getInstance().setHasLogin(true);
+
         UIManager.turnToAct(this, MainActivity.class);
         finish();
     }

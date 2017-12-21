@@ -33,7 +33,7 @@ public class SoftApplication extends QuickApplication {
     public static SoftApplication softApplication;
     private static AppInfo appInfo;
     private static UserInfo userInfo ;
-    private static boolean isLogin;// 判断是否已经登录
+    public static boolean isLogin;// 判断是否已经登录
     private static String token = "";
     private static int authStatus;
     private static int serviceId;            // 用户的服务类型Id;
@@ -51,7 +51,7 @@ public class SoftApplication extends QuickApplication {
         // fresco的初始化
         Fresco.initialize(this);
         // 获取用户的服务ID
-        serviceId = SharedPrefHelper.getInstance().getServicetype();
+        getLoginState();
 
 //        appInfo = initAppInfo();
 
@@ -75,6 +75,16 @@ public class SoftApplication extends QuickApplication {
         return refWatcher;
     }
 
+    /**
+     *  获取用户信息,判断登录状态
+     */
+    public void getLoginState() {
+        boolean hasLogin = SharedPrefHelper.getInstance().getHasLogin();
+        if (hasLogin) {
+            isLogin = true;
+            token = SharedPrefHelper.getInstance().getToken();
+        }
+    }
 
     /**
      * 实例化AppInfo

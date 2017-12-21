@@ -44,6 +44,15 @@ public class SharedPrefHelper {
     public String getPhoneNumber() {
         return sharedPreferences.getString("phoneNumber", "");
     }
+
+    public void setToken(String token) {
+        sharedPreferences.edit().putString("token",token).commit();
+    }
+
+    public String getToken() {
+        return sharedPreferences.getString("token","");
+    }
+
     public void setPassword(String password) {
         sharedPreferences.edit().putString("password", password).commit();
     }
