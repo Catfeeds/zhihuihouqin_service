@@ -34,7 +34,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
-     TextView tx_null;
+    TextView tx_null;
     @BindView(R.id.view_error)
     RelativeLayout layout_error;
     private List<MeetingBean.ListBean> list = new ArrayList<>();
@@ -50,6 +50,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         type = argument.getInt("type");
 
     }
+
     @Override
     public void initView(View v) {
 
@@ -57,8 +58,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        //getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-        list.add(new MeetingBean.ListBean());
+        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        //list.add(new MeetingBean.ListBean());
 
 //        getPresenter().getOrder(type + "", page + "", limit + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
@@ -78,7 +79,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 //        list.add(s3);
 //        list.add(s4);
 
-        myAdpater = new MettingRoomAdpater(list, getActivity(),type,getPresenter());
+        myAdpater = new MettingRoomAdpater(list, getActivity(), type, getPresenter());
         mRecyclerView.setAdapter(myAdpater);
 
 //        myAdpater.setMyOnClickListener(new MettingRoomAdpater.MyOnClickListener() {
@@ -152,13 +153,13 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 
     @Override
     public void getSucc(MeetingBean bean) {
-        LogUtils.d("错误"+bean.errCode);
-        if (bean.errCode!=0){
+        LogUtils.d("错误" + bean.errCode);
+        if (bean.errCode != 0) {
 
             tx_null.setText("暂无数据");
             return;
         }
-        if (page==1){
+        if (page == 1) {
             list.clear();
             if (bean.getList().size() != 0) {
                 layout_error.setVisibility(View.GONE);
