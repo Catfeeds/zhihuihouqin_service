@@ -76,6 +76,11 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.receiveOrder)
     Observable<CommonBean> receiveOrder(@FieldMap Map<String,Object> map);
+    // 拒绝接单
+    @FormUrlEncoded
+    @POST(NetUrl.refuseOrder)
+    Observable<CommonBean> refuseOrder(@FieldMap Map<String,Object> map);
+
     // 完成订单
     @FormUrlEncoded
     @POST(NetUrl.finishOrder)

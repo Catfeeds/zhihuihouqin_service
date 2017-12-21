@@ -111,7 +111,12 @@ public class StationeryAdpater extends RecyclerView.Adapter<StationeryAdpater.Vi
             @Override
             public void onClick(View v) {
                 if (type == WORK_UNRECEIVE_ORDER) {                             // 未接单的取消订单
-                    presenter.cancelOrder(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid", bean.getId() + "");
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(context, OrderDetailActivity.class);
                 } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {         // 已接单的立即配送
                     presenter.peiSongOrder(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
                 } else if (type == WORK_DELIVERY) {                             //配送中的已送达

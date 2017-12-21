@@ -51,12 +51,18 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
 
         if (type == Tab1Constants.MAINTAIN_UNSERVICE) {
             holder.tv_nowservice.setText("立即服务");
+            holder.tv_functionTop.setText("拒绝接单");
+            holder.tv_functionTop.setVisibility(View.VISIBLE);
         } else if (type == Tab1Constants.MAINTAIN_SERVICING) {
             holder.tv_nowservice.setText("已完成");
+            holder.tv_functionTop.setText("取消订单");
+            holder.tv_functionTop.setVisibility(View.VISIBLE);
         } else if (type == Tab1Constants.MAINTAIN_FINISH) {
             holder.tv_nowservice.setText("删除");
+            holder.tv_functionTop.setVisibility(View.GONE);
         } else if (type == Tab1Constants.MAINTAIN_CANCEL) {
             holder.tv_nowservice.setText("删除");
+            holder.tv_functionTop.setVisibility(View.GONE);
         }
 
         // 设置订单数据:
@@ -100,6 +106,17 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
                 }
             }
         });
+
+        holder.tv_functionTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (type == Tab1Constants.MAINTAIN_UNSERVICE) {             // 拒绝接单
+                    myOnClickListener.refuseOrder(datas.get(position));
+                } else if (type == Tab1Constants.MAINTAIN_SERVICING) {      // 取消接单.
+                    myOnClickListener.cancelOrder(datas.get(position));
+                }
+            }
+        });
     }
 
     //获取数据的数量
@@ -122,6 +139,7 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
         public SimpleDraweeView iv_header;
         public TextView tv_inviteTime;      // 上门时间
         public TextView tv_ordersn;         // 订单号
+        public TextView tv_functionTop;     // 上边的功能键
 
         public ViewHolder(View view) {
             super(view);
@@ -137,6 +155,7 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
             iv_header = (SimpleDraweeView) view.findViewById(R.id.iv_header);      //订单发起人头像
             tv_inviteTime = (TextView) view.findViewById(R.id.tv_time);
             tv_ordersn = (TextView) view.findViewById(R.id.tv_order_id);
+            tv_functionTop = (TextView) view.findViewById(R.id.tv_functionTop);
         }
 
         @Override
@@ -149,6 +168,10 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
         void call(String phoneNum);
         // 立即服务;
         void service(StationeryBean.ListBean bean);
+        // 拒绝接单
+        void refuseOrder(StationeryBean.ListBean bean);
+        // 取消订单
+        void cancelOrder(StationeryBean.ListBean bean);
         // 已完成:
         void finishOrder(StationeryBean.ListBean bean);
         // 删除:

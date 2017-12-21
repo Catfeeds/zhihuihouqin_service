@@ -11,6 +11,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -111,7 +114,13 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
                 }
                 break;
             case R.id.tv_stationery_functionBottom:                         // 取消订单.
-                getPresenter().cancelOrder(serviceType,orderid);
+                //getPresenter().cancelOrder(serviceType,orderid);
+                OrderDetailActivity.isReason = true;
+                Bundle bundle = new Bundle();
+                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                bundle.putString("orderid",orderid);
+                bundle.putInt("type",type);
+                UIManager.turnToAct(getActivity(), OrderDetailActivity.class);
                 break;
         }
     }

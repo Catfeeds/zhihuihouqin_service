@@ -375,6 +375,22 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
 
     /**
+     *  拒绝接单
+     */
+    public static Observable refuseOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try {
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("id",orderId);
+            addParam(paramsMap, tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.refuseOrder(paramsMap);
+    }
+
+    /**
      *  立即配送
      */
     public static Observable peiSongOrder(String serviceType,String orderId) {
@@ -394,13 +410,13 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     /**
      *  取消订单
      */
-    public static Observable cancelOrder(String serviceType,String orderId) {
+    public static Observable cancelOrder(String serviceType,String orderId,String reason) {
         Map<String,Object> paramsMap = new HashMap<>();
         try {
             Map<String,String> tempMap = new HashMap<>();
             tempMap.put("serviceType",serviceType);
             tempMap.put("id",orderId);
-            tempMap.put("cancelreason","");
+            tempMap.put("cancelreason",reason);
             addParam(paramsMap, tempMap);
         }catch (Exception e) {
             e.printStackTrace();

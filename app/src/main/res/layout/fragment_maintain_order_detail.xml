@@ -269,10 +269,23 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_maintain_function"
+            android:id="@+id/tv_maintain_functionTop"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/solide_f30000_5"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="#fff"
+            android:text="立即接单"/>
+
+        <TextView
+            android:id="@+id/tv_maintain_function"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/solide_2ea7e0_5"

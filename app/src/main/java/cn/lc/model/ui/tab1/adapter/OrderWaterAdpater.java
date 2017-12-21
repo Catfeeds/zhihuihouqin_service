@@ -106,7 +106,12 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
                 int servicetype = SharedPrefHelper.getInstance().getServicetype();
 
                 if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){
-                    presenter.cancelOrder(String.valueOf(servicetype),bean.getId());
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid", bean.getId() + "");
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(context, OrderDetailActivity.class);
                 }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){
                     presenter.peiSongOrder(String.valueOf(servicetype),bean.getId());
                 }else if(type == Tab1Constants.WATER_DELIVERY){

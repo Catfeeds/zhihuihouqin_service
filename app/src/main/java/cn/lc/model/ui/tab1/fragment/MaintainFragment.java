@@ -21,10 +21,12 @@ import java.util.List;
 import butterknife.BindView;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
+import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
@@ -109,6 +111,27 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             public void service(StationeryBean.ListBean bean) {
                 getPresenter().goService(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getOrderid()));
             }
+            //拒绝接单
+            @Override
+            public void refuseOrder(StationeryBean.ListBean bean) {
+                OrderDetailActivity.isReason = true;
+                Bundle bundle = new Bundle();
+                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                bundle.putString("orderid",bean.getOrderid() + "");
+                bundle.putInt("type",type);
+                UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+            }
+            // 取消接单.
+            @Override
+            public void cancelOrder(StationeryBean.ListBean bean) {
+                OrderDetailActivity.isReason = true;
+                Bundle bundle = new Bundle();
+                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                bundle.putString("orderid",bean.getOrderid() + "");
+                bundle.putInt("type",type);
+
+                UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);
+            }
 
             // 服务中点击完成
             @Override
@@ -121,6 +144,7 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             public void removeOrder(StationeryBean.ListBean bean) {
                 getPresenter().deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getOrderid()));
             }
+
         });
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -151,6 +175,15 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             }
         });
     }
+
+    /*@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10) {
+            String reason = data.getStringExtra("reason");
+
+        }
+    }*/
 
     @Override
     public Tab1Presenter createPresenter() {

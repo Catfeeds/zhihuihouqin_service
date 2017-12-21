@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -45,6 +48,8 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
     TextView tx_ordernum;
     @BindView(R.id.tv_maintain_function)
     TextView tv_function;
+    @BindView(R.id.tv_maintain_functionTop)
+    TextView tv_functionTop;
 
     String serviceType;
     String orderid;
@@ -67,17 +72,24 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
         switch (type) {
             case Tab1Constants.MAINTAIN_UNSERVICE:          // 未服务
                 tv_function.setVisibility(View.VISIBLE);
+                tv_functionTop.setVisibility(View.VISIBLE);
+                tv_functionTop.setText("拒绝订单");
                 tv_function.setText("立即服务");
                 break;
             case Tab1Constants.MAINTAIN_SERVICING:          // 服务中
                 tv_function.setVisibility(View.VISIBLE);
+                tv_functionTop.setVisibility(View.VISIBLE);
+                tv_functionTop.setText("取消订单");
                 tv_function.setText("已完成");
                 break;
             case Tab1Constants.MAINTAIN_FINISH:             // 已完成.
                 tv_function.setVisibility(View.GONE);
+                tv_functionTop.setVisibility(View.GONE);
                 break;
             case Tab1Constants.MAINTAIN_CANCEL:             // 取消.
                 tv_function.setVisibility(View.GONE);
+                tv_functionTop.setVisibility(View.VISIBLE);
+                tv_functionTop.setText("删除");
                 break;
         }
     }
@@ -115,7 +127,7 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
         this.type = type;
     }
 
-    @OnClick({R.id.iv_call,R.id.tv_maintain_function})
+    @OnClick({R.id.iv_call,R.id.tv_maintain_function,R.id.tv_maintain_functionTop})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_call:
@@ -135,17 +147,42 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
             case R.id.tv_maintain_function:
                 switch (type) {
                     case Tab1Constants.MAINTAIN_UNSERVICE:          // 未服务
-                        tv_function.setVisibility(View.VISIBLE);
                         tv_function.setText("立即服务");
                         getPresenter().goService(serviceType,orderid);
                         break;
                     case Tab1Constants.MAINTAIN_SERVICING:          // 服务中
-                        tv_function.setVisibility(View.VISIBLE);
                         tv_function.setText("已完成");
                         getPresenter().finishService(serviceType,orderid);
                         break;
                 }
                 break;
+            case R.id.tv_maintain_functionTop:
+                switch (type) {
+                    case Tab1Constants.MAINTAIN_UNSERVICE:          // 未服务
+                        OrderDetailActivity.isReason = true;
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("serviceType", serviceType);
+                        bundle1.putString("orderid",orderid);
+                        bundle1.putInt("type",type);
+
+                        UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle1);
+                        break;
+                    case Tab1Constants.MAINTAIN_SERVICING:          // 服务中
+                        OrderDetailActivity.isReason = true;
+                        Bundle bundle = new Bundle();
+                        bundle.putString("serviceType", serviceType);
+                        bundle.putString("orderid",orderid);
+                        bundle.putInt("type",type);
+
+                        UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);
+                        break;
+                    case Tab1Constants.MAINTAIN_CANCEL:
+                        Log.e("TAG","11111111111111111111");
+                        getPresenter().deleteOrder(serviceType,orderid);
+                        break;
+                }
+                break;
+
         }
     }
 }

@@ -92,7 +92,12 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
             @Override
             public void onClick(View v) {
                 if (type == Tab1Constants.MEETINGROOM_UNSERVICE) {
-                    presenter.cancelOrder(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid", bean.getOrderid() + "");
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(context, OrderDetailActivity.class);
                 } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {
                     presenter.finishService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getOrderid() + "");
                 } else if (type == Tab1Constants.MEETINGROOM_CANCEL) {

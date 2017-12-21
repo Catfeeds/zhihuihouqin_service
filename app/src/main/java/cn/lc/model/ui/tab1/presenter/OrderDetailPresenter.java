@@ -125,10 +125,32 @@ public class OrderDetailPresenter extends MvpRxSimplePresenter<OrderDetailView> 
             }
         });
     }
+
+    //拒绝接单
+    public void refuseOrder(String serviceType,String orderId) {
+        Observable observable = RetrofitUtils.getInstance().refuseOrder(serviceType, orderId);
+        getNetWork(observable, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("拒绝成功");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
     //取消订单
-    public void cancelOrder(String serviceType,String orderId) {
+    public void cancelOrder(String serviceType,String orderId,String reason) {
         LogUtils.d("取消订单");
-        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId);
+        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId, reason);
         getNetWork(observable, new RetrofitCallBack<CommonBean>() {
             @Override
             public void onPostFail(Throwable e) {

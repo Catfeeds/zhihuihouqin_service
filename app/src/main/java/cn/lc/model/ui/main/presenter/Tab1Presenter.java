@@ -130,9 +130,9 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
         });
     }
     //取消订单
-    public void cancelOrder(String serviceType,String orderId) {
+    public void cancelOrder(String serviceType,String orderId,String reason) {
         LogUtils.d("取消订单");
-        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId);
+        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId,reason);
         getNetWork(observable, new RetrofitCallBack<CommonBean>() {
             @Override
             public void onPostFail(Throwable e) {
