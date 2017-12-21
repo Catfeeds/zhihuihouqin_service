@@ -28,6 +28,7 @@ import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
+import cn.lc.model.ui.tab1.bean.MeetingBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
@@ -220,6 +221,11 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
 
     @Override
     public void getSucc(OrderWaterBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(MeetingBean bean) {
 
     }
 }

@@ -307,6 +307,25 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
 
     /**
+     *  获取会议室预定的订单列表
+     */
+    public static Observable getMeetingOrder(String serviceType, String page, String limit, String orderstatus) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("serviceType", serviceType);
+            tempMap.put("page", page);
+            tempMap.put("limit", limit);
+            tempMap.put("orderstatus", orderstatus);
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getMeetingOrder(paramsMap);
+    }
+
+    /**
      *  获取订单详情
      */
     public static Observable getOrderDetail(String serviceType,String orderId) {
@@ -355,6 +374,22 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         }
 
         return api.getWaterDetial(paramsMap);
+    }
+    /**
+     *  获取会议室预定服务的订单详情
+     */
+    public static Observable getMeetingDetial(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("orderid",orderId);
+            addParam(paramsMap,tempMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.getMeetingDetail(paramsMap);
     }
 
     /**

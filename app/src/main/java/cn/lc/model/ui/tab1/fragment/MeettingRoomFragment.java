@@ -21,6 +21,7 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
 import cn.lc.model.ui.tab1.adapter.MettingRoomAdpater;
+import cn.lc.model.ui.tab1.bean.MeetingBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
@@ -36,7 +37,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
      TextView tx_null;
     @BindView(R.id.view_error)
     RelativeLayout layout_error;
-    private List<StationeryBean.ListBean> list = new ArrayList<>();
+    private List<MeetingBean.ListBean> list = new ArrayList<>();
     private int type;
     private int page = 1;
     private int limit = 10;
@@ -56,8 +57,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-        //list.add(new StationeryBean.ListBean());
+        //getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        list.add(new MeetingBean.ListBean());
 
 //        getPresenter().getOrder(type + "", page + "", limit + "");
 //        StationeryBean.ListBean s1=new StationeryBean.ListBean();
@@ -136,6 +137,21 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
 
     @Override
     public void getSucc(StationeryBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(StationeryNewBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(OrderWaterBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(MeetingBean bean) {
         LogUtils.d("错误"+bean.errCode);
         if (bean.errCode!=0){
 
@@ -153,16 +169,6 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void getSucc(StationeryNewBean bean) {
-
-    }
-
-    @Override
-    public void getSucc(OrderWaterBean bean) {
 
     }
 }

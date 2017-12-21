@@ -14,6 +14,7 @@ import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
+import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -163,5 +164,10 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
         txTotime.setText(bean.getAddress());
         txBeizhu.setText(bean.getRemark());
         txOrdernum.setText(bean.getOrdercode());
+    }
+
+    @Override
+    public void getSucc(MeetingDetailBean bean) {
+
     }
 }

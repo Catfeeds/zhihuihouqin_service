@@ -212,8 +212,10 @@
                 style="@style/tvStyle_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="2017-12-24"
+                android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/tx6"
-                android:text="2017-12-24" />
+                android:layout_toEndOf="@+id/tx6" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -317,7 +319,6 @@
                 android:text="订单备注: " />
 
             <TextView
-                android:id="@+id/tx_meetBeizhu"
                 style="@style/tvStyle_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -326,6 +327,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tx_meetBeizhu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/tvStyle_black"
@@ -371,7 +373,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_maintain_function"
+            android:id="@+id/tv_meeting_functionTop"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="45dp"
@@ -384,7 +386,7 @@
             android:text="立即接单"/>
 
         <TextView
-            android:id="@+id/tv_stationery_functionBottom"
+            android:id="@+id/tv_meeting_functionBottom"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="10dp"
@@ -395,4 +397,5 @@
             android:text="取消接单"/>
 
     </LinearLayout>
+
 </ScrollView>

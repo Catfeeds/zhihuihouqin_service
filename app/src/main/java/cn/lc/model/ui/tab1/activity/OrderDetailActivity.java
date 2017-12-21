@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
+import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -93,7 +94,19 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.layout_orderDetail_content,selectReasonFragment)
                         .commit();
-
+            } else if (SharedPrefHelper.getInstance().getServicetype() == 7) {                      // 会议.
+                SelectReasonFragment selectReasonFragment = new SelectReasonFragment();
+                selectReasonFragment.setOrderId(serviceType,orderid);
+                if (type == Tab1Constants.MEETINGROOM_UNSERVICE) {                   // 拒绝接单
+                    tv_title.setText("拒绝订单");
+                    selectReasonFragment.setType(SelectReasonFragment.REFUSE_TYPE);
+                } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {             // 取消接单.
+                    tv_title.setText("取消订单");
+                    selectReasonFragment.setType(SelectReasonFragment.CANCEL_TYPE);
+                }
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.layout_orderDetail_content,selectReasonFragment)
+                        .commit();
             }
 
         } else {
@@ -147,6 +160,11 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
 
     @Override
     public void getSucc(OrderWaterDetailBean bean) {}
+
+    @Override
+    public void getSucc(MeetingDetailBean bean) {
+
+    }
 
     @Override
     public OrderDetailPresenter createPresenter() {

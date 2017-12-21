@@ -5,6 +5,8 @@ import java.util.Map;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.ui.login.bean.CaptchaBean;
 import cn.lc.model.ui.login.bean.LoginBean;
+import cn.lc.model.ui.tab1.bean.MeetingBean;
+import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
@@ -59,6 +61,13 @@ public interface NetAPI {
     @POST(NetUrl.getorder)
     Observable<OrderWaterBean> getOrderWaterOrder(@FieldMap Map<String,Object> map);
 
+    /**
+     *  获取会议室预定的订单列表
+     */
+    @FormUrlEncoded
+    @POST(NetUrl.getorder)
+    Observable<MeetingBean> getMeetingOrder(@FieldMap Map<String,Object> map);
+
     // 获取订单详情
     @FormUrlEncoded
     @POST(NetUrl.getOrderDetail)
@@ -71,6 +80,10 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.getOrderDetail)
     Observable<OrderWaterDetailBean> getWaterDetial(@FieldMap Map<String,Object> map);
+    // 获取会议室预定服务订单详情
+    @FormUrlEncoded
+    @POST(NetUrl.getOrderDetail)
+    Observable<MeetingDetailBean> getMeetingDetail(@FieldMap Map<String,Object> map);
 
     // 接单
     @FormUrlEncoded

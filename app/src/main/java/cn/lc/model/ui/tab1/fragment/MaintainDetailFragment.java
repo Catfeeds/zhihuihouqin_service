@@ -16,6 +16,7 @@ import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
+import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -118,6 +119,11 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
 
     @Override
     public void getSucc(OrderWaterDetailBean bean) {
+
+    }
+
+    @Override
+    public void getSucc(MeetingDetailBean bean) {
 
     }
 

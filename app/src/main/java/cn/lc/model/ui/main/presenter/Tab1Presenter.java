@@ -5,6 +5,7 @@ import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.view.Tab1View;
+import cn.lc.model.ui.tab1.bean.MeetingBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
@@ -74,6 +75,29 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onSuccess(OrderWaterBean orderWaterBean) {
                 getView().getSucc(orderWaterBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    /**
+     * 获取会议室预定的订单列表
+     */
+    public void getMeetingOrder(String serviceType, String page, String limit, String orderstatus) {
+        Observable meetingOrder = RetrofitUtils.getInstance().getMeetingOrder(serviceType, page, limit, orderstatus);
+        getNetWork(meetingOrder, new RetrofitCallBack<MeetingBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(MeetingBean bean) {
+                getView().getSucc(bean);
             }
 
             @Override

@@ -4,6 +4,7 @@ import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
+import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
@@ -71,6 +72,27 @@ public class OrderDetailPresenter extends MvpRxSimplePresenter<OrderDetailView> 
             @Override
             public void onSuccess(OrderWaterDetailBean orderWaterDetailBean) {
                 getView().getSucc(orderWaterDetailBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    // 获取会议室预定的服务
+    public void getMeetingOrderDetail(String serviceType,String orderid) {
+        Observable meetingDetial = RetrofitUtils.getInstance().getMeetingDetial(serviceType, orderid);
+        getNetWork(meetingDetial, new RetrofitCallBack<MeetingDetailBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+
+            }
+
+            @Override
+            public void onSuccess(MeetingDetailBean meetingDetailBean) {
+                //getView().get
             }
 
             @Override
