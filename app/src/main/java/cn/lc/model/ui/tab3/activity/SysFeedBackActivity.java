@@ -1,6 +1,5 @@
 package cn.lc.model.ui.tab3.activity;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -10,15 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
-import cn.lc.model.framework.contant.Constants;
-import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.CommonUtils;
-import cn.lc.model.ui.login.activity.RegistStep1Activity;
 import cn.lc.model.ui.tab3.presenter.SysFeedBackPresenter;
 import cn.lc.model.ui.tab3.view.SysFeedBackView;
 import mvp.cn.util.StringUtil;
@@ -43,7 +39,6 @@ public class SysFeedBackActivity extends MvpSimpleActivity<SysFeedBackView, SysF
     @Override
     public void setContentLayout() {
         setContentView(R.layout.sys_feedback);
-        ButterKnife.bind(this);
     }
 
     @Override
@@ -70,6 +65,8 @@ public class SysFeedBackActivity extends MvpSimpleActivity<SysFeedBackView, SysF
                     showToast("请输入正确的手机号");
                     return;
                 }
+                getPresenter().getData(content,phone, SharedPrefHelper.getInstance().getServicetype() + "");
+
                 break;
         }
 
@@ -77,7 +74,8 @@ public class SysFeedBackActivity extends MvpSimpleActivity<SysFeedBackView, SysF
 
     @Override
     public void getSucc(CommonBean bean) {
-
+        showToast("提交成功");
+        finish();
     }
 
     @Override

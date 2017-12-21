@@ -4,7 +4,6 @@ import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
-import cn.lc.model.ui.tab3.view.AddBankView;
 import cn.lc.model.ui.tab3.view.SysFeedBackView;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import rx.Observable;
@@ -15,9 +14,9 @@ import rx.Observable;
 
 public class SysFeedBackPresenter extends MvpRxSimplePresenter<SysFeedBackView> {
 
-    public void getData(String name,String mobile) {
+    public void getData(String name,String mobile,String serviceType) {
         LogUtils.d("sysFeedBackPresenter发出请求");
-        Observable login = RetrofitUtils.getInstance().updatename(name,mobile);
+        Observable login = RetrofitUtils.getInstance().adviceFeedBack(name,mobile,serviceType);
         getNetWork(login, new RetrofitCallBack<CommonBean>() {
             @Override
             public void onPostFail(Throwable e) {

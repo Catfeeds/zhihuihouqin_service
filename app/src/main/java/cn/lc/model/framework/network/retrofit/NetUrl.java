@@ -29,6 +29,7 @@ public interface NetUrl {
     String getIncomeList = "Owner/commentlist?";                 // 获取用户收益列表.
     String changePW = "Owner/commentlist?";                      // 修改密码.
     String getVersionInfo = "version/get?";                      // 获取版本信息.
+    String advice = "xtsz/opinion/commit?";                      // 意见反馈
 
     String updatename="user/modifyUserinfo?";
 }

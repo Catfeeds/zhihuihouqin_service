@@ -142,4 +142,8 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.getVersionInfo)
     Observable<VersionInfoBean> getVersionInfo(@FieldMap Map<String,Object> map);
+    // 意见反馈
+    @FormUrlEncoded
+    @POST(NetUrl.advice)
+    Observable<CommonBean> advice(@FieldMap Map<String,Object> map);
 }
