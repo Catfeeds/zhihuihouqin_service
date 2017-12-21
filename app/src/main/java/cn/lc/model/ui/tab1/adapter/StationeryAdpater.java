@@ -59,9 +59,12 @@ public class StationeryAdpater extends RecyclerView.Adapter<StationeryAdpater.Vi
         if (type == Tab1Constants.WORK_UNRECEIVE_ORDER) {
             holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
+            holder.tv_accept_oreder.setText("立即接单");
+            holder.tv_cancel_order.setText("拒绝接单");
         } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {
-            holder.tv_accept_oreder.setVisibility(View.GONE);
+            holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
+            holder.tv_accept_oreder.setText("取消订单");
             holder.tv_cancel_order.setText("立即配送");
         } else if (type == WORK_DELIVERY) {
             holder.tv_accept_oreder.setVisibility(View.GONE);
@@ -103,20 +106,32 @@ public class StationeryAdpater extends RecyclerView.Adapter<StationeryAdpater.Vi
         });
         holder.tv_accept_oreder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {                       // 未接单中的立即接单.
-                presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+            public void onClick(View v) {
+                if (type == WORK_UNRECEIVE_ORDER) {                             // 未接单中的立即接单.
+                    presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {         // 已接单的取消订单
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid",bean.getId() + "");
+                    bundle.putInt("type",type);
+
+                    UIManager.turnToAct(context,OrderDetailActivity.class,bundle);
+                }
+
+
             }
         });
         holder.tv_cancel_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type == WORK_UNRECEIVE_ORDER) {                             // 未接单的取消订单
+                if (type == WORK_UNRECEIVE_ORDER) {                             // 未接单的拒绝接单
                     OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
                     bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                     bundle.putString("orderid", bean.getId() + "");
                     bundle.putInt("type",type);
-                    UIManager.turnToAct(context, OrderDetailActivity.class);
+                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
                 } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {         // 已接单的立即配送
                     presenter.peiSongOrder(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
                 } else if (type == WORK_DELIVERY) {                             //配送中的已送达

@@ -67,11 +67,17 @@ public class OrderDetailActivity extends MvpSimpleActivity<OrderDetailView,Order
                         .add(R.id.layout_orderDetail_content,selectReasonFragment)
                         .commit();
             } else if (SharedPrefHelper.getInstance().getServicetype() == 8) {          //办公用品
-                StationeryDetailFragment stationeryDetailFragment = new StationeryDetailFragment();
-                stationeryDetailFragment.setOrderId(serviceType,orderid,type);
-
+                SelectReasonFragment selectReasonFragment = new SelectReasonFragment();
+                selectReasonFragment.setOrderId(serviceType,orderid);
+                if (type == Tab1Constants.WORK_UNRECEIVE_ORDER) {             // 拒绝接单
+                    tv_title.setText("拒绝订单");
+                    selectReasonFragment.setType(SelectReasonFragment.REFUSE_TYPE);
+                } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {      // 取消接单.
+                    tv_title.setText("取消订单");
+                    selectReasonFragment.setType(SelectReasonFragment.CANCEL_TYPE);
+                }
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.layout_orderDetail_content,stationeryDetailFragment)
+                        .add(R.id.layout_orderDetail_content,selectReasonFragment)
                         .commit();
 
             }

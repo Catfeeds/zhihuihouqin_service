@@ -104,11 +104,14 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
             case Tab1Constants.WORK_UNRECEIVE_ORDER:    // 待接单
                 tv_funtionTop.setVisibility(View.VISIBLE);
                 tv_funtionBottom.setVisibility(View.VISIBLE);
+                tv_funtionTop.setText("立即服务");
+                tv_funtionBottom.setText("拒绝接单");
                 break;
             case Tab1Constants.WORK_RECEIVED_ORDER:     // 已接单
                 tv_funtionTop.setVisibility(View.VISIBLE);
-                tv_funtionBottom.setVisibility(View.GONE);
+                tv_funtionBottom.setVisibility(View.VISIBLE);
                 tv_funtionTop.setText("立即配送");
+                tv_funtionBottom.setText("取消订单");
                 break;
             case Tab1Constants.WORK_DELIVERY:           // 配送中
                 tv_funtionTop.setVisibility(View.VISIBLE);
@@ -147,12 +150,26 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
                 }
                 break;
             case R.id.tv_stationery_functionBottom:
-                OrderDetailActivity.isReason = true;
-                Bundle bundle = new Bundle();
-                bundle.putString("serviceType", serviceType);
-                bundle.putString("orderid",orderid);
-                bundle.putInt("type",type);
-                UIManager.turnToAct(getActivity(), OrderDetailActivity.class);
+                switch (type) {
+                    case Tab1Constants.WORK_UNRECEIVE_ORDER:    // 拒接接单
+                        OrderDetailActivity.isReason = true;
+                        Bundle bundle = new Bundle();
+                        bundle.putString("serviceType", serviceType);
+                        bundle.putString("orderid",orderid);
+                        bundle.putInt("type",type);
+                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+                        break;
+                    case Tab1Constants.WORK_RECEIVED_ORDER:     // 取消接单
+                        OrderDetailActivity.isReason = true;
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("serviceType", serviceType);
+                        bundle1.putString("orderid",orderid);
+                        bundle1.putInt("type",type);
+                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle1);
+                        break;
+                }
+
+
                 break;
         }
     }
