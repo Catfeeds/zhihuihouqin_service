@@ -97,7 +97,10 @@ public class SettingFragment extends MvpSimpleFragment<SystemSettingView,SystemS
                         .commit();
                 break;
             case R.id.s_aboatus :
-
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.setting_content,new AboutUsFragment())
+                        .addToBackStack("")
+                        .commit();
                 break;
             case R.id.s_feedBack:
                 UIManager.turnToAct(getActivity(),SysFeedBackActivity.class);
