@@ -81,10 +81,13 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
         if (type== Tab1Constants.WATER_UNRECEIVE_ORDER){
             tv_funtionTop.setVisibility(View.VISIBLE);
             tv_funtionBottom.setVisibility(View.VISIBLE);
+            tv_funtionTop.setText("立即接单");
+            tv_funtionBottom.setText("拒绝接单");
         }else if (type== Tab1Constants.WATER_RECEIVED_ORDER){
             tv_funtionTop.setVisibility(View.VISIBLE);
-            tv_funtionBottom.setVisibility(View.GONE);
+            tv_funtionBottom.setVisibility(View.VISIBLE);
             tv_funtionTop.setText("立即配送");
+            tv_funtionBottom.setText("取消订单");
         }else if (type== Tab1Constants.WATER_DELIVERY){
             tv_funtionTop.setVisibility(View.VISIBLE);
             tv_funtionBottom.setVisibility(View.GONE);
@@ -115,12 +118,22 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
                 break;
             case R.id.tv_stationery_functionBottom:                         // 取消订单.
                 //getPresenter().cancelOrder(serviceType,orderid);
-                OrderDetailActivity.isReason = true;
-                Bundle bundle = new Bundle();
-                bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
-                bundle.putString("orderid",orderid);
-                bundle.putInt("type",type);
-                UIManager.turnToAct(getActivity(), OrderDetailActivity.class);
+
+                if (type== Tab1Constants.WATER_UNRECEIVE_ORDER){            // 立即接单
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid",orderid);
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+                }else if (type== Tab1Constants.WATER_RECEIVED_ORDER){       // 立即配送
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid",orderid);
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+                }
                 break;
         }
     }

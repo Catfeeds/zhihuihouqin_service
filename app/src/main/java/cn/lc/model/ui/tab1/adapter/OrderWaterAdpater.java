@@ -53,9 +53,12 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
         if (type== Tab1Constants.WATER_UNRECEIVE_ORDER){
             holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
+            holder.tv_accept_oreder.setText("立即接单");
+            holder.tv_cancel_order.setText("拒绝接单");
         }else if (type== Tab1Constants.WATER_RECEIVED_ORDER){
-            holder.tv_accept_oreder.setVisibility(View.GONE);
+            holder.tv_accept_oreder.setVisibility(View.VISIBLE);
             holder.tv_cancel_order.setVisibility(View.VISIBLE);
+            holder.tv_accept_oreder.setText("取消接单");
             holder.tv_cancel_order.setText("立即配送");
         }else if (type== Tab1Constants.WATER_DELIVERY){
             holder.tv_accept_oreder.setVisibility(View.GONE);
@@ -97,7 +100,17 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
         holder.tv_accept_oreder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId());
+                if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){
+                    presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId());
+                }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){      // 取消接单
+                    OrderDetailActivity.isReason = true;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+                    bundle.putString("orderid", bean.getId() + "");
+                    bundle.putInt("type",type);
+                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
+                }
+
             }
         });
         holder.tv_cancel_order.setOnClickListener(new View.OnClickListener() {
@@ -105,13 +118,13 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
             public void onClick(View v) {
                 int servicetype = SharedPrefHelper.getInstance().getServicetype();
 
-                if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){
+                if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){       // 拒绝接单
                     OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
                     bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                     bundle.putString("orderid", bean.getId() + "");
                     bundle.putInt("type",type);
-                    UIManager.turnToAct(context, OrderDetailActivity.class);
+                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
                 }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){
                     presenter.peiSongOrder(String.valueOf(servicetype),bean.getId());
                 }else if(type == Tab1Constants.WATER_DELIVERY){
