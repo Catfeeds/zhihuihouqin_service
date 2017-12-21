@@ -65,9 +65,9 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        //getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 
-        list.add(new StationeryNewBean.ListBean());
+        //list.add(new StationeryNewBean.ListBean());
         myAdpater = new StationeryAdpater(list, getActivity(), type,getPresenter());
         mRecyclerView.setAdapter(myAdpater);
         myAdpater.setMyOnClickListener(new StationeryAdpater.MyOnClickListener() {
