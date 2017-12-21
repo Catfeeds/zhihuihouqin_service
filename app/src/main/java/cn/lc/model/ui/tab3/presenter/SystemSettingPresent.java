@@ -4,6 +4,7 @@ import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
+import cn.lc.model.ui.tab3.bean.VersionInfoBean;
 import cn.lc.model.ui.tab3.view.SystemSettingView;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import rx.Observable;
@@ -27,6 +28,29 @@ public class SystemSettingPresent extends MvpRxSimplePresenter<SystemSettingView
             @Override
             public void onSuccess(CommonBean commonBean) {
                 getView().getSucc(commonBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    /**
+     *  获取版本信息
+     */
+    public void getVersionInfo() {
+        Observable versionInfo = RetrofitUtils.getInstance().getVersionInfo();
+        getNetWork(versionInfo, new RetrofitCallBack<VersionInfoBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+
+            }
+
+            @Override
+            public void onSuccess(VersionInfoBean versionInfoBean) {
+                getView().getSucc(versionInfoBean);
             }
 
             @Override

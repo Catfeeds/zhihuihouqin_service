@@ -248,6 +248,21 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         return api.changePW(paramsMap);
     }
 
+    /**
+     *  获取版本信息
+     */
+    public static Observable getVersionInfo() {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("type","0");
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.getVersionInfo(paramsMap);
+    }
+
     /*************************************  订单 ************************************************/
     /**
      * 维修订单列表

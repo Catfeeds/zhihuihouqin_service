@@ -22,12 +22,13 @@ public interface NetUrl {
     String peiSong = "CommonOrder/immediateDelivery?";          // 立即配送
 
     // 用户信息
-    String getPersonInfo = "Owner/getUserinfo";                 // 获取用户信息.
-    String getEvaluateData = "Owner/commentlist";               // 获取我的评价信息.
+    String getPersonInfo = "Owner/getUserinfo?";                 // 获取用户信息.
+    String getEvaluateData = "Owner/commentlist?";               // 获取我的评价信息.
     // TODO: 2017/12/20 地址错误
-    String getIncomeData = "Owner/commentlist";                 // 获取用户收益信息.
-    String getIncomeList = "Owner/commentlist";                 // 获取用户收益列表.
-    String changePW = "Owner/commentlist";                      // 修改密码.
+    String getIncomeData = "Owner/commentlist?";                 // 获取用户收益信息.
+    String getIncomeList = "Owner/commentlist?";                 // 获取用户收益列表.
+    String changePW = "Owner/commentlist?";                      // 修改密码.
+    String getVersionInfo = "version/get?";                      // 获取版本信息.
 
     String updatename="user/modifyUserinfo?";
 }

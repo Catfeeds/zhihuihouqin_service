@@ -17,6 +17,7 @@ import cn.lc.model.ui.tab3.bean.EvaluateBean;
 import cn.lc.model.ui.tab3.bean.IncomeBean;
 import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
 import cn.lc.model.ui.tab3.bean.PersonInfoBean;
+import cn.lc.model.ui.tab3.bean.VersionInfoBean;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -137,4 +138,8 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.changePW)
     Observable<CommonBean> changePW(@FieldMap Map<String,Object> map);
+    // 获取版本信息
+    @FormUrlEncoded
+    @POST(NetUrl.getVersionInfo)
+    Observable<VersionInfoBean> getVersionInfo(@FieldMap Map<String,Object> map);
 }

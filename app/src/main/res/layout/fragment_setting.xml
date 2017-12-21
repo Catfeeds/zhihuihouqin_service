@@ -53,7 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_common"
         android:background="@color/white"
-        app:iv_right="@mipmap/arrow_right"
         app:tv_left="清除本地缓存" />
 
     <View
