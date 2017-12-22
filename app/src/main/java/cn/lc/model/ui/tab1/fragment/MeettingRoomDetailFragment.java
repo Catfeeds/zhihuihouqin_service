@@ -108,7 +108,9 @@ public class MeettingRoomDetailFragment extends MvpSimpleFragment<OrderDetailVie
     public void getSucc(OrderWaterDetailBean bean) {}
 
     @Override
-    public void getSucc(MeetingDetailBean bean) {
+    public void getSucc(MeetingDetailBean data) {
+        MeetingDetailBean.DataBean bean = data.getData();
+
         tv_personName.setText(bean.getUsername());
         tv_phone.setText(bean.getMobile());
         tv_orderNum.setText(bean.getOrdercode());

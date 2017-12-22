@@ -1,7 +1,6 @@
 package cn.lc.model.ui.tab1.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -110,27 +109,17 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
             @Override
             public void onRefresh() {
                 page = 1;
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 //                        getPresenter().getOrder(type + "", page + "", limit + "");
-                        mRecyclerView.refreshComplete();
-                    }
-
-                }, 2000);            //refresh data here
+                mRecyclerView.refreshComplete();
             }
 
             @Override
             public void onLoadMore() {
                 page++;
-                new Handler().postDelayed(new Runnable() {
-
-                    public void run() {
-                        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 //                        getPresenter().getOrder(type + "", page + "", limit + "");
-                        mRecyclerView.loadMoreComplete();
-                    }
-                }, 2000);
+                mRecyclerView.loadMoreComplete();
 
             }
         });
@@ -160,7 +149,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     }
 
     public void refreshData() {
-        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
     }
 
     @Override

@@ -92,7 +92,7 @@ public class OrderDetailPresenter extends MvpRxSimplePresenter<OrderDetailView> 
 
             @Override
             public void onSuccess(MeetingDetailBean meetingDetailBean) {
-                //getView().get
+                getView().getSucc(meetingDetailBean);
             }
 
             @Override
