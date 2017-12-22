@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.RelativeLayout;
@@ -36,6 +36,8 @@ import cn.lc.model.ui.tab1.bean.StationeryNewBean;
  */
 
 public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> implements Tab1View {
+    private static final String TAG = "StationeryFragment";
+
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
@@ -49,6 +51,8 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     private int limit = 10;
     private StationeryAdpater myAdpater;
     private ViewStub viewStub;
+
+    private boolean isRefresh = false;
 
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
@@ -92,26 +96,15 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
             @Override
             public void onRefresh() {
                 page = 1;
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-                        mRecyclerView.refreshComplete();
-                    }
-
-                }, 2000);            //refresh data here
+                getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                mRecyclerView.refreshComplete();
             }
 
             @Override
             public void onLoadMore() {
                 page++;
-                new Handler().postDelayed(new Runnable() {
-
-                    public void run() {
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-                        mRecyclerView.loadMoreComplete();
-                    }
-                }, 2000);
-
+                getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                mRecyclerView.loadMoreComplete();
             }
         });
     }
@@ -120,6 +113,29 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     public Tab1Presenter createPresenter() {
         return new Tab1Presenter();
     }
+
+    public void refreshData() {
+        getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+    }
+
+    @Override
+    public void onStart() {
+        Log.e(TAG,"onStart");
+        super.onStart();
+        if (isRefresh) {
+            Log.e(TAG,"刷新了1111111111111111111111");
+            refreshData();
+            isRefresh = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        Log.e(TAG,"onStop");
+        super.onStop();
+        isRefresh = true;
+    }
+
 
     @Override
     public void getSucc(StationeryBean bean) {}

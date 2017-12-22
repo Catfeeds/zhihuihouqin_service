@@ -58,7 +58,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
         //list.add(new MeetingBean.ListBean());
 
 //        getPresenter().getOrder(type + "", page + "", limit + "");
@@ -107,7 +107,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
                 page = 1;
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 //                        getPresenter().getOrder(type + "", page + "", limit + "");
                         mRecyclerView.refreshComplete();
                     }
@@ -121,7 +121,7 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
                 new Handler().postDelayed(new Runnable() {
 
                     public void run() {
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                        getPresenter().getMeetingOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 //                        getPresenter().getOrder(type + "", page + "", limit + "");
                         mRecyclerView.loadMoreComplete();
                     }

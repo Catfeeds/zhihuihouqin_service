@@ -99,6 +99,7 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
             public void onClick(View v) {
                 if (type == Tab1Constants.MEETINGROOM_UNSERVICE) {
                     presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId() + "");
+                    presenter.getOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {
                     OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
@@ -123,8 +124,10 @@ public class MettingRoomAdpater extends RecyclerView.Adapter<MettingRoomAdpater.
                     UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
                 } else if (type == Tab1Constants.MEETINGROOM_SERVICING) {
                     presenter.finishService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId() + "");
+                    presenter.getOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 } else if (type == Tab1Constants.MEETINGROOM_CANCEL) {
                     presenter.deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId() + "");
+                    presenter.getOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 }
             }
         });

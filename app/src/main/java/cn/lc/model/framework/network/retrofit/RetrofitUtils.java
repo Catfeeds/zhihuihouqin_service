@@ -450,7 +450,7 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         try {
             Map<String,String> tempMap = new HashMap<>();
             tempMap.put("serviceType",serviceType);
-            tempMap.put("id",orderId);
+            tempMap.put("orderId",orderId);
             addParam(paramsMap, tempMap);
         }catch (Exception e) {
             e.printStackTrace();

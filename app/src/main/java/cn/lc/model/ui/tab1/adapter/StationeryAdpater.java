@@ -109,6 +109,7 @@ public class StationeryAdpater extends RecyclerView.Adapter<StationeryAdpater.Vi
             public void onClick(View v) {
                 if (type == WORK_UNRECEIVE_ORDER) {                             // 未接单中的立即接单.
                     presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                    presenter.getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {         // 已接单的取消订单
                     OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
@@ -134,10 +135,13 @@ public class StationeryAdpater extends RecyclerView.Adapter<StationeryAdpater.Vi
                     UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
                 } else if (type == Tab1Constants.WORK_RECEIVED_ORDER) {         // 已接单的立即配送
                     presenter.peiSongOrder(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                    presenter.getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 } else if (type == WORK_DELIVERY) {                             //配送中的已送达
                     presenter.finishService(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                    presenter.getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 } else if (type == WORK_CANCEL) {                               // 已取消的删除订单.
                     presenter.deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "" + "",bean.getId());
+                    presenter.getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 }
             }
         });

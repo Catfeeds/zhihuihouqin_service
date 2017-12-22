@@ -7,130 +7,165 @@ import cn.lc.model.framework.base.BaseResponse;
  */
 
 public class StationeryDetailBean extends BaseResponse {
-    private String uid;
-    private String id;
-    private String createtime;
-    private String username;
-    private String count;
-    private String totalprice;
-    private String status;
-    private String address;
-    private String img;
-    private String expertarrivaltme;
-    private String code;
-    private String mobile;
-    private String remark;
-    private String productname;
 
-    public String getUid() {
-        return uid;
+
+    /**
+     * data : {"address":"大屯","code":"0081513076344350","count":"","createtime":"2017-12-22 15:07:36","expertarrivaltme":"2017-12-15 17:06:23","id":188,"img":"","mobile":"13260444370","productname":"","remark":"","status":0,"totalprice":"","uid":0,"username":"哈哈哈哈哈"}
+     */
+
+    private DataBean data;
+
+    public DataBean getData() {
+        return data;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public String getId() {
-        return id;
-    }
+    public static class DataBean {
+        /**
+         * address : 大屯
+         * code : 0081513076344350
+         * count :
+         * createtime : 2017-12-22 15:07:36
+         * expertarrivaltme : 2017-12-15 17:06:23
+         * id : 188
+         * img :
+         * mobile : 13260444370
+         * productname :
+         * remark :
+         * status : 0
+         * totalprice :
+         * uid : 0
+         * username : 哈哈哈哈哈
+         */
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        private String address;
+        private String code;
+        private String count;
+        private String createtime;
+        private String expertarrivaltme;
+        private int id;
+        private String img;
+        private String mobile;
+        private String productname;
+        private String remark;
+        private int status;
+        private String totalprice;
+        private int uid;
+        private String username;
 
-    public String getCreatetime() {
-        return createtime;
-    }
+        public String getAddress() {
+            return address;
+        }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
-    }
+        public void setAddress(String address) {
+            this.address = address;
+        }
 
-    public String getUsername() {
-        return username;
-    }
+        public String getCode() {
+            return code;
+        }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+        public void setCode(String code) {
+            this.code = code;
+        }
 
-    public String getCount() {
-        return count;
-    }
+        public String getCount() {
+            return count;
+        }
 
-    public void setCount(String count) {
-        this.count = count;
-    }
+        public void setCount(String count) {
+            this.count = count;
+        }
 
-    public String getTotalprice() {
-        return totalprice;
-    }
+        public String getCreatetime() {
+            return createtime;
+        }
 
-    public void setTotalprice(String totalprice) {
-        this.totalprice = totalprice;
-    }
+        public void setCreatetime(String createtime) {
+            this.createtime = createtime;
+        }
 
-    public String getStatus() {
-        return status;
-    }
+        public String getExpertarrivaltme() {
+            return expertarrivaltme;
+        }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+        public void setExpertarrivaltme(String expertarrivaltme) {
+            this.expertarrivaltme = expertarrivaltme;
+        }
 
-    public String getAddress() {
-        return address;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public String getImg() {
-        return img;
-    }
+        public String getImg() {
+            return img;
+        }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+        public void setImg(String img) {
+            this.img = img;
+        }
 
-    public String getExpertarrivaltme() {
-        return expertarrivaltme;
-    }
+        public String getMobile() {
+            return mobile;
+        }
 
-    public void setExpertarrivaltme(String expertarrivaltme) {
-        this.expertarrivaltme = expertarrivaltme;
-    }
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
 
-    public String getCode() {
-        return code;
-    }
+        public String getProductname() {
+            return productname;
+        }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+        public void setProductname(String productname) {
+            this.productname = productname;
+        }
 
-    public String getMobile() {
-        return mobile;
-    }
+        public String getRemark() {
+            return remark;
+        }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
 
-    public String getRemark() {
-        return remark;
-    }
+        public int getStatus() {
+            return status;
+        }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+        public void setStatus(int status) {
+            this.status = status;
+        }
 
-    public String getProductname() {
-        return productname;
-    }
+        public String getTotalprice() {
+            return totalprice;
+        }
 
-    public void setProductname(String productname) {
-        this.productname = productname;
+        public void setTotalprice(String totalprice) {
+            this.totalprice = totalprice;
+        }
+
+        public int getUid() {
+            return uid;
+        }
+
+        public void setUid(int uid) {
+            this.uid = uid;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
     }
 }

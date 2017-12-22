@@ -3,6 +3,7 @@ package cn.lc.model.ui.tab1.adapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         StationeryBean.ListBean bean = datas.get(position);
+        Log.e("TAG",bean.getId() + "");
 
         if (type == Tab1Constants.MAINTAIN_UNSERVICE) {
             holder.tv_nowservice.setText("立即服务");
@@ -67,12 +69,12 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
 
         // 设置订单数据:
         holder.tv_inviteTime.setText(bean.getInvitetime());
-        holder.iv_header.setImageURI(bean.getMenderphoto());
-        holder.tv_name.setText(bean.getMendername());
+        holder.iv_header.setImageURI(bean.getAvatar());
+        holder.tv_name.setText(bean.getUsername());
         holder.tv_address.setText(bean.getServiceplace());
-        holder.tv_phone.setText(bean.getMendermobile());
+        holder.tv_phone.setText(bean.getPhone());
         holder.tv_project.setText(bean.getItemname());
-        //holder.tv_dis.setText(bean.);
+        holder.tv_dis.setText(bean.getMendcontent());
         holder.tv_ordersn.setText(bean.getOrdercode());
 
         holder.ll_item.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +82,7 @@ public class MaintainAdpater extends RecyclerView.Adapter<MaintainAdpater.ViewHo
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
-                bundle.putString("orderid",datas.get(position).getOrderid() + "");
+                bundle.putString("orderid",datas.get(position).getId() + "");
                 bundle.putInt("type",type);
 
                 UIManager.turnToAct(context, OrderDetailActivity.class,bundle);

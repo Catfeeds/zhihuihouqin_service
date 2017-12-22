@@ -27,6 +27,8 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
     @BindView(R.id.m_bottom)
     TabBar mBottom;
 
+    public static boolean isRefreshOrder = false;
+
     private List<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -76,6 +78,10 @@ public class MainActivity extends MvpSimpleActivity<MainView, MainPresenter> imp
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.m_frameLayout, f);
         ft.commit();
+    }
+
+    public Tab1Fragment getTab1Fragment() {
+        return (Tab1Fragment) fragments.get(0);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Tab1Constants {
     // 保修维修
     public static final int MAINTAIN_UNSERVICE = 1;
     public static final int MAINTAIN_SERVICING = 2;
-    public static final int MAINTAIN_FINISH = 4;
+    public static final int MAINTAIN_FINISH = 3;
     public static final int MAINTAIN_CANCEL = 5;
     // 办公用品
     public static final int WORK_UNRECEIVE_ORDER = 0;

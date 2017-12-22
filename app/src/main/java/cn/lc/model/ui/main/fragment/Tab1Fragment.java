@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -143,6 +144,28 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
         navigator.setSkimOver(true);
         navigator.setScrollPivotX(0.5f);
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment fragment = fragmentList.get(position);
+                if (fragment instanceof MaintainFragment) {
+                    ((MaintainFragment) fragment).refreshData();
+                } else if (fragment instanceof StationeryFragment){
+                    ((StationeryFragment) fragment).refreshData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         CommonNavigatorAdapter navigatorAdapter = new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -182,5 +205,31 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
         navigator.setAdapter(navigatorAdapter);
         mIndicator.setNavigator(navigator);
         ViewPagerHelper.bind(mIndicator, viewPager);
+    }
+
+
+
+    public void Refresh(Fragment object,int max){
+        int itemPosition = fragmentAdapter.getItemPosition(object);
+        Log.e("viewpage","当前的position == " + itemPosition);
+        /*MaintainFragment fragment1 = (MaintainFragment) object;
+        fragment1.refreshData();*/
+
+
+        /*if (itemPosition-1 >= 0) {
+            Fragment item = fragmentAdapter.getItem(itemPosition - 1);
+            if (item instanceof MaintainFragment) {
+                MaintainFragment fragment = (MaintainFragment) item;
+                fragment.refreshData();
+            }
+        }
+        if (itemPosition+1 <= max) {
+            Fragment item = fragmentAdapter.getItem(itemPosition + 1);
+            if (item instanceof MaintainFragment) {
+                MaintainFragment fragment = (MaintainFragment) item;
+                fragment.refreshData();
+            }
+        }*/
+
     }
 }

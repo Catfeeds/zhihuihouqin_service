@@ -69,7 +69,8 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
     public void getSucc(OrderDetailBean bean) {}
 
     @Override
-    public void getSucc(StationeryDetailBean bean) {
+    public void getSucc(StationeryDetailBean bean1) {
+        StationeryDetailBean.DataBean bean = bean1.getData();
         txPersonname.setText(bean.getUsername());
         txPersonphone.setText(bean.getMobile());
         txPersonaddress.setText(bean.getAddress());

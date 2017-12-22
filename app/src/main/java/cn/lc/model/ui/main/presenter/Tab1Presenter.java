@@ -1,5 +1,7 @@
 package cn.lc.model.ui.main.presenter;
 
+import android.util.Log;
+
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
@@ -29,6 +31,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             @Override
             public void onSuccess(StationeryBean baseResponse) {
+                Log.e("TAG","11111111111111111111111");
                 getView().getSucc(baseResponse);
             }
 
@@ -133,7 +136,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
     // 维修人员立即服务/接单
     public void goService(String serviceType,String orderId){
-        LogUtils.d("即服务的请求发出");
+        LogUtils.d("立即服务的请求发出");
         Observable receiveOrder = RetrofitUtils.getInstance().receiveOrder(serviceType, orderId);
         getNetWork(receiveOrder, new RetrofitCallBack<CommonBean>() {
             @Override
