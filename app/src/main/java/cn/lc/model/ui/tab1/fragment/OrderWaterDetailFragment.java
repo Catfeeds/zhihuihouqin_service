@@ -152,7 +152,9 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
     public void getSucc(StationeryDetailBean bean) {}
 
     @Override
-    public void getSucc(OrderWaterDetailBean bean) {
+    public void getSucc(OrderWaterDetailBean data) {
+        OrderWaterDetailBean.DataBean bean = data.getData();
+
         txPersonname.setText(bean.getRealname());
         txPersonphone.setText(bean.getMobile());
         txPersonaddress.setText(bean.getAddress());
@@ -161,7 +163,7 @@ public class OrderWaterDetailFragment extends MvpSimpleFragment<OrderDetailView,
         tvGoodsCount.setText("x" + bean.getCount());
         tvGoodsMoney.setText("¥" + bean.getTotalprice());
         txOrdertime.setText(bean.getCreatetime());
-        txTotime.setText(bean.getAddress());
+        txTotime.setText(bean.getEndtime());
         txBeizhu.setText(bean.getRemark());
         txOrdernum.setText(bean.getOrdercode());
     }

@@ -129,6 +129,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 type = 0;
                 SharedPrefHelper.getInstance().setServicetype(1);
                 softApplication.setServiceId(1);
+                servicetype = 1;
                 title.setText("维修工作人员");
                 break;
             case R.id.tx_work:
@@ -136,6 +137,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 tr_rl.setVisibility(View.GONE);
                 type = 0;
                 SharedPrefHelper.getInstance().setServicetype(8);
+                servicetype = 8;
                 softApplication.setServiceId(8);
                 title.setText("办公用品人员");
                 break;
@@ -144,6 +146,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 tr_rl.setVisibility(View.GONE);
                 type = 0;
                 SharedPrefHelper.getInstance().setServicetype(18);
+                servicetype = 18;
                 softApplication.setServiceId(18);
                 title.setText("水站工作人员");
                 break;
@@ -152,6 +155,7 @@ public class LoginActivity extends MvpSimpleActivity<LoginView, LoginPresenter> 
                 tr_rl.setVisibility(View.GONE);
                 type = 0;
                 SharedPrefHelper.getInstance().setServicetype(7);
+                servicetype = 7;
                 softApplication.setServiceId(7);
                 title.setText("会议室预定");
                 break;

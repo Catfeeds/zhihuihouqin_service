@@ -3,6 +3,7 @@ package cn.lc.model.ui.tab1.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import cn.lc.model.ui.tab1.bean.StationeryNewBean;
  */
 
 public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> implements Tab1View {
+    private static final String TAG = "MeettingRoomFragment";
+
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
@@ -42,6 +45,8 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     private int page = 1;
     private int limit = 10;
     private MettingRoomAdpater myAdpater;
+
+    private boolean isRefresh = false;
 
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
@@ -134,6 +139,28 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     @Override
     public Tab1Presenter createPresenter() {
         return new Tab1Presenter();
+    }
+
+    @Override
+    public void onStart() {
+        Log.e(TAG,"onStart");
+        super.onStart();
+        if (isRefresh) {
+            Log.e(TAG,"刷新了1111111111111111111111");
+            refreshData();
+            isRefresh = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        Log.e(TAG,"onStop");
+        super.onStop();
+        isRefresh = true;
+    }
+
+    public void refreshData() {
+        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
     }
 
     @Override

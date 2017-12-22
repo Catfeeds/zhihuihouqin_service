@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
@@ -36,6 +35,8 @@ import cn.lc.model.ui.tab1.bean.StationeryNewBean;
  */
 
 public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> implements Tab1View {
+    private static final String TAG = "OrderWaterFragment";
+
     @BindView(R.id.mRecyclerview)
     XRecyclerView mRecyclerView;
     @BindView(R.id.tx_null)
@@ -47,12 +48,15 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     private int page = 1;
     private int limit = 10;
     private OrderWaterAdpater myAdpater;
+
+    private boolean isRefresh = false;
+
     @Override
     public void setContentLayout(Bundle savedInstanceState) {
         setContentView(R.layout.tab1_1_0);
         Bundle argument = getArguments();
         type = argument.getInt("type");
-        ButterKnife.bind(getActivity());
+        //ButterKnife.bind(getActivity());
 
     }
     @Override
@@ -105,26 +109,14 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
             @Override
             public void onRefresh() {
                 page = 1;
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-//                        getPresenter().getOrder(type + "", page + "", limit + "");
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-                        mRecyclerView.refreshComplete();
-                    }
-
-                }, 2000);            //refresh data here
+                getPresenter().getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                mRecyclerView.refreshComplete();
             }
             @Override
             public void onLoadMore() {
                 page++;
-                new Handler().postDelayed(new Runnable() {
-
-                    public void run() {
-//                        getPresenter().getOrder(type + "", page + "", limit + "");
-                        getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-                        mRecyclerView.loadMoreComplete();
-                    }
-                }, 2000);
+                getPresenter().getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                mRecyclerView.loadMoreComplete();
 
             }
         });
@@ -133,6 +125,28 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     @Override
     public Tab1Presenter createPresenter() {
         return new Tab1Presenter();
+    }
+
+    @Override
+    public void onStart() {
+        Log.e(TAG,"onStart");
+        super.onStart();
+        if (isRefresh) {
+            Log.e(TAG,"刷新了1111111111111111111111");
+            refreshData();
+            isRefresh = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        Log.e(TAG,"onStop");
+        super.onStop();
+        isRefresh = true;
+    }
+
+    public void refreshData() {
+        getPresenter().getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
     }
 
     @Override

@@ -7,130 +7,143 @@ import cn.lc.model.framework.base.BaseResponse;
  */
 
 public class OrderWaterDetailBean extends BaseResponse {
-    private String address;
-    private String ordercode;
-    private String createtime;
-    private String endtime;
-    private String id;
-    private String img;
-    private String mobile;
-    private String status;
-    private String uid;
-    private String realname;
-    private String count;
-    private String name;
-    private String remark;
-    private String totalprice;
 
-    public String getAddress() {
-        return address;
+    private DataBean data;
+
+    public DataBean getData() {
+        return data;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public String getOrdercode() {
-        return ordercode;
-    }
+    public static class DataBean {
+        private String address;
+        private String ordercode;
+        private String createtime;
+        private String endtime;
+        private String id;
+        private String img;
+        private String mobile;
+        private String status;
+        private String uid;
+        private String realname;
+        private String count;
+        private String name;
+        private String remark;
+        private String totalprice;
 
-    public void setOrdercode(String ordercode) {
-        this.ordercode = ordercode;
-    }
+        public String getAddress() {
+            return address;
+        }
 
-    public String getCreatetime() {
-        return createtime;
-    }
+        public void setAddress(String address) {
+            this.address = address;
+        }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
-    }
+        public String getOrdercode() {
+            return ordercode;
+        }
 
-    public String getEndtime() {
-        return endtime;
-    }
+        public void setOrdercode(String ordercode) {
+            this.ordercode = ordercode;
+        }
 
-    public void setEndtime(String endtime) {
-        this.endtime = endtime;
-    }
+        public String getCreatetime() {
+            return createtime;
+        }
 
-    public String getId() {
-        return id;
-    }
+        public void setCreatetime(String createtime) {
+            this.createtime = createtime;
+        }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        public String getEndtime() {
+            return endtime;
+        }
 
-    public String getImg() {
-        return img;
-    }
+        public void setEndtime(String endtime) {
+            this.endtime = endtime;
+        }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+        public String getId() {
+            return id;
+        }
 
-    public String getMobile() {
-        return mobile;
-    }
+        public void setId(String id) {
+            this.id = id;
+        }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+        public String getImg() {
+            return img;
+        }
 
-    public String getStatus() {
-        return status;
-    }
+        public void setImg(String img) {
+            this.img = img;
+        }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+        public String getMobile() {
+            return mobile;
+        }
 
-    public String getUid() {
-        return uid;
-    }
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+        public String getStatus() {
+            return status;
+        }
 
-    public String getRealname() {
-        return realname;
-    }
+        public void setStatus(String status) {
+            this.status = status;
+        }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
+        public String getUid() {
+            return uid;
+        }
 
-    public String getCount() {
-        return count;
-    }
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
 
-    public void setCount(String count) {
-        this.count = count;
-    }
+        public String getRealname() {
+            return realname;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public void setRealname(String realname) {
+            this.realname = realname;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public String getCount() {
+            return count;
+        }
 
-    public String getRemark() {
-        return remark;
-    }
+        public void setCount(String count) {
+            this.count = count;
+        }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public String getTotalprice() {
-        return totalprice;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setTotalprice(String totalprice) {
-        this.totalprice = totalprice;
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public String getTotalprice() {
+            return totalprice;
+        }
+
+        public void setTotalprice(String totalprice) {
+            this.totalprice = totalprice;
+        }
     }
 }

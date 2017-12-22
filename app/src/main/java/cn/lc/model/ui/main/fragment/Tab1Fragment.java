@@ -157,6 +157,10 @@ public class Tab1Fragment extends MvpSimpleFragment<Tab1View, Tab1Presenter> {
                     ((MaintainFragment) fragment).refreshData();
                 } else if (fragment instanceof StationeryFragment){
                     ((StationeryFragment) fragment).refreshData();
+                } else if (fragment instanceof OrderWaterFragment) {
+                    ((OrderWaterFragment) fragment).refreshData();
+                } else if (fragment instanceof MeettingRoomFragment) {
+                    ((MeettingRoomFragment) fragment).refreshData();
                 }
             }
 
