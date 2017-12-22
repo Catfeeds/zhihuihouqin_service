@@ -191,10 +191,13 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     /**
      *  获取用户评价信息
      */
-    public static Observable getEvaluateData() {
+    public static Observable getEvaluateData(String serviceType,String scoretype,String page) {
         Map<String,Object> paramsMap = new HashMap<>();
         try{
             Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("servicetype",serviceType);
+            tempMap.put("scoretype",scoretype);
+            tempMap.put("page",page);
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();

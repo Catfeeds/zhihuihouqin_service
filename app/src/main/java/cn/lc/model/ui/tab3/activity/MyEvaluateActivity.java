@@ -1,6 +1,5 @@
 package cn.lc.model.ui.tab3.activity;
 
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleActivity;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab3.adapter.MyEvaluateAdapter;
 import cn.lc.model.ui.tab3.bean.EvaluateBean;
 import cn.lc.model.ui.tab3.presenter.MyBankPresenter;
@@ -33,9 +33,10 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
     XRecyclerView mRecyclerView;
     @BindView(R.id.view_error)
     RelativeLayout layout_error;
-    private List<EvaluateBean.ListBean> list = new ArrayList<>();
+    private List<EvaluateBean.PageBean.ListBean> list = new ArrayList<>();
     private int page = 1;
     private int limit = 10;
+
     private MyEvaluateAdapter myAdpater;
 
     @Override
@@ -59,7 +60,7 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
 
-        getPresenter().getEvaluateData();
+        getPresenter().getEvaluateData(SharedPrefHelper.getInstance().getServicetype()+"","0",page +"");
         //list.add(new EvaluateBean.ListBean());
         myAdpater = new MyEvaluateAdapter(list, getActivity());
         mRecyclerView.setAdapter(myAdpater);
@@ -67,26 +68,16 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
             @Override
             public void onRefresh() {
                 page = 1;
-                getPresenter().getEvaluateData();
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
+                getPresenter().getEvaluateData(SharedPrefHelper.getInstance().getServicetype()+"","0",page +"");
+                mRecyclerView.refreshComplete();
 
-                        mRecyclerView.refreshComplete();
-                    }
-
-                }, 2000);            //refresh data here
             }
 
             @Override
             public void onLoadMore() {
                 page++;
-                new Handler().postDelayed(new Runnable() {
-
-                    public void run() {
-
-                        mRecyclerView.loadMoreComplete();
-                    }
-                }, 2000);
+                getPresenter().getEvaluateData(SharedPrefHelper.getInstance().getServicetype()+"","0",page +"");
+                mRecyclerView.loadMoreComplete();
 
             }
         });
@@ -105,13 +96,13 @@ public class MyEvaluateActivity extends MvpSimpleActivity<MyBankView, MyBankPres
 
         if (page == 1) {
             list.clear();
-            if (data.getList().size() == 0) {
+            if (data.getPage().getList().size() == 0) {
                 layout_error.setVisibility(View.VISIBLE);
             } else {
                 layout_error.setVisibility(View.GONE);
             }
         }
-        list.addAll(data.getList());
+        list.addAll(data.getPage().getList());
         myAdpater.notifyDataSetChanged();
     }
 

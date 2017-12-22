@@ -41,8 +41,8 @@ public class MyBankPresenter extends MvpRxSimplePresenter<MyBankView> {
     /**
      *  获取我的评价的数据
      */
-    public void getEvaluateData() {
-        Observable evaluateData = RetrofitUtils.getInstance().getEvaluateData();
+    public void getEvaluateData(String serviceType,String scoretype,String page) {
+        Observable evaluateData = RetrofitUtils.getInstance().getEvaluateData(serviceType,scoretype,page);
         getNetWork(evaluateData, new RetrofitCallBack<EvaluateBean>() {
             @Override
             public void onPostFail(Throwable e) {

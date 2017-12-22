@@ -3,7 +3,6 @@ package cn.lc.model.framework.application;
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
@@ -46,7 +45,7 @@ public class SoftApplication extends QuickApplication {
     public void onCreate() {
         super.onCreate();
         softApplication = this;
-        MultiDex.install(this);
+        //MultiDex.install(this);
         refWatcher =  LeakCanary.install(this);
         // fresco的初始化
         Fresco.initialize(this);
