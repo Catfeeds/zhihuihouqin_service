@@ -8,8 +8,9 @@ import cn.lc.model.framework.base.BaseResponse;
 
 public class OrderDetailBean extends BaseResponse {
 
+
     /**
-     * data : {"uid":14,"orderstatus":2,"orderchange":0,"menderid":11,"score":5,"mendermobile":"13260444370","menderphoto":"http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png","createtime":"2017-12-05","serviceplace":"大屯路东","paystatus":null,"invitetime":"2017/12/10 17:00","itemname":"电气焊","mendername":"董建","menditem":null,"orderid":105,"ordercode":"0011511839030020"}
+     * data : {"avatar":"","createtime":"2017-12-12 17:14:31.0","id":126,"invitetime":"2017-12-12 9:00-10:00","itemname":"电气焊","mendcontent":"哦啦啦","menderid":16,"mendermobile":"","mendername":"","menderphoto":"","mendimgs":"beijing.aliyuncs.com/zhhq:bxwx:img201711281511839029870.jpg,beijing.aliyuncs.com/zhhq:bxwx:img201711281511839029870.jpg","menditem":0,"orderchange":0,"ordercode":"0011222230601398","orderstatus":1,"paystatus":0,"phone":"15201025750","score":0,"serviceplace":"哦啦啦","uid":45,"username":"王"}
      */
 
     private DataBean data;
@@ -24,95 +25,57 @@ public class OrderDetailBean extends BaseResponse {
 
     public static class DataBean {
         /**
-         * uid : 14
-         * orderstatus : 2
-         * orderchange : 0
-         * menderid : 11
-         * score : 5.0
-         * mendermobile : 13260444370
-         * menderphoto : http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png
-         * createtime : 2017-12-05
-         * serviceplace : 大屯路东
-         * paystatus : null
-         * invitetime : 2017/12/10 17:00
+         * avatar :
+         * createtime : 2017-12-12 17:14:31.0
+         * id : 126
+         * invitetime : 2017-12-12 9:00-10:00
          * itemname : 电气焊
-         * mendername : 董建
-         * menditem : null
-         * orderid : 105
-         * ordercode : 0011511839030020
+         * mendcontent : 哦啦啦
+         * menderid : 16
+         * mendermobile :
+         * mendername :
+         * menderphoto :
+         * mendimgs : beijing.aliyuncs.com/zhhq:bxwx:img201711281511839029870.jpg,beijing.aliyuncs.com/zhhq:bxwx:img201711281511839029870.jpg
+         * menditem : 0
+         * orderchange : 0
+         * ordercode : 0011222230601398
+         * orderstatus : 1
+         * paystatus : 0
+         * phone : 15201025750
+         * score : 0
+         * serviceplace : 哦啦啦
+         * uid : 45
+         * username : 王
          */
 
-        private int uid;
-        private int orderstatus;
-        private int orderchange;
-        private int menderid;
-        private double score;
-        private String mendermobile;
-        private String menderphoto;
+        private String avatar;
         private String createtime;
-        private String serviceplace;
-        private Object paystatus;
+        private int id;
         private String invitetime;
         private String itemname;
+        private String mendcontent;
+        private int menderid;
+        private String mendermobile;
         private String mendername;
-        private Object menditem;
-        private int orderid;
+        private String menderphoto;
+        private String mendimgs;
+        private int menditem;
+        private int orderchange;
         private String ordercode;
+        private int orderstatus;
+        private int paystatus;
+        private String phone;
+        private int score;
+        private String serviceplace;
+        private int uid;
+        private String username;
 
-        public int getUid() {
-            return uid;
+        public String getAvatar() {
+            return avatar;
         }
 
-        public void setUid(int uid) {
-            this.uid = uid;
-        }
-
-        public int getOrderstatus() {
-            return orderstatus;
-        }
-
-        public void setOrderstatus(int orderstatus) {
-            this.orderstatus = orderstatus;
-        }
-
-        public int getOrderchange() {
-            return orderchange;
-        }
-
-        public void setOrderchange(int orderchange) {
-            this.orderchange = orderchange;
-        }
-
-        public int getMenderid() {
-            return menderid;
-        }
-
-        public void setMenderid(int menderid) {
-            this.menderid = menderid;
-        }
-
-        public double getScore() {
-            return score;
-        }
-
-        public void setScore(double score) {
-            this.score = score;
-        }
-
-        public String getMendermobile() {
-            return mendermobile;
-        }
-
-        public void setMendermobile(String mendermobile) {
-            this.mendermobile = mendermobile;
-        }
-
-        public String getMenderphoto() {
-            return menderphoto;
-        }
-
-        public void setMenderphoto(String menderphoto) {
-            this.menderphoto = menderphoto;
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
         }
 
         public String getCreatetime() {
@@ -123,20 +86,12 @@ public class OrderDetailBean extends BaseResponse {
             this.createtime = createtime;
         }
 
-        public String getServiceplace() {
-            return serviceplace;
+        public int getId() {
+            return id;
         }
 
-        public void setServiceplace(String serviceplace) {
-            this.serviceplace = serviceplace;
-        }
-
-        public Object getPaystatus() {
-            return paystatus;
-        }
-
-        public void setPaystatus(Object paystatus) {
-            this.paystatus = paystatus;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getInvitetime() {
@@ -155,6 +110,30 @@ public class OrderDetailBean extends BaseResponse {
             this.itemname = itemname;
         }
 
+        public String getMendcontent() {
+            return mendcontent;
+        }
+
+        public void setMendcontent(String mendcontent) {
+            this.mendcontent = mendcontent;
+        }
+
+        public int getMenderid() {
+            return menderid;
+        }
+
+        public void setMenderid(int menderid) {
+            this.menderid = menderid;
+        }
+
+        public String getMendermobile() {
+            return mendermobile;
+        }
+
+        public void setMendermobile(String mendermobile) {
+            this.mendermobile = mendermobile;
+        }
+
         public String getMendername() {
             return mendername;
         }
@@ -163,20 +142,36 @@ public class OrderDetailBean extends BaseResponse {
             this.mendername = mendername;
         }
 
-        public Object getMenditem() {
+        public String getMenderphoto() {
+            return menderphoto;
+        }
+
+        public void setMenderphoto(String menderphoto) {
+            this.menderphoto = menderphoto;
+        }
+
+        public String getMendimgs() {
+            return mendimgs;
+        }
+
+        public void setMendimgs(String mendimgs) {
+            this.mendimgs = mendimgs;
+        }
+
+        public int getMenditem() {
             return menditem;
         }
 
-        public void setMenditem(Object menditem) {
+        public void setMenditem(int menditem) {
             this.menditem = menditem;
         }
 
-        public int getOrderid() {
-            return orderid;
+        public int getOrderchange() {
+            return orderchange;
         }
 
-        public void setOrderid(int orderid) {
-            this.orderid = orderid;
+        public void setOrderchange(int orderchange) {
+            this.orderchange = orderchange;
         }
 
         public String getOrdercode() {
@@ -185,6 +180,62 @@ public class OrderDetailBean extends BaseResponse {
 
         public void setOrdercode(String ordercode) {
             this.ordercode = ordercode;
+        }
+
+        public int getOrderstatus() {
+            return orderstatus;
+        }
+
+        public void setOrderstatus(int orderstatus) {
+            this.orderstatus = orderstatus;
+        }
+
+        public int getPaystatus() {
+            return paystatus;
+        }
+
+        public void setPaystatus(int paystatus) {
+            this.paystatus = paystatus;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
+        public String getServiceplace() {
+            return serviceplace;
+        }
+
+        public void setServiceplace(String serviceplace) {
+            this.serviceplace = serviceplace;
+        }
+
+        public int getUid() {
+            return uid;
+        }
+
+        public void setUid(int uid) {
+            this.uid = uid;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }

@@ -103,12 +103,12 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
         tx_ordertime.setText(data.getCreatetime());
         tx_totime.setText(data.getInvitetime());
         tx_content.setText(data.getItemname());
-        //tx_beizhu.setText(data.getme);
+        tx_beizhu.setText(data.getMendcontent());
         tx_ordernum.setText(data.getOrdercode());
 
         // 客户信息:
-        tx_personname.setText(data.getMendername());
-        tx_personphone.setText(data.getMendermobile());
+        tx_personname.setText(data.getUsername());
+        tx_personphone.setText(data.getPhone());
         tx_personaddress.setText(data.getServiceplace());
     }
 
