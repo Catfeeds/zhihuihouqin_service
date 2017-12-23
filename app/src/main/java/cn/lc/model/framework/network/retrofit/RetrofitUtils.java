@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -19,7 +20,10 @@ import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import mvp.cn.util.DateUtil;
 import mvp.cn.util.Md5Util;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -241,15 +245,16 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
      *  修改密码
      */
     public static Observable changePW(String pw) {
-        Map<String,Object> paramsMap = new HashMap<>();
-        try{
-            Map<String,String> tempMap = new HashMap<>();
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("password", pw);
+            tempMap.put("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return api.changePW(paramsMap);
+        return api.updatename(paramsMap);
     }
 
     /**
@@ -562,5 +567,48 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
             e.printStackTrace();
         }
         return api.updatename(paramsMap);
+    }
+
+    /**
+     *  修改头像
+     */
+    public static Observable updataPhoto(String photo) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        RequestBody requestBody = null;
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("serviceType",SharedPrefHelper.getInstance().getServicetype() + "");
+
+            Gson gson = new Gson();
+            String biz = gson.toJson(tempMap);
+
+
+            LogUtils.d("biz请求参数：" + biz);
+            String timestamp = DateUtil.getCurrentDateTimeyyyyMMddHHmmss();
+
+
+            LogUtils.d("时间戳请求参数：" + timestamp);
+            SoftApplication sf = new SoftApplication();
+            String token = "";
+            sf.getToken();
+            LogUtils.d("token::" + sf.getToken());
+            if (sf.getToken() != null && !sf.getToken().equals("")) {
+                token = sf.getToken();
+            }
+            LogUtils.d("sign" + getSign(biz,timestamp));
+            LogUtils.d("photo" + new File(photo).length());
+            requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart(ParameterKeys.BIZ, biz)
+                    .addFormDataPart(ParameterKeys.TIMESTAMP,timestamp)
+                    .addFormDataPart(ParameterKeys.TOKEN,token)
+                    .addFormDataPart(ParameterKeys.SIGN,getSign(biz,timestamp))
+                    .addFormDataPart("file", "", RequestBody.create(MediaType.parse("image/jpeg"), new File(photo)))
+                    .build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return api.upPhoto(requestBody);
     }
 }

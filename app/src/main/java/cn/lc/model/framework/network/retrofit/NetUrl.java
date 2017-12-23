@@ -32,4 +32,6 @@ public interface NetUrl {
     String advice = "xtsz/opinion/commit?";                      // 意见反馈
 
     String updatename="Owner/modifyUserinfo?";
+    // 上传头像
+    String upPhoto = "service/user/uploadPhoto";
 }

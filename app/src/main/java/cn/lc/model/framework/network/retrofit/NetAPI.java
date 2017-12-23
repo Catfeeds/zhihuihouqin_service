@@ -17,7 +17,10 @@ import cn.lc.model.ui.tab3.bean.EvaluateBean;
 import cn.lc.model.ui.tab3.bean.IncomeBean;
 import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
 import cn.lc.model.ui.tab3.bean.PersonInfoBean;
+import cn.lc.model.ui.tab3.bean.PhotoBean;
 import cn.lc.model.ui.tab3.bean.VersionInfoBean;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -146,4 +149,7 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.advice)
     Observable<CommonBean> advice(@FieldMap Map<String,Object> map);
+    // 上传头像
+    @POST(NetUrl.upPhoto)
+    Observable<PhotoBean> upPhoto(@Body RequestBody Body);
 }

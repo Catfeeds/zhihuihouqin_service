@@ -1,5 +1,6 @@
 package cn.lc.model.ui.tab3.view;
 
+import cn.lc.model.ui.tab3.bean.PhotoBean;
 import mvp.cn.common.MvpView;
 
 /**
@@ -7,5 +8,5 @@ import mvp.cn.common.MvpView;
  */
 
 public interface PersonInfoView extends MvpView{
-
+    void upPhotoSuccess(PhotoBean bean);
 }

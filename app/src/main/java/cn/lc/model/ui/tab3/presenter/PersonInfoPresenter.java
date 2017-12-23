@@ -1,12 +1,12 @@
 package cn.lc.model.ui.tab3.presenter;
 
-import cn.lc.model.framework.base.BaseResponse;
+import android.util.Log;
+
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
-import cn.lc.model.ui.main.view.MainView;
+import cn.lc.model.ui.tab3.bean.PhotoBean;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
 import mvp.cn.rx.MvpRxSimplePresenter;
-import mvp.cn.util.LogUtil;
 import rx.Observable;
 
 /**
@@ -36,6 +36,26 @@ public class PersonInfoPresenter extends MvpRxSimplePresenter<PersonInfoView> {
 //
 //            }
 //        });
+    }
+
+    public void upPhoto(String photo) {
+        Observable observable = RetrofitUtils.getInstance().updataPhoto(photo);
+        getNetWork(observable, new RetrofitCallBack<PhotoBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                Log.e("netError:",e.toString());
+            }
+
+            @Override
+            public void onSuccess(PhotoBean photoBean) {
+                getView().upPhotoSuccess(photoBean);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     @Override

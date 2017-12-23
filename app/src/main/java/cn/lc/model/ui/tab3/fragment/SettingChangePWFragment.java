@@ -8,8 +8,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import cn.lc.model.R;
+import cn.lc.model.framework.application.SoftApplication;
 import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.manager.UIManager;
+import cn.lc.model.ui.login.activity.LoginActivity;
 import cn.lc.model.ui.tab3.presenter.SystemSettingPresent;
 import cn.lc.model.ui.tab3.view.SystemSettingView;
 
@@ -41,11 +44,15 @@ public class SettingChangePWFragment extends MvpSimpleFragment<SystemSettingView
     public void initView(View v) {
         iv_back.setOnClickListener(this);
         tv_confirm.setOnClickListener(this);
+
+
     }
 
     @Override
     public void getSucc(BaseResponse bean) {
         showToast("密码修改成功");
+        UIManager.turnToAct(getActivity(), LoginActivity.class);
+        SoftApplication.softApplication.finishOther();
     }
 
     @Override

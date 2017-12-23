@@ -30,6 +30,7 @@ import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.utils.SelectImageHelper;
 import cn.lc.model.framework.widget.MySettingView;
+import cn.lc.model.ui.tab3.bean.PhotoBean;
 import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
@@ -96,8 +97,9 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
                 finish();
                 break;
             case R.id.iv_header:
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                        || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                 }else {
                     imgHelper = new SelectImageHelper(this);
                     imgHelper.setCropParams(1, 1, 160, 160);
@@ -146,7 +148,9 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
 
             @Override
             public void onGetPhoto(File photoFile, Bitmap bitmap) {
+                Log.e("photo",photoFile.getAbsolutePath());
                 iv_header.setImageBitmap(bitmap);
+                getPresenter().upPhoto(photoFile.getAbsolutePath());
             }
         });
 //        if (resultCode == RESULT_OK) {
@@ -172,5 +176,10 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     @Override
     public PersonInfoPresenter createPresenter() {
         return new PersonInfoPresenter();
+    }
+
+    @Override
+    public void upPhotoSuccess(PhotoBean bean) {
+        Log.e("photo",bean.getUrl());
     }
 }
