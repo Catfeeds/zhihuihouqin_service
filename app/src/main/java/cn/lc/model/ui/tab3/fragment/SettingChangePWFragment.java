@@ -15,6 +15,7 @@ import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.ui.login.activity.LoginActivity;
 import cn.lc.model.ui.tab3.presenter.SystemSettingPresent;
 import cn.lc.model.ui.tab3.view.SystemSettingView;
+import mvp.cn.util.CrcUtil;
 
 /**
  * Created by Administrator on 2017/12/20.
@@ -63,7 +64,13 @@ public class SettingChangePWFragment extends MvpSimpleFragment<SystemSettingView
                 break;
             case R.id.tv_changePW_confirm:
                 if (et_pwd1.getText().toString().equals(et_pwd2.getText().toString())) {
-                    getPresenter().changePW(et_pwd1.getText().toString());
+                    String pw = et_pwd1.getText().toString();
+                    try {
+                        pw = CrcUtil.MD5(pw);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    getPresenter().changePW(pw);
                 }
                 break;
         }
