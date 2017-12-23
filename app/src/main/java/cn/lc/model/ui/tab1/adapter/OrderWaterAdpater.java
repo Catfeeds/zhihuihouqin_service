@@ -104,12 +104,15 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
                     presenter.goService(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId());
                     presenter.getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
                 }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){      // 取消接单
-                    OrderDetailActivity.isReason = true;
+                    /*OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
                     bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                     bundle.putString("orderid", bean.getId() + "");
                     bundle.putInt("type",type);
-                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
+                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);*/
+                    presenter.cancelOrder(SharedPrefHelper.getInstance().getServicetype() + "",bean.getId(),"");
+                    presenter.getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
+
                 }
 
             }
@@ -120,12 +123,15 @@ public class OrderWaterAdpater extends RecyclerView.Adapter<OrderWaterAdpater.Vi
                 int servicetype = SharedPrefHelper.getInstance().getServicetype();
 
                 if (type == Tab1Constants.WATER_UNRECEIVE_ORDER){       // 拒绝接单
-                    OrderDetailActivity.isReason = true;
+                    /*OrderDetailActivity.isReason = true;
                     Bundle bundle = new Bundle();
                     bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                     bundle.putString("orderid", bean.getId() + "");
                     bundle.putInt("type",type);
-                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);
+                    UIManager.turnToAct(context, OrderDetailActivity.class,bundle);*/
+                    presenter.refuseOrder(String.valueOf(servicetype),bean.getId());
+                    presenter.getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");
+
                 }else if (type == Tab1Constants.WATER_RECEIVED_ORDER){
                     presenter.peiSongOrder(String.valueOf(servicetype),bean.getId());
                     presenter.getWaterOrder(SharedPrefHelper.getInstance().getServicetype() + "", 1 + "", 10 + "", type + "");

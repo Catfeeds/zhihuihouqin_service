@@ -11,8 +11,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
-import cn.lc.model.framework.manager.UIManager;
-import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
@@ -159,20 +157,23 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
             case R.id.tv_stationery_functionBottom:
                 switch (type) {
                     case Tab1Constants.WORK_UNRECEIVE_ORDER:    // 拒接接单
-                        OrderDetailActivity.isReason = true;
+                        /*OrderDetailActivity.isReason = true;
                         Bundle bundle = new Bundle();
                         bundle.putString("serviceType", serviceType);
                         bundle.putString("orderid",orderid);
                         bundle.putInt("type",type);
-                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);*/
+                        getPresenter().refuseOrder(serviceType,orderid);
+
                         break;
                     case Tab1Constants.WORK_RECEIVED_ORDER:     // 取消接单
-                        OrderDetailActivity.isReason = true;
+                        /*OrderDetailActivity.isReason = true;
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("serviceType", serviceType);
                         bundle1.putString("orderid",orderid);
                         bundle1.putInt("type",type);
-                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle1);
+                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle1);*/
+                        getPresenter().cancelOrder(serviceType,orderid,"");
                         break;
                 }
 

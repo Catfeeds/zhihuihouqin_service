@@ -157,7 +157,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
         });
     }
     //取消订单
-    public void cancelOrder(String serviceType,String orderId,String reason) {
+    /*public void cancelOrder(String serviceType,String orderId,String reason) {
         LogUtils.d("取消订单");
         Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId,reason);
         getNetWork(observable, new RetrofitCallBack<CommonBean>() {
@@ -177,7 +177,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             }
         });
-    }
+    }*/
 
     // 维修人员结束订单/订单完成
     public void finishService(String serviceType,String orderId) {
@@ -217,6 +217,50 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onSuccess(CommonBean commonBean) {
                 getView().showToast("订单已删除");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    //拒绝接单
+    public void refuseOrder(String serviceType,String orderId) {
+        Observable observable = RetrofitUtils.getInstance().refuseOrder(serviceType, orderId);
+        getNetWork(observable, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("拒绝成功");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    //取消订单
+    public void cancelOrder(String serviceType,String orderId,String reason) {
+        LogUtils.d("取消订单");
+        Observable observable = RetrofitUtils.getInstance().cancelOrder(serviceType, orderId, reason);
+        getNetWork(observable, new RetrofitCallBack<CommonBean>() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+                getView().showToast("订单取消失败");
+            }
+
+            @Override
+            public void onSuccess(CommonBean commonBean) {
+                getView().showToast("订单取消成功");
             }
 
             @Override

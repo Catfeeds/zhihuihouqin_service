@@ -7,8 +7,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
-import cn.lc.model.framework.manager.UIManager;
-import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.bean.MeetingDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderDetailBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
@@ -143,21 +141,25 @@ public class MeettingRoomDetailFragment extends MvpSimpleFragment<OrderDetailVie
             case R.id.tv_meeting_functionBottom:
                 switch (type) {
                     case Tab1Constants.MEETINGROOM_UNSERVICE:
-                        OrderDetailActivity.isReason = true;
+                        /*OrderDetailActivity.isReason = true;
                         Bundle bundle = new Bundle();
                         bundle.putString("serviceType", serviceType);
                         bundle.putString("orderid",orderid);
                         bundle.putInt("type",type);
 
-                        UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);
+                        UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);*/
+                        getPresenter().refuseOrder(serviceType,orderid);
+
                         break;
                     case Tab1Constants.MEETINGROOM_SERVICING:
-                        OrderDetailActivity.isReason = true;
+                        /*OrderDetailActivity.isReason = true;
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("serviceType", serviceType);
                         bundle1.putString("orderid",orderid);
                         bundle1.putInt("type",type);
-                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle1);
+                        UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle1);*/
+                        getPresenter().cancelOrder(serviceType,orderid,"");
+
                         break;
                 }
                 break;

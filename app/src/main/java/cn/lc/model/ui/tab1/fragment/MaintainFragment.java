@@ -21,14 +21,12 @@ import java.util.List;
 import butterknife.BindView;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
-import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.ui.main.activity.MainActivity;
 import cn.lc.model.ui.main.fragment.Tab1Fragment;
 import cn.lc.model.ui.main.presenter.Tab1Presenter;
 import cn.lc.model.ui.main.view.Tab1View;
-import cn.lc.model.ui.tab1.activity.OrderDetailActivity;
 import cn.lc.model.ui.tab1.adapter.MaintainAdpater;
 import cn.lc.model.ui.tab1.bean.MeetingBean;
 import cn.lc.model.ui.tab1.bean.OrderWaterBean;
@@ -128,14 +126,16 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             public void refuseOrder(StationeryBean.ListBean bean) {
 
 
-                OrderDetailActivity.isReason = true;
+                /*OrderDetailActivity.isReason = true;
                 Bundle bundle = new Bundle();
                 bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                 bundle.putString("orderid",bean.getId() + "");
                 bundle.putInt("type",type);
-                UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);
+                UIManager.turnToAct(getActivity(), OrderDetailActivity.class,bundle);*/
 
-                //getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
+                page = 1;
+                getPresenter().refuseOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getId()));
+                getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
 
             }
             // 取消接单.
@@ -143,14 +143,15 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             public void cancelOrder(StationeryBean.ListBean bean) {
 
 
-                OrderDetailActivity.isReason = true;
+                /*OrderDetailActivity.isReason = true;
                 Bundle bundle = new Bundle();
                 bundle.putString("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
                 bundle.putString("orderid",bean.getId() + "");
                 bundle.putInt("type",type);
 
-                UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);
+                UIManager.turnToAct(getActivity(),OrderDetailActivity.class,bundle);*/
                 page = 1;
+                getPresenter().cancelOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getId()),"");
                 getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
             }
 
