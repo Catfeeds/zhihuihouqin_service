@@ -64,8 +64,8 @@ public class MyBankPresenter extends MvpRxSimplePresenter<MyBankView> {
     /**
      *  获取收益首页数据
      */
-    public void getIncomeData() {
-        Observable incomeData = RetrofitUtils.getInstance().getIncomeData();
+    public void getIncomeData(String serviceType) {
+        Observable incomeData = RetrofitUtils.getInstance().getIncomeData(serviceType);
         getNetWork(incomeData, new RetrofitCallBack<IncomeBean>() {
             @Override
             public void onPostFail(Throwable e) {
@@ -87,8 +87,8 @@ public class MyBankPresenter extends MvpRxSimplePresenter<MyBankView> {
     /**
      *  获取用户的收益列表
      */
-    public void getIncomeList() {
-        Observable observable = RetrofitUtils.getInstance().getIncomeList();
+    public void getIncomeList(String serviceTypeId,String page,String limit) {
+        Observable observable = RetrofitUtils.getInstance().getIncomeList(serviceTypeId,page,limit);
         getNetWork(observable, new RetrofitCallBack<IncomeDetailBean>() {
             @Override
             public void onPostFail(Throwable e) {

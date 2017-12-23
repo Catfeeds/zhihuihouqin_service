@@ -1,7 +1,6 @@
 package cn.lc.model.ui.tab3.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,14 +8,12 @@ import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab3.adapter.IncomeAdapter;
 import cn.lc.model.ui.tab3.bean.IncomeBean;
 import cn.lc.model.ui.tab3.presenter.MyBankPresenter;
@@ -39,7 +36,7 @@ public class IncomeFrament extends MvpSimpleFragment<MyBankView, MyBankPresenter
     ImageView iv_rule;
 
     IncomeAdapter adapter;
-    List<IncomeBean.ListBean> list = new ArrayList<>();
+    //List<IncomeBean.ListBean> list = new ArrayList<>();
 
 
     private int page = 1;
@@ -79,13 +76,13 @@ public class IncomeFrament extends MvpSimpleFragment<MyBankView, MyBankPresenter
 
     @Override
     public void initView(View v) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new IncomeAdapter(getActivity(),list);
+       /* recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new IncomeAdapter(getActivity(),list);*/
 
-        getPresenter().getIncomeData();
+        getPresenter().getIncomeData(SharedPrefHelper.getInstance().getServicetype() + "");
         //list.add(new IncomeBean.ListBean());
 
-        recyclerView.setAdapter(adapter);
+        /*recyclerView.setAdapter(adapter);
         recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -98,7 +95,7 @@ public class IncomeFrament extends MvpSimpleFragment<MyBankView, MyBankPresenter
                 page++;
                 recyclerView.loadMoreComplete();
             }
-        });
+        });*/
     }
 
     @Override
@@ -111,12 +108,14 @@ public class IncomeFrament extends MvpSimpleFragment<MyBankView, MyBankPresenter
             return;
         }
 
-        if (page == 1) {
+        tv_money.setText(data.getData());
+
+        /*if (page == 1) {
             list.clear();
         }
 
         list.addAll(data.getList());
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();*/
     }
 
 }

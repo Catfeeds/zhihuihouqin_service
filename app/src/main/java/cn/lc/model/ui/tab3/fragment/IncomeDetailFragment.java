@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.MvpSimpleFragment;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab3.adapter.IncomeDetailAdapter;
 import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
 import cn.lc.model.ui.tab3.presenter.MyBankPresenter;
@@ -31,7 +32,7 @@ public class IncomeDetailFragment extends MvpSimpleFragment<MyBankView, MyBankPr
     RelativeLayout view_error;
 
     IncomeDetailAdapter adapter;
-    List<IncomeDetailBean.ListBean> list = new ArrayList<>();
+    List<IncomeDetailBean.DataBean> list = new ArrayList<>();
 
     private int page = 1;
     private int limit = 10;
@@ -51,10 +52,25 @@ public class IncomeDetailFragment extends MvpSimpleFragment<MyBankView, MyBankPr
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //list.add(new IncomeDetailBean.ListBean());
-        getPresenter().getIncomeList();
+        getPresenter().getIncomeList(SharedPrefHelper.getInstance().getServicetype() + "",page + "",limit + "");
 
         adapter = new IncomeDetailAdapter(getActivity(),list);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page = 1;
+                getPresenter().getIncomeList(SharedPrefHelper.getInstance().getServicetype() + "",page + "",limit + "");
+                recyclerView.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                page++;
+                getPresenter().getIncomeList(SharedPrefHelper.getInstance().getServicetype() + "",page + "",limit + "");
+                recyclerView.refreshComplete();
+            }
+        });
     }
 
     @OnClick({R.id.iv_back})
@@ -79,7 +95,7 @@ public class IncomeDetailFragment extends MvpSimpleFragment<MyBankView, MyBankPr
         if (page == 1) {
             list.clear();
             recyclerView.refreshComplete();
-            if (data.getList().size() == 0) {
+            if (data.getData().size() == 0) {
                 view_error.setVisibility(View.VISIBLE);
             } else {
                 view_error.setVisibility(View.GONE);
@@ -88,7 +104,7 @@ public class IncomeDetailFragment extends MvpSimpleFragment<MyBankView, MyBankPr
             recyclerView.loadMoreComplete();
         }
 
-        list.addAll(data.getList());
+        list.addAll(data.getData());
         adapter.notifyDataSetChanged();
     }
 

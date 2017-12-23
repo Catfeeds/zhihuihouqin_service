@@ -19,6 +19,7 @@ import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
 import cn.lc.model.ui.tab3.bean.PersonInfoBean;
 import cn.lc.model.ui.tab3.bean.PhotoBean;
 import cn.lc.model.ui.tab3.bean.VersionInfoBean;
+import cn.lc.model.ui.tab3.bean.WalletHomeBean;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
@@ -152,4 +153,9 @@ public interface NetAPI {
     // 上传头像
     @POST(NetUrl.upPhoto)
     Observable<PhotoBean> upPhoto(@Body RequestBody Body);
+
+    // 钱包
+    @FormUrlEncoded
+    @POST(NetUrl.advice)
+    Observable<WalletHomeBean> getWalletHome(@FieldMap Map<String,Object> map);
 }

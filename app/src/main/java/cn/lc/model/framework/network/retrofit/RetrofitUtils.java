@@ -214,10 +214,11 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     /**
      *  获取用户的收益首页
      */
-    public static Observable getIncomeData(){
+    public static Observable getIncomeData(String serviceType){
         Map<String,Object> paramsMap = new HashMap<>();
         try{
             Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceTypeId",serviceType);
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,10 +230,13 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     /**
      *  获取用户的收益列表.
      */
-    public static Observable getIncomeList(){
+    public static Observable getIncomeList(String serviceTypeId,String page,String limit){
         Map<String,Object> paramsMap = new HashMap<>();
         try{
             Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceTypeId",serviceTypeId);
+            tempMap.put("page",page);
+            tempMap.put("limit",limit);
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,23 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import cn.lc.model.R;
-import cn.lc.model.ui.tab3.bean.IncomeBean;
 
 /**
  * Created by Administrator on 2017/12/20.
  */
 
 public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeViewHolder> {
-    private List<IncomeBean.ListBean> list;
+    //private List<IncomeBean.ListBean> list;
     private Activity activity;
 
-    public IncomeAdapter(Activity activity, List<IncomeBean.ListBean> list) {
+    /*public IncomeAdapter(Activity activity, List<IncomeBean.ListBean> list) {
         this.activity = activity;
-        this.list = list;
-    }
+        //this.list = list;
+    }*/
 
     @Override
     public IncomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +35,8 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
 
     @Override
     public int getItemCount() {
-        return list.size();
+        //return list.size();
+        return 0;
     }
 
     public class IncomeViewHolder extends RecyclerView.ViewHolder {

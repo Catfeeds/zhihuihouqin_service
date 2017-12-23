@@ -152,6 +152,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="43dp"
+        android:visibility="gone"
         android:background="#fff">
 
         <TextView
@@ -178,12 +179,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="#f0f0f0"/>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerView_wallet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="#fff">
 
     </com.jcodecraeer.xrecyclerview.XRecyclerView>
