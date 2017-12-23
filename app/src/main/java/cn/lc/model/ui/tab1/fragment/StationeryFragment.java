@@ -97,7 +97,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
             public void onRefresh() {
                 page = 1;
                 getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
-                mRecyclerView.refreshComplete();
+
             }
 
             @Override
@@ -115,6 +115,7 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     }
 
     public void refreshData() {
+        page = 1;
         getPresenter().getStationeryOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
     }
 
@@ -137,10 +138,8 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     }
 
 
-    @Override
-    public void getSucc(StationeryBean bean) {}
 
-    @Override
+    /*@Override
     public void getSucc(StationeryNewBean bean) {
         LogUtils.d("错误" + bean.errCode);
         if (bean.errCode != 0) {
@@ -159,15 +158,43 @@ public class StationeryFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
+    }*/
+
+
+    @Override
+    public void getStationerySucc(StationeryBean bean) {
+
     }
 
     @Override
-    public void getSucc(OrderWaterBean bean) {
+    public void getStationeryNewSucc(StationeryNewBean bean) {
+        LogUtils.d("错误" + bean.errCode);
+        if (bean.errCode != 0) {
+
+            tx_null.setText("暂无数据");
+            return;
+        }
+        if (page == 1) {
+            list.clear();
+            if (bean.getList().size() == 0) {
+                layout_error.setVisibility(View.VISIBLE);
+            } else {
+                layout_error.setVisibility(View.GONE);
+            }
+            mRecyclerView.refreshComplete();
+        }
+        list.addAll(bean.getList());
+
+        myAdpater.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getWaterSucc(OrderWaterBean bean) {
 
     }
 
     @Override
-    public void getSucc(MeetingBean bean) {
+    public void getMeetingSucc(MeetingBean bean) {
 
     }
 }

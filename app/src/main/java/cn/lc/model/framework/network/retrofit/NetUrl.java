@@ -31,5 +31,5 @@ public interface NetUrl {
     String getVersionInfo = "version/get?";                      // 获取版本信息.
     String advice = "xtsz/opinion/commit?";                      // 意见反馈
 
-    String updatename="user/modifyUserinfo?";
+    String updatename="Owner/modifyUserinfo?";
 }

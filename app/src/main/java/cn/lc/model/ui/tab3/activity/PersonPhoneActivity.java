@@ -5,18 +5,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.greenrobot.eventbus.EventBus;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
-import cn.lc.model.framework.base.BaseActivity;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.CommonUtils;
-import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonNamePresenter;
 import cn.lc.model.ui.tab3.view.PersonNameView;
 import mvp.cn.util.VerifyCheck;
@@ -32,6 +28,8 @@ public class PersonPhoneActivity extends MvpSimpleActivity<PersonNameView,Person
     TextView tv_sure;
     @BindView(R.id.ed_phone)
     EditText ed_phone;
+
+    String phone;
 
     @Override
     public void setContentLayout() {
@@ -52,7 +50,10 @@ public class PersonPhoneActivity extends MvpSimpleActivity<PersonNameView,Person
                     return;
                 }
                 CommonUtils.hintKbTwo(this);
-                getPresenter().UpdateName("",ed_phone.getText().toString());
+                phone = ed_phone.getText().toString();
+                getPresenter().UpdatePhone(phone);
+                //SharedPrefHelper.getInstance().setUserName(ed_name.getText().toString());
+
                 break;
         }
     }
@@ -70,8 +71,11 @@ public class PersonPhoneActivity extends MvpSimpleActivity<PersonNameView,Person
 
     @Override
     public void updateSucc(CommonBean bean) {
-        SharedPrefHelper.getInstance().setUserName(ed_phone.getText().toString());
-        EventBus.getDefault().post(new PersonInfoEnvent());
+        SharedPrefHelper.getInstance().setRealPhone(ed_phone.getText().toString());
+        PersonInfoActivity.isChangePhone = true;
+        PersonInfoActivity.phoneNum = phone;
         finish();
+        //EventBus.getDefault().post(new PersonInfoEnvent());
+        //finish();
     }
 }

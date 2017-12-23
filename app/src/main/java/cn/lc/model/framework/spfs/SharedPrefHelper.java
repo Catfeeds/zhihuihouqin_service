@@ -53,6 +53,14 @@ public class SharedPrefHelper {
         return sharedPreferences.getString("token","");
     }
 
+    public void setPhoto(String photo) {
+        sharedPreferences.edit().putString("photo",photo).commit();
+    }
+
+    public String getPhoto() {
+        return sharedPreferences.getString("photo","");
+    }
+
     public void setPassword(String password) {
         sharedPreferences.edit().putString("password", password).commit();
     }

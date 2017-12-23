@@ -16,7 +16,7 @@ public class AddBankPresenter extends MvpRxSimplePresenter<AddBankView> {
 
     public void getData(String name,String mobile) {
         LogUtils.d("addBankPresenter发出请求");
-        Observable login = RetrofitUtils.getInstance().updatename(name,mobile);
+        Observable login = RetrofitUtils.getInstance().updatename(name);
         getNetWork(login, new RetrofitCallBack<CommonBean>() {
             @Override
             public void onPostFail(Throwable e) {

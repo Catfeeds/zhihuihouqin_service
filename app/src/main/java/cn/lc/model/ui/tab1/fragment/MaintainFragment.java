@@ -251,7 +251,7 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
     }
 
     @Override
-    public void getSucc(StationeryBean bean) {
+    public void getStationerySucc(StationeryBean bean) {
         LogUtils.d("错误" + bean.errCode);
         if (bean.errCode != 0) {
 
@@ -273,21 +273,20 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getStationeryNewSucc(StationeryNewBean bean) {
 
     }
 
     @Override
-    public void getSucc(StationeryNewBean bean) {
+    public void getWaterSucc(OrderWaterBean bean) {
 
     }
 
     @Override
-    public void getSucc(OrderWaterBean bean) {
-
-    }
-
-    @Override
-    public void getSucc(MeetingBean bean) {
+    public void getMeetingSucc(MeetingBean bean) {
 
     }
 }

@@ -153,22 +153,22 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
     }
 
     @Override
-    public void getSucc(StationeryBean bean) {
+    public void getStationerySucc(StationeryBean bean) {
 
     }
 
     @Override
-    public void getSucc(StationeryNewBean bean) {
+    public void getStationeryNewSucc(StationeryNewBean bean) {
 
     }
 
     @Override
-    public void getSucc(OrderWaterBean bean) {
+    public void getWaterSucc(OrderWaterBean bean) {
 
     }
 
     @Override
-    public void getSucc(MeetingBean bean) {
+    public void getMeetingSucc(MeetingBean bean) {
         LogUtils.d("错误" + bean.errCode);
         if (bean.errCode != 0) {
 
@@ -186,6 +186,5 @@ public class MeettingRoomFragment extends MvpSimpleFragment<Tab1View, Tab1Presen
         list.addAll(bean.getList());
 
         myAdpater.notifyDataSetChanged();
-
     }
 }

@@ -15,6 +15,7 @@ import cn.lc.model.framework.contant.Constants;
 import cn.lc.model.framework.network.AppConstants;
 import cn.lc.model.framework.network.ParameterKeys;
 import cn.lc.model.framework.network.ServerConstants;
+import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import mvp.cn.util.DateUtil;
 import mvp.cn.util.Md5Util;
@@ -533,13 +534,29 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
      * 真实姓名。电话
      * @return
      */
-    public static Observable updatename(String name,String mobile)  {
+    public static Observable updatename(String name)  {
         Map<String, Object> paramsMap = new HashMap<>();
         try {
             Map<String, String> tempMap = new HashMap<String, String>();
             tempMap.put("realname", name);
-            tempMap.put("mobile",mobile);
+            tempMap.put("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
+            addParam(paramsMap,tempMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return api.updatename(paramsMap);
+    }
 
+    /**
+     * 真实电话
+     * @return
+     */
+    public static Observable updatePhone(String phone)  {
+        Map<String, Object> paramsMap = new HashMap<>();
+        try {
+            Map<String, String> tempMap = new HashMap<String, String>();
+            tempMap.put("mobile", phone);
+            tempMap.put("serviceType", SharedPrefHelper.getInstance().getServicetype() + "");
             addParam(paramsMap,tempMap);
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,15 +2,14 @@ package cn.lc.model.ui.main.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
-import cn.lc.model.easeui.ChatActivity;
-import cn.lc.model.easeui.EaseConstant;
 import cn.lc.model.framework.base.MvpSimpleFragment;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
@@ -28,7 +27,7 @@ import cn.lc.model.ui.tab3.bean.PersonInfoBean;
  */
 public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> implements Tab3View {
     @BindView(R.id.iv_header)
-    ImageView iv_header;
+    SimpleDraweeView iv_header;
     @BindView(R.id.tx_name)
     TextView tx_name;
     @BindView(R.id.tx_dis)
@@ -59,13 +58,13 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
                 UIManager.turnToAct(getActivity(), PersonInfoActivity.class);
                 break;
             case R.id.tx_name:
-                Bundle bundle1 = new Bundle();
+                /*Bundle bundle1 = new Bundle();
                 bundle1.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                 bundle1.putString(EaseConstant.EXTRA_USER_ID, "8");
                 bundle1.putString(EaseConstant.EXTRA_USER_NUMBER, "1000000008");
                 bundle1.putString(EaseConstant.EXTRA_USER_NAME, "王大仙");
                 bundle1.putBoolean(EaseConstant.EXTRA_CLEAR, true);
-                UIManager.turnToAct(getActivity(), ChatActivity.class, bundle1);
+                UIManager.turnToAct(getActivity(), ChatActivity.class, bundle1);*/
                 break;
             case R.id.tx_dis:
 
@@ -91,7 +90,12 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
     }
 
     @Override
-    public void getSuccess(PersonInfoBean personInfoBean) {
+    public void getSuccess(PersonInfoBean bean) {
+        PersonInfoBean.UserInfoBean info = bean.getUserInfo();
 
+        iv_header.setImageURI(info.getPhoto());
+        tx_name.setText(info.getRealname());
+        SharedPrefHelper.getInstance().setPhoto(info.getPhoto());
+        SharedPrefHelper.getInstance().setUserName(info.getRealname());
     }
 }

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -13,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
-
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -80,6 +81,31 @@ public class SelectImageHelper {
         } else {
             Toast.makeText(activity, "没有SD卡", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    String pic_path;
+    Uri pictureUri;
+    private static final int PHOTO_GRAPH = 1;// 拍照
+    private static final int PHOTO_ZOOM = 2; // 缩放
+    private static final int PHOTO_RESOULT = 3;// 结果
+    private static final String IMAGE_UNSPECIFIED = "image/*";
+    /**
+     * 打开系统照相机
+     */
+    private void startOpenCamera(){
+        //新建图片sd卡路径
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        String path = Environment.getExternalStorageDirectory() + "/anxin"; /*File.pathSeparator*/
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        pic_path = path + "/" + System.currentTimeMillis() + "_test.jpg";
+        File imageFile = new File(pic_path);
+        pictureUri = Uri.fromFile(imageFile);
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,pictureUri);
+        activity.startActivityForResult(intent, PHOTO_GRAPH);
     }
 
     /**
@@ -218,6 +244,57 @@ public class SelectImageHelper {
             }
         }
     }
+    //上传文件头像
+    private File upLoadHeaderFile = null;
+
+    @SuppressLint("NewApi")
+    public void NewdoResult(int requestCode, int resultCode, Intent data, OnGetPhotoListener onGetPhotoListener) {
+        if(requestCode == PHOTO_GRAPH){
+            if(pictureUri!=null){
+                startNewPhotoZoom(pictureUri);
+            }
+        }
+        //从相册选取照片
+        if(requestCode == PHOTO_ZOOM ){
+            //解决部分机型选取图库打开方式，返回data为空的问题
+            if(data!=null){
+                if(data.getData()!=null){
+                    startNewPhotoZoom(data.getData());
+                }
+            }
+        }
+        //剪切图片后的处理结果
+        if(requestCode == PHOTO_RESOULT && resultCode == Activity.RESULT_OK){
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                Bitmap photo = extras.getParcelable("data");
+                Bitmap chu = FileUtils.toRoundCorner(photo,2);
+                upLoadHeaderFile = FileUtils.getFirByBitmap(chu,   "zhhq_" + System.currentTimeMillis()+".jpg");
+
+                onGetPhotoListener.onGetPhoto(upLoadHeaderFile,chu);
+                //person_info_header.setImageBitmap(chu); // 把图片显示在ImageView控件上
+            }
+        }
+    }
+
+    /**
+     * 调用系统裁剪功能
+     *
+     * @param uri
+     */
+    private void startNewPhotoZoom(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");// 调用Android系统自带的一个图片剪裁页面,
+        intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
+        intent.putExtra("crop", "true");// 进行修剪shezhi
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
+        intent.putExtra("return-data", true);
+        activity.startActivityForResult(intent, PHOTO_RESOULT);
+    }
 
 
     /**
@@ -238,11 +315,16 @@ public class SelectImageHelper {
 
                 switch (position) {
                     case 0:// 拍照上传
-                        doTakePhoto();
+                        startOpenCamera();
                         dialog.dismiss();
                         break;
                     case 1:// 从gallery选择
-                        doPickPhotoFromGallery();
+                        //doPickPhotoFromGallery();
+                        Intent intent = new Intent(Intent.ACTION_PICK, null);
+                        intent.setDataAndType(
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                IMAGE_UNSPECIFIED);
+                        activity.startActivityForResult(intent, PHOTO_ZOOM);
                         dialog.dismiss();
                         break;
                     case 2:// 取消
@@ -280,6 +362,7 @@ public class SelectImageHelper {
      */
     public interface OnGetPhotoListener {
         void onGetPhoto(File photoFile);
+        void onGetPhoto(File photoFile,Bitmap bitmap);
     }
 
 }

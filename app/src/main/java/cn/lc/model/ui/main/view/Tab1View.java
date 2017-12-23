@@ -11,8 +11,9 @@ import mvp.cn.common.MvpView;
  */
 
 public interface Tab1View extends MvpView{
-    void getSucc(StationeryBean bean);
-    void getSucc(StationeryNewBean bean);
-    void getSucc(OrderWaterBean bean);
-    void getSucc(MeetingBean bean);
+
+    void getStationerySucc(StationeryBean bean);
+    void getStationeryNewSucc(StationeryNewBean bean);
+    void getWaterSucc(OrderWaterBean bean);
+    void getMeetingSucc(MeetingBean bean);
 }

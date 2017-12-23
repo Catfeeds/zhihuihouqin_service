@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:background="@color/blank"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -46,13 +47,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-        <cn.lc.model.framework.widget.CircleImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_header"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:src="@mipmap/user_header" />
+            fresco:placeholderImage="@mipmap/user_header"
+            fresco:placeholderImageScaleType="fitCenter" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,13 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,15 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
+import cn.lc.model.framework.imageload.GlideLoading;
 import cn.lc.model.framework.manager.UIManager;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.utils.SelectImageHelper;
-import cn.lc.model.framework.widget.CircleImageView;
 import cn.lc.model.framework.widget.MySettingView;
 import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
@@ -43,7 +42,7 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     @BindView(R.id.iv_back)
     ImageView iv_back;
     @BindView(R.id.iv_header)
-    CircleImageView iv_header;
+    SimpleDraweeView iv_header;
     @BindView(R.id.s_name)
     MySettingView s_name;
     @BindView(R.id.s_phone)
@@ -51,10 +50,15 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     SelectImageHelper imgHelper;
     private List<LocalMedia> selectList = new ArrayList<>();
 
+    public static String name;
+    public static String phoneNum;
+    public static boolean isChangeName = false;
+    public static boolean isChangePhone = false;
+
     @Override
     public void setContentLayout() {
         setContentView(R.layout.personinfo);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
         EventBus.getDefault().register(this);//订阅
     }
 
@@ -67,8 +71,22 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
 
     @Override
     public void initView() {
-        s_name.setRightText("张大可");
-        s_phone.setRightText("12345678901");
+        s_name.setRightText(SharedPrefHelper.getInstance().getUserName());
+        s_phone.setRightText(SharedPrefHelper.getInstance().getRealPhone());
+        iv_header.setImageURI(SharedPrefHelper.getInstance().getPhoto());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isChangeName) {
+            s_name.setRightText(name);
+            isChangeName = false;
+        }
+        if (isChangePhone) {
+            s_phone.setRightText(phoneNum);
+            isChangePhone = false;
+        }
     }
 
     @OnClick({R.id.iv_back, R.id.iv_header, R.id.s_phone, R.id.s_name})
@@ -115,15 +133,20 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
         if (imgHelper == null) {
             return;
         }
-        imgHelper.doResult(requestCode, resultCode, data, new SelectImageHelper.OnGetPhotoListener() {
+        imgHelper.NewdoResult(requestCode, resultCode, data, new SelectImageHelper.OnGetPhotoListener() {
             @Override
             public void onGetPhoto(File photoFile) {
                 Log.e("photo",photoFile.getAbsolutePath());
                 LogUtils.d("photoFile==" + photoFile.getAbsolutePath());
-                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+               /* Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                iv_header.setImageBitmap(bitmap);*/
+                GlideLoading.getInstance().loadImgFile(getActivity(), photoFile, iv_header);
+                String mPhotoFile = photoFile.getAbsolutePath();
+            }
+
+            @Override
+            public void onGetPhoto(File photoFile, Bitmap bitmap) {
                 iv_header.setImageBitmap(bitmap);
-                /*GlideLoading.getInstance().loadImgFile(getActivity(), photoFile, iv_header);
-                String mPhotoFile = photoFile.getAbsolutePath();*/
             }
         });
 //        if (resultCode == RESULT_OK) {

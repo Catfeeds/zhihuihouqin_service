@@ -8,69 +8,74 @@ import cn.lc.model.framework.base.BaseResponse;
 
 public class PersonInfoBean extends BaseResponse {
 
+
     /**
-     * error_code : 0
-     * data : {"uid":"1","username":"12154545","name":"吴系挂","photo":"","realname":"1436864169","mobile":"0"}
+     * userInfo : {"createtime":null,"id":16,"mobile":"15137167843","password":"25f9e794323b453885f5181f1b624d0b","photo":"http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png","realname":"大海","servicetypeid":1,"username":"15137167843","valid":1}
      */
 
-    private int error_code;
-    private DataBean data;
+    private UserInfoBean userInfo;
 
-    public int getError_code() {
-        return error_code;
+    public UserInfoBean getUserInfo() {
+        return userInfo;
     }
 
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
+    public void setUserInfo(UserInfoBean userInfo) {
+        this.userInfo = userInfo;
     }
 
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean {
+    public static class UserInfoBean {
         /**
-         * uid : 1
-         * username : 12154545
-         * name : 吴系挂
-         * photo :
-         * realname : 1436864169
-         * mobile : 0
+         * createtime : null
+         * id : 16
+         * mobile : 15137167843
+         * password : 25f9e794323b453885f5181f1b624d0b
+         * photo : http://dentist.oss-cn-beijing.aliyuncs.com/zhhq:test:img201711131510587842176.png
+         * realname : 大海
+         * servicetypeid : 1
+         * username : 15137167843
+         * valid : 1
          */
 
-        private String uid;
-        private String username;
-        private String name;
+        private Object createtime;
+        private int id;
+        private String mobile;
+        private String password;
         private String photo;
         private String realname;
-        private String mobile;
+        private int servicetypeid;
+        private String username;
+        private int valid;
 
-        public String getUid() {
-            return uid;
+        public Object getCreatetime() {
+            return createtime;
         }
 
-        public void setUid(String uid) {
-            this.uid = uid;
+        public void setCreatetime(Object createtime) {
+            this.createtime = createtime;
         }
 
-        public String getUsername() {
-            return username;
+        public int getId() {
+            return id;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setId(int id) {
+            this.id = id;
         }
 
-        public String getName() {
-            return name;
+        public String getMobile() {
+            return mobile;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         public String getPhoto() {
@@ -89,12 +94,28 @@ public class PersonInfoBean extends BaseResponse {
             this.realname = realname;
         }
 
-        public String getMobile() {
-            return mobile;
+        public int getServicetypeid() {
+            return servicetypeid;
         }
 
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
+        public void setServicetypeid(int servicetypeid) {
+            this.servicetypeid = servicetypeid;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public int getValid() {
+            return valid;
+        }
+
+        public void setValid(int valid) {
+            this.valid = valid;
         }
     }
 }

@@ -150,18 +150,17 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     }
 
     @Override
-    public void getSucc(StationeryBean bean) {
-
-
-    }
-
-    @Override
-    public void getSucc(StationeryNewBean bean) {
+    public void getStationerySucc(StationeryBean bean) {
 
     }
 
     @Override
-    public void getSucc(OrderWaterBean bean) {
+    public void getStationeryNewSucc(StationeryNewBean bean) {
+
+    }
+
+    @Override
+    public void getWaterSucc(OrderWaterBean bean) {
         LogUtils.d("错误"+bean.errCode);
         if (bean.errCode!=0){
 
@@ -182,7 +181,7 @@ public class OrderWaterFragment extends MvpSimpleFragment<Tab1View, Tab1Presente
     }
 
     @Override
-    public void getSucc(MeetingBean bean) {
+    public void getMeetingSucc(MeetingBean bean) {
 
     }
 }

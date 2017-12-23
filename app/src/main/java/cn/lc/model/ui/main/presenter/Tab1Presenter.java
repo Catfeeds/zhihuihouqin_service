@@ -32,7 +32,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
             @Override
             public void onSuccess(StationeryBean baseResponse) {
                 Log.e("TAG","11111111111111111111111");
-                getView().getSucc(baseResponse);
+                getView().getStationerySucc(baseResponse);
             }
 
             @Override
@@ -54,7 +54,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             @Override
             public void onSuccess(StationeryNewBean stationeryNewBean) {
-                getView().getSucc(stationeryNewBean);
+                getView().getStationeryNewSucc(stationeryNewBean);
             }
 
             @Override
@@ -77,7 +77,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             @Override
             public void onSuccess(OrderWaterBean orderWaterBean) {
-                getView().getSucc(orderWaterBean);
+                getView().getWaterSucc(orderWaterBean);
             }
 
             @Override
@@ -100,7 +100,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             @Override
             public void onSuccess(MeetingBean bean) {
-                getView().getSucc(bean);
+                getView().getMeetingSucc(bean);
             }
 
             @Override

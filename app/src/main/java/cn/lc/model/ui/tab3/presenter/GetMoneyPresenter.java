@@ -4,7 +4,6 @@ import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
 import cn.lc.model.framework.utils.LogUtils;
-import cn.lc.model.ui.tab3.view.AddBankView;
 import cn.lc.model.ui.tab3.view.GetMoneyView;
 import mvp.cn.rx.MvpRxSimplePresenter;
 import rx.Observable;
@@ -17,7 +16,7 @@ public class GetMoneyPresenter extends MvpRxSimplePresenter<GetMoneyView> {
 
     public void getData(String name,String mobile) {
         LogUtils.d("getMoneyPresenter发出请求");
-        Observable login = RetrofitUtils.getInstance().updatename(name,mobile);
+        Observable login = RetrofitUtils.getInstance().updatename(name);
         getNetWork(login, new RetrofitCallBack<CommonBean>() {
             @Override
             public void onPostFail(Throwable e) {
