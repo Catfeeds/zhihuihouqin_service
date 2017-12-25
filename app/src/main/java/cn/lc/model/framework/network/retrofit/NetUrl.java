@@ -18,6 +18,7 @@ public interface NetUrl {
     String refuseOrder = "CommonOrder/refuseOrder?";            // 拒绝接单.
     String finishOrder = "CommonOrder/finishOrder?";            // 结束订单.
     String deleteOrder = "CommonOrder/deleteOrder?";            // 删除订单.
+    String deleteFinishOrder = "CommonOrder/deleteOverOrder?";  // 删除已完成订单.
     String cancelOrder = "CommonOrder/cancelOrder?";            // 取消订单.
     String peiSong = "CommonOrder/immediateDelivery?";          // 立即配送
 

@@ -117,6 +117,11 @@ public interface NetAPI {
     @POST(NetUrl.deleteOrder)
     Observable<CommonBean> deleteOrder(@FieldMap Map<String,Object> map);
 
+    // 删除已完成订单
+    @FormUrlEncoded
+    @POST(NetUrl.deleteFinishOrder)
+    Observable<CommonBean> deleteFinishOrder(@FieldMap Map<String,Object> map);
+
     @FormUrlEncoded
     @POST(NetUrl.updatename)
     Observable<CommonBean> updatename (@FieldMap Map<String,Object> map);

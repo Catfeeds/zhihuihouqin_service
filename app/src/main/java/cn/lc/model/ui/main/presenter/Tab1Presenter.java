@@ -2,6 +2,7 @@ package cn.lc.model.ui.main.presenter;
 
 import android.util.Log;
 
+import cn.lc.model.framework.base.BaseResponse;
 import cn.lc.model.framework.base.CommonBean;
 import cn.lc.model.framework.network.callback.RetrofitCallBack;
 import cn.lc.model.framework.network.retrofit.RetrofitUtils;
@@ -203,7 +204,7 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
         });
     }
 
-    // 删除已完成/已取消订单.
+    // 删除已取消订单.
     public void deleteOrder(String serviceType,String orderId) {
         LogUtils.d("删除订单");
         Observable deleteOrder = RetrofitUtils.getInstance().deleteOrder(serviceType, orderId);
@@ -221,6 +222,33 @@ public class Tab1Presenter extends MvpRxSimplePresenter<Tab1View> {
 
             @Override
             public void onComplete() {
+
+            }
+        });
+    }
+
+    // 删除已完成订单
+    public void deleteFinishOrder(String ServiceType,String orderId) {
+        LogUtils.d("删除已完成订单");
+        Observable observable = RetrofitUtils.getInstance().deleteFinishOrder(ServiceType, orderId);
+        getNetWork(observable, new RetrofitCallBack() {
+            @Override
+            public void onPostFail(Throwable e) {
+                LogUtils.d("erre...." + e);
+            }
+
+            @Override
+            public void onSuccess(BaseResponse baseResponse) {
+                getView().showToast("订单已删除");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
 
             }
         });

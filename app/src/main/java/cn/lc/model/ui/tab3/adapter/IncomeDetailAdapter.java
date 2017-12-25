@@ -35,9 +35,11 @@ public class IncomeDetailAdapter extends RecyclerView.Adapter<IncomeDetailAdapte
 
     @Override
     public void onBindViewHolder(IncomeDetialViewHolder holder, int position) {
-        holder.tv_name.setText(list.get(position).getContent());
-        holder.tv_time.setText(list.get(position).getCreatTime());
-        holder.tv_money.setText(list.get(position).getMoney());
+        IncomeDetailBean.DataBean bean = list.get(position);
+
+        holder.tv_name.setText(bean.getContent());
+        holder.tv_time.setText(bean.getCreatTime());
+        holder.tv_money.setText(bean.getMoney() + "¥");
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import butterknife.BindView;
 import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleFragment;
@@ -50,6 +52,12 @@ public class MeettingRoomDetailFragment extends MvpSimpleFragment<OrderDetailVie
     TextView tv_functionTop;
     @BindView(R.id.tv_meeting_functionBottom)
     TextView tv_functionBottom;
+    @BindView(R.id.iv_meetting_img1)
+    SimpleDraweeView iv_img1;
+    @BindView(R.id.iv_meetting_img2)
+    SimpleDraweeView iv_img2;
+    @BindView(R.id.iv_meetting_img3)
+    SimpleDraweeView iv_img3;
 
     @Override
     public OrderDetailPresenter createPresenter() {
@@ -65,6 +73,8 @@ public class MeettingRoomDetailFragment extends MvpSimpleFragment<OrderDetailVie
     public void initView(View v) {
         tv_functionTop.setOnClickListener(this);
         tv_functionBottom.setOnClickListener(this);
+
+
 
         getPresenter().getMeetingOrderDetail(serviceType,orderid);
         switch (type) {
@@ -120,6 +130,28 @@ public class MeettingRoomDetailFragment extends MvpSimpleFragment<OrderDetailVie
         tv_meetingEquipment.setText(bean.getName());
         tv_personCount.setText(bean.getAttendnum());
         tv_meetBeizhu.setText(bean.getRemark());
+
+        iv_img1.setVisibility(View.GONE);
+        iv_img2.setVisibility(View.GONE);
+        iv_img3.setVisibility(View.GONE);
+        String imgs = bean.getImgs();
+        String[] split = imgs.split(",");
+        for (int i = 0;i < split.length;i++) {
+            switch (i) {
+                case 0:
+                    iv_img1.setVisibility(View.VISIBLE);
+                    iv_img1.setImageURI(split[i]);
+                    break;
+                case 1:
+                    iv_img2.setVisibility(View.VISIBLE);
+                    iv_img2.setImageURI(split[i]);
+                    break;
+                case 2:
+                    iv_img3.setVisibility(View.VISIBLE);
+                    iv_img3.setImageURI(split[i]);
+                    break;
+            }
+        }
     }
 
     @Override

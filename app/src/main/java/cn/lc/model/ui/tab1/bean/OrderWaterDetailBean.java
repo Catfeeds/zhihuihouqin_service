@@ -3,7 +3,7 @@ package cn.lc.model.ui.tab1.bean;
 import cn.lc.model.framework.base.BaseResponse;
 
 /**
- * Created by Administrator on 2017/12/19.
+ * Created by zhy on 2017/12/19.
  */
 
 public class OrderWaterDetailBean extends BaseResponse {

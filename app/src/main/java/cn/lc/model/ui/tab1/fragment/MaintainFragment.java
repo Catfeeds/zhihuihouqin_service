@@ -168,7 +168,7 @@ public class MaintainFragment extends MvpSimpleFragment<Tab1View, Tab1Presenter>
             @Override
             public void removeOrder(StationeryBean.ListBean bean) {
                 page = 1;
-                getPresenter().deleteOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getId()));
+                getPresenter().deleteFinishOrder(SharedPrefHelper.getInstance().getServicetype() + "",String.valueOf(bean.getId()));
                 getPresenter().getOrder(SharedPrefHelper.getInstance().getServicetype() + "", page + "", limit + "", type + "");
                 //callTab1Refresh();
             }

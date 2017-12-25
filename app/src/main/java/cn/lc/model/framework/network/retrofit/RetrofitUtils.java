@@ -540,6 +540,23 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
     }
 
     /**
+     *  删除已完成订单
+     */
+    public static Observable deleteFinishOrder(String serviceType,String orderId) {
+        Map<String,Object> paramsMap = new HashMap<>();
+        try{
+            Map<String,String> tempMap = new HashMap<>();
+            tempMap.put("serviceType",serviceType);
+            tempMap.put("orderId",orderId);
+            addParam(paramsMap, tempMap);
+        } catch (Exception e) {
+            e.toString();
+        }
+
+        return api.deleteFinishOrder(paramsMap);
+    }
+
+    /**
      * 真实姓名。电话
      * @return
      */

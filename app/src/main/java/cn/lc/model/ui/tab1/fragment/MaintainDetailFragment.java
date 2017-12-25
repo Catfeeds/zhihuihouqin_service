@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
@@ -49,6 +51,12 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
     TextView tv_function;
     @BindView(R.id.tv_maintain_functionTop)
     TextView tv_functionTop;
+    @BindView(R.id.iv_maintain_img1)
+    SimpleDraweeView iv_img1;
+    @BindView(R.id.iv_maintain_img2)
+    SimpleDraweeView iv_img2;
+    @BindView(R.id.iv_maintain_img3)
+    SimpleDraweeView iv_img3;
 
     String serviceType;
     String orderid;
@@ -108,6 +116,29 @@ public class MaintainDetailFragment extends MvpSimpleFragment<OrderDetailView,Or
         tx_personname.setText(data.getUsername());
         tx_personphone.setText(data.getPhone());
         tx_personaddress.setText(data.getServiceplace());
+
+        iv_img1.setVisibility(View.GONE);
+        iv_img2.setVisibility(View.GONE);
+        iv_img3.setVisibility(View.GONE);
+
+        String imgs = data.getMendimgs();
+        String[] split = imgs.split(",");
+        for (int i = 0;i < split.length;i++) {
+            switch (i) {
+                case 0:
+                    iv_img1.setVisibility(View.VISIBLE);
+                    iv_img1.setImageURI(split[i]);
+                    break;
+                case 1:
+                    iv_img2.setVisibility(View.VISIBLE);
+                    iv_img2.setImageURI(split[i]);
+                    break;
+                case 2:
+                    iv_img3.setVisibility(View.VISIBLE);
+                    iv_img3.setImageURI(split[i]);
+                    break;
+            }
+        }
     }
 
     @Override
