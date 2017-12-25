@@ -31,6 +31,7 @@ import cn.lc.model.framework.utils.LogUtils;
 import cn.lc.model.framework.utils.SelectImageHelper;
 import cn.lc.model.framework.widget.MySettingView;
 import cn.lc.model.ui.tab3.bean.PhotoBean;
+import cn.lc.model.ui.tab3.event.ChangeUserEvent;
 import cn.lc.model.ui.tab3.event.PersonInfoEnvent;
 import cn.lc.model.ui.tab3.presenter.PersonInfoPresenter;
 import cn.lc.model.ui.tab3.view.PersonInfoView;
@@ -81,10 +82,12 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     protected void onStart() {
         super.onStart();
         if (isChangeName) {
+            EventBus.getDefault().post(new ChangeUserEvent());
             s_name.setRightText(name);
             isChangeName = false;
         }
         if (isChangePhone) {
+            EventBus.getDefault().post(new ChangeUserEvent());
             s_phone.setRightText(phoneNum);
             isChangePhone = false;
         }
@@ -181,5 +184,7 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     @Override
     public void upPhotoSuccess(PhotoBean bean) {
         Log.e("photo",bean.getUrl());
+        SharedPrefHelper.getInstance().setPhoto(bean.getUrl());
+        EventBus.getDefault().post(new ChangeUserEvent());
     }
 }

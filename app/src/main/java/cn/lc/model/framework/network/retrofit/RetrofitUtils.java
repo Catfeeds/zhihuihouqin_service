@@ -581,7 +581,7 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
         RequestBody requestBody = null;
         try {
             Map<String, String> tempMap = new HashMap<String, String>();
-            tempMap.put("serviceType",SharedPrefHelper.getInstance().getServicetype() + "");
+            tempMap.put("servicetypeid",SharedPrefHelper.getInstance().getServicetype() + "");
 
             Gson gson = new Gson();
             String biz = gson.toJson(tempMap);
@@ -600,13 +600,15 @@ public class RetrofitUtils implements AppConstants, ServerConstants {
                 token = sf.getToken();
             }
             LogUtils.d("sign" + getSign(biz,timestamp));
-            LogUtils.d("photo" + new File(photo).length());
+
+            File file = new File(photo);
+            LogUtils.d("photo" + file.length());
             requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
                     .addFormDataPart(ParameterKeys.BIZ, biz)
                     .addFormDataPart(ParameterKeys.TIMESTAMP,timestamp)
                     .addFormDataPart(ParameterKeys.TOKEN,token)
                     .addFormDataPart(ParameterKeys.SIGN,getSign(biz,timestamp))
-                    .addFormDataPart("file", "", RequestBody.create(MediaType.parse("image/jpeg"), new File(photo)))
+                    .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("\"image/*\""), file))
                     .build();
 
         } catch (Exception e) {

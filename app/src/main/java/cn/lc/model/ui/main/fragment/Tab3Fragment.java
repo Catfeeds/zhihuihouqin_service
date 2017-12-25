@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.lc.model.R;
@@ -21,6 +24,7 @@ import cn.lc.model.ui.tab3.activity.MyWalletActivity;
 import cn.lc.model.ui.tab3.activity.PersonInfoActivity;
 import cn.lc.model.ui.tab3.activity.SysSettingActivity;
 import cn.lc.model.ui.tab3.bean.PersonInfoBean;
+import cn.lc.model.ui.tab3.event.ChangeUserEvent;
 
 /**
  * Created by hh on 2016/5/18.
@@ -48,6 +52,7 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
 
     @Override
     public void initView(View v) {
+        EventBus.getDefault().register(this);
         getPresenter().getData(SharedPrefHelper.getInstance().getServicetype() + "");
     }
 
@@ -97,5 +102,11 @@ public class Tab3Fragment extends MvpSimpleFragment<Tab3View, Tab3Presenter> imp
         tx_name.setText(info.getRealname());
         SharedPrefHelper.getInstance().setPhoto(info.getPhoto());
         SharedPrefHelper.getInstance().setUserName(info.getRealname());
+    }
+
+    @Subscribe
+    public void ChangeName(ChangeUserEvent event){
+        iv_header.setImageURI(SharedPrefHelper.getInstance().getPhoto());
+        tx_name.setText(SharedPrefHelper.getInstance().getUserName());
     }
 }

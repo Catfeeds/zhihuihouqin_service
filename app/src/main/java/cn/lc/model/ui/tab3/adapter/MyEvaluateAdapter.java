@@ -42,8 +42,24 @@ public class MyEvaluateAdapter extends RecyclerView.Adapter<MyEvaluateAdapter.Ev
         holder.iv_head.setImageURI(listBean.getReplyphoto());
         holder.tv_name.setText(listBean.getReplyname());
         holder.tv_content.setText(listBean.getContent());
-        holder.iv_img1.setImageURI(listBean.getImgs());
-
+        //holder.iv_img1.setImageURI(listBean.getImgs());
+        String imgs = listBean.getImgs();
+        String[] split = imgs.split(",");
+        for (int i = 0;i < split.length;i++) {
+            switch (i) {
+                case 0:
+                    holder.iv_img1.setImageURI(split[i]);
+                    break;
+                case 1:
+                    holder.iv_img2.setVisibility(View.VISIBLE);
+                    holder.iv_img2.setImageURI(split[i]);
+                    break;
+                case 2:
+                    holder.iv_img3.setVisibility(View.VISIBLE);
+                    holder.iv_img3.setImageURI(split[i]);
+                    break;
+            }
+        }
 
         switch (listBean.getScore()) {
             case 1:
