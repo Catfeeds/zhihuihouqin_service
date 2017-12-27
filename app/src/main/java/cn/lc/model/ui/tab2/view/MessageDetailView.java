@@ -1,5 +1,6 @@
 package cn.lc.model.ui.tab2.view;
 
+import cn.lc.model.ui.tab2.bean.OrderMessageBean;
 import mvp.cn.common.MvpView;
 
 /**
@@ -7,5 +8,6 @@ import mvp.cn.common.MvpView;
  */
 
 public interface MessageDetailView extends MvpView {
-
+    // 获取订单消息
+    void orderMessageSucc(OrderMessageBean bean);
 }

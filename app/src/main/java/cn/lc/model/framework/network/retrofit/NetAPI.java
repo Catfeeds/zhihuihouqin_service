@@ -13,6 +13,7 @@ import cn.lc.model.ui.tab1.bean.OrderWaterDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryBean;
 import cn.lc.model.ui.tab1.bean.StationeryDetailBean;
 import cn.lc.model.ui.tab1.bean.StationeryNewBean;
+import cn.lc.model.ui.tab2.bean.OrderMessageBean;
 import cn.lc.model.ui.tab3.bean.EvaluateBean;
 import cn.lc.model.ui.tab3.bean.IncomeBean;
 import cn.lc.model.ui.tab3.bean.IncomeDetailBean;
@@ -163,4 +164,10 @@ public interface NetAPI {
     @FormUrlEncoded
     @POST(NetUrl.advice)
     Observable<WalletHomeBean> getWalletHome(@FieldMap Map<String,Object> map);
+
+    /*************************************  消息 *************************************************/
+    //订单消息
+    @FormUrlEncoded
+    @POST(NetUrl.getOrderMessage)
+    Observable<OrderMessageBean> getOrderMessage(@FieldMap Map<String,Object> map);
 }

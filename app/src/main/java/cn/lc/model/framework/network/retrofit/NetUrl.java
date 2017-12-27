@@ -27,6 +27,8 @@ public interface NetUrl {
     String getEvaluateData = "Owner/commentlist?";               // 获取我的评价信息.
     // 钱包
     String getWalletHome = "Owner/walletHome";                   // 获取钱包数据
+    // 订单消息
+    String getOrderMessage = "Owner/messages";
 
 
     String getIncomeData = "Owner/walletHome?";                 // 获取用户收益信息.

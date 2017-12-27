@@ -19,8 +19,6 @@ import cn.lc.model.ui.tab1.constant.Tab1Constants;
 import cn.lc.model.ui.tab1.presenter.OrderDetailPresenter;
 import cn.lc.model.ui.tab1.view.OrderDetailView;
 
-import static cn.lc.model.R.id.iv_goodsIcon;
-
 /**
  * Created by Administrator on 2017/12/18.
  */
@@ -36,7 +34,7 @@ public class StationeryDetailFragment extends MvpSimpleFragment<OrderDetailView,
     ImageView ivCall;
     @BindView(R.id.tx_personaddress)
     TextView txPersonaddress;
-    @BindView(iv_goodsIcon)
+    @BindView(R.id.iv_goodsIcon)
     SimpleDraweeView ivGoodsIcon;
     @BindView(R.id.tv_goodsName)
     TextView tvGoodsName;
