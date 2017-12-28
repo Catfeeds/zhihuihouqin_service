@@ -47,9 +47,11 @@ public class Tab2Fragment extends MvpSimpleFragment<Tab2View,Tab2Presenter> impl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl1:
+                MessageDetailActivity.flag = MessageDetailActivity.SYSTEM_MSG;
                 UIManager.turnToAct(getActivity(), MessageDetailActivity.class);
                 break;
             case R.id.rl2:
+                MessageDetailActivity.flag = MessageDetailActivity.ORDER_MSG;
                 UIManager.turnToAct(getActivity(), MessageDetailActivity.class);
                 break;
             case R.id.rl3:

@@ -14,6 +14,7 @@ import cn.lc.model.R;
 import cn.lc.model.framework.base.MvpSimpleActivity;
 import cn.lc.model.framework.spfs.SharedPrefHelper;
 import cn.lc.model.ui.tab2.adapter.OrderMessageAdapter;
+import cn.lc.model.ui.tab2.adapter.SystemMessageAdapter;
 import cn.lc.model.ui.tab2.bean.OrderMessageBean;
 import cn.lc.model.ui.tab2.presenter.MessageDetailPresenter;
 import cn.lc.model.ui.tab2.view.MessageDetailView;
@@ -27,9 +28,16 @@ public class MessageDetailActivity extends MvpSimpleActivity<MessageDetailView,M
     XRecyclerView recyclerView;
 
     private List<OrderMessageBean.DataBean> list = new ArrayList<>();
+    private List<OrderMessageBean.SystemBean> systemBeanList = new ArrayList<>();
     private int page = 1;
     private int limit = 10;
     OrderMessageAdapter adapter;
+    SystemMessageAdapter sysAdapter;
+
+    public static final int SYSTEM_MSG = 1;
+    public static final int ORDER_MSG = 2;
+
+    public static int flag;
 
     @Override
     public void setContentLayout() {
@@ -41,8 +49,15 @@ public class MessageDetailActivity extends MvpSimpleActivity<MessageDetailView,M
         getPresenter().getOrderMessage(SharedPrefHelper.getInstance().getServicetype()+"",page + "",limit + "");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new OrderMessageAdapter(list);
-        recyclerView.setAdapter(adapter);
+        if (flag == ORDER_MSG) {
+            adapter = new OrderMessageAdapter(list);
+            recyclerView.setAdapter(adapter);
+        } else {
+            sysAdapter = new SystemMessageAdapter(systemBeanList);
+            recyclerView.setAdapter(sysAdapter);
+        }
+
+
 
         recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -82,9 +97,21 @@ public class MessageDetailActivity extends MvpSimpleActivity<MessageDetailView,M
         }
 
         if (page == 0) {
-            list.clear();
+            if (flag == ORDER_MSG) {
+                list.clear();
+            } else {
+                systemBeanList.clear();
+            }
+
         }
-        list.addAll(bean.getData());
-        adapter.notifyDataSetChanged();
+        if (flag == ORDER_MSG) {
+            list.addAll(bean.getData());
+            adapter.notifyDataSetChanged();
+        } else {
+            systemBeanList.addAll(bean.getSystem());
+            sysAdapter.notifyDataSetChanged();
+        }
+
+
     }
 }

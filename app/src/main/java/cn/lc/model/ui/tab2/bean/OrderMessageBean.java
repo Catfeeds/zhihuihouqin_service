@@ -11,6 +11,15 @@ import cn.lc.model.framework.base.BaseResponse;
 public class OrderMessageBean extends BaseResponse {
 
     private List<DataBean> data;
+    private List<SystemBean> system;
+
+    public List<SystemBean> getSystem() {
+        return system;
+    }
+
+    public void setSystem(List<SystemBean> system) {
+        this.system = system;
+    }
 
     public List<DataBean> getData() {
         return data;
@@ -18,6 +27,121 @@ public class OrderMessageBean extends BaseResponse {
 
     public void setData(List<DataBean> data) {
         this.data = data;
+    }
+
+    public static class SystemBean{
+        /**
+         *   "content": "欢迎使用智慧后勤用户端",
+         "createtime": "2017-09-20 15:06:45",
+         "detailId": 0,
+         "id": 1,
+         "isDel": false,
+         "isRead": false,
+         "messagetitle": "系统消息:欢迎使用",
+         "messagetype": 1,
+         "newCount": 0,
+         "read": 0,
+         "uid": 0
+         */
+        private String content;
+        private String createtime;
+        private String detailId;
+        private String id;
+        private boolean isDel;
+        private boolean isRead;
+        private String messagetitle;
+        private String messagetype;
+        private String newCount;
+        private String read;
+        private String uid;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public String getCreatetime() {
+            return createtime;
+        }
+
+        public void setCreatetime(String createtime) {
+            this.createtime = createtime;
+        }
+
+        public String getDetailId() {
+            return detailId;
+        }
+
+        public void setDetailId(String detailId) {
+            this.detailId = detailId;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public boolean isDel() {
+            return isDel;
+        }
+
+        public void setDel(boolean del) {
+            isDel = del;
+        }
+
+        public boolean isRead() {
+            return isRead;
+        }
+
+        public void setRead(boolean read) {
+            isRead = read;
+        }
+
+        public String getMessagetitle() {
+            return messagetitle;
+        }
+
+        public void setMessagetitle(String messagetitle) {
+            this.messagetitle = messagetitle;
+        }
+
+        public String getMessagetype() {
+            return messagetype;
+        }
+
+        public void setMessagetype(String messagetype) {
+            this.messagetype = messagetype;
+        }
+
+        public String getNewCount() {
+            return newCount;
+        }
+
+        public void setNewCount(String newCount) {
+            this.newCount = newCount;
+        }
+
+        public String getRead() {
+            return read;
+        }
+
+        public void setRead(String read) {
+            this.read = read;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
     }
 
     public static class DataBean {
