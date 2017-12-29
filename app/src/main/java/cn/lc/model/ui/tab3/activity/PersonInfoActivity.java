@@ -11,14 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -50,7 +47,6 @@ public class PersonInfoActivity extends MvpSimpleActivity<PersonInfoView, Person
     @BindView(R.id.s_phone)
     MySettingView s_phone;
     SelectImageHelper imgHelper;
-    private List<LocalMedia> selectList = new ArrayList<>();
 
     public static String name;
     public static String phoneNum;

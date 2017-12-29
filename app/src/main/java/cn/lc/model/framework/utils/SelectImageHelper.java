@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -100,11 +101,13 @@ public class SelectImageHelper {
         if (!file.exists()) {
             file.mkdirs();
         }
-        pic_path = path + "/" + System.currentTimeMillis() + "_test.jpg";
+        pic_path = path + "/" + System.currentTimeMillis() + "_test.  ";
         File imageFile = new File(pic_path);
-        pictureUri = Uri.fromFile(imageFile);
+        pictureUri = FileProvider.getUriForFile(activity, "cn.lc.model.fileprovider", imageFile);
+        //pictureUri = Uri.fromFile(imageFile);
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,pictureUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         activity.startActivityForResult(intent, PHOTO_GRAPH);
     }
 
