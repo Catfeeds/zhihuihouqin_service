@@ -2,8 +2,10 @@ package cn.lc.model.framework.application;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -43,7 +45,11 @@ public class SoftApplication extends QuickApplication {
     private double longitude;
     private double latitude;
     private RefWatcher refWatcher;
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -53,7 +59,6 @@ public class SoftApplication extends QuickApplication {
             return;
         }
         LeakCanary.install(this);*/
-
         softApplication = this;
         //MultiDex.install(this);
         refWatcher =  LeakCanary.install(this);
